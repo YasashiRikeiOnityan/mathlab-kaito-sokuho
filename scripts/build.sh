@@ -3,17 +3,96 @@
 # 年度が引数として指定されているか確認
 if [ -z "$1" ]; then
     echo "Error: Please specify a year."
-    echo "Usage: $0 2026"
+    echo "Usage: $0 YEAR [UNIVERSITY] [PROBLEM]"
+    echo "  YEAR: Year (required, e.g., 2026)"
+    echo "  UNIVERSITY: University name (optional: tokyo, kyoto, science-tokyo)"
+    echo "  PROBLEM: Problem number (optional: 1, 2, 3, 4, 5, 6)"
+    echo ""
+    echo "Examples:"
+    echo "  $0 2026          # Compile all files in src/contents/2026"
+    echo "  $0 2026 tokyo    # Compile all files in src/contents/2026/tokyo"
+    echo "  $0 2026 tokyo 1  # Compile src/contents/2026/tokyo/1.tex"
     exit 1
 fi
 
 YEAR=$1
-CONTENTS_DIR="src/contents/${YEAR}"
+UNIVERSITY=$2
+PROBLEM=$3
 
-# 指定された年度のディレクトリが存在するか確認
-if [ ! -d "$CONTENTS_DIR" ]; then
-    echo "Error: Directory '$CONTENTS_DIR' not found."
+# 大学名の検証
+if [ -n "$UNIVERSITY" ]; then
+    case "$UNIVERSITY" in
+        tokyo|kyoto|science-tokyo)
+            ;;
+        *)
+            echo "Error: Invalid university name '$UNIVERSITY'."
+            echo "Valid university names: tokyo, kyoto, science-tokyo"
+            exit 1
+            ;;
+    esac
+fi
+
+# 問題番号の検証
+if [ -n "$PROBLEM" ]; then
+    case "$PROBLEM" in
+        1|2|3|4|5|6)
+            ;;
+        *)
+            echo "Error: Invalid problem number '$PROBLEM'."
+            echo "Valid problem numbers: 1, 2, 3, 4, 5, 6"
+            exit 1
+            ;;
+    esac
+fi
+
+# 問題番号が指定されている場合は大学名も必須
+if [ -n "$PROBLEM" ] && [ -z "$UNIVERSITY" ]; then
+    echo "Error: University name is required when problem number is specified."
     exit 1
+fi
+
+# コンパイル対象のディレクトリを決定
+if [ -n "$PROBLEM" ]; then
+    # 第3引数まで指定：特定のファイルをコンパイル
+    CONTENTS_DIR="src/contents/${YEAR}/${UNIVERSITY}"
+    TEX_FILE="${CONTENTS_DIR}/${PROBLEM}.tex"
+    
+    if [ ! -f "$TEX_FILE" ]; then
+        echo "Error: File '$TEX_FILE' not found."
+        exit 1
+    fi
+    
+    TEX_FILES="$TEX_FILE"
+elif [ -n "$UNIVERSITY" ]; then
+    # 第2引数まで指定：その年度・大学のすべてのtexファイルをコンパイル
+    CONTENTS_DIR="src/contents/${YEAR}/${UNIVERSITY}"
+    
+    if [ ! -d "$CONTENTS_DIR" ]; then
+        echo "Error: Directory '$CONTENTS_DIR' not found."
+        exit 1
+    fi
+    
+    TEX_FILES=$(find "$CONTENTS_DIR" -maxdepth 1 -name "*.tex" -type f)
+    
+    if [ -z "$TEX_FILES" ]; then
+        echo "Warning: No tex files found under '$CONTENTS_DIR'."
+        exit 0
+    fi
+else
+    # 第1引数のみ：その年度のすべてのtexファイルをコンパイル
+    CONTENTS_DIR="src/contents/${YEAR}"
+    
+    if [ ! -d "$CONTENTS_DIR" ]; then
+        echo "Error: Directory '$CONTENTS_DIR' not found."
+        exit 1
+    fi
+    
+    TEX_FILES=$(find "$CONTENTS_DIR" -name "*.tex" -type f)
+    
+    if [ -z "$TEX_FILES" ]; then
+        echo "Warning: No tex files found under '$CONTENTS_DIR'."
+        exit 0
+    fi
 fi
 
 # Dockerfileのパス
@@ -37,12 +116,6 @@ docker build -t "$IMAGE_NAME" -f "$DOCKERFILE_PATH" . || {
 
 # texファイルを検索してコンパイル
 echo "Searching for tex files..."
-TEX_FILES=$(find "$CONTENTS_DIR" -name "*.tex" -type f)
-
-if [ -z "$TEX_FILES" ]; then
-    echo "Warning: No tex files found under '$CONTENTS_DIR'."
-    exit 0
-fi
 
 # 各texファイルをコンパイル
 for TEX_FILE in $TEX_FILES; do
