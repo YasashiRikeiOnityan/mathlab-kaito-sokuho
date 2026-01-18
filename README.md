@@ -12,4 +12,4 @@ https://discord.gg/hpjNHkqTED
 
 ## Contributing
 
-[CONTRIBUTING.md](https://github.com/YasashiRikeiOnityan/mathlava-kaito-sokuho/blob/main/README.md) を確認してください。
+[CONTRIBUTING.md](https://github.com/YasashiRikeiOnityan/mathlava-kaito-sokuho/blob/main/CONTRIBUTING.md) を確認してください。
