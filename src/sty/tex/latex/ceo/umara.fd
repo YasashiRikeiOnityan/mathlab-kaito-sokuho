@@ -1,0 +1,10 @@
+\ProvidesFile{umara.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{mara}{}
+\DeclareFontShape{U}{mara}{m}{n}{	%medium
+     <->mara%
+}{}
+
+\endinput
+

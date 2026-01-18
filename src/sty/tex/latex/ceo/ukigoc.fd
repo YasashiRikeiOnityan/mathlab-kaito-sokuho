@@ -1,0 +1,10 @@
+\ProvidesFile{ukigoc.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{kigoc}{}
+\DeclareFontShape{U}{kigoc}{m}{n}{	%medium
+     <->kigoc%
+}{}
+
+\endinput
+

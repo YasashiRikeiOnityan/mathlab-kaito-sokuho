@@ -1,0 +1,297 @@
+%%% 行列ベクトルスタイル
+%%%村本 成洋氏と安田亨による
+%%% Feb.16, 2006
+%arrayで行列や縦になったベクトルを作ると中のサイズが小さいとき，
+%教科書の組版機で作った数式を見慣れた目には括弧が大きく
+%不格好に見える．arrayが大きめなものを想定しているため
+%自動で大きな括弧を読み出す機構left(　right) が大きめな括弧を
+%選ぶせいだ．そこで，
+%「中の式の大きさを偽装して小さな括弧を選ぶ機構」
+%Left Rightを作った．難しい部分は村本氏作である．
+%left rightでは，通常は(,{,[とアングルブラケット（不等号の縦に
+%大きいもの）を呼び出すが，偽装機構Left Rightはアングルブラケット
+%には対応せず，<>はサイズ指定のための制御に用いる．
+%もともとアングルブラケットは「一応ある」程度の扱いで，多段階に
+%にもなっていないので，サイズ偽装アングルブラケットの需要はない．
+%
+%このスタイルはceo.styと無関係に働きます．
+%ceo.styを使用の場合は自動的に読み込みます．
+
+\newdimen{\spacemh}
+\newdimen{\spacemi}
+\spacemh=-6pt % 行列にn乗がついたときの指数の下げ分
+\spacemi=-4pt % 括弧内の詰め
+
+\newdimen\DelimReduceV%デフォルト括弧サイズ減少分
+\DelimReduceV=3pt
+
+\let\origleft\left
+% この時点での \left の定義を \origleft に退避
+\let\Right\right
+
+\def\Left{%
+  \@ifnextchar<%
+  {\shrinkable@Left}{\shrinkable@Left<\the\DelimReduceV>}}
+
+
+\def\shrinkable@Left<#1>#2#3\Right{%
+% \Leftのあとには必ず
+%   <#1=length> #2=開始デリミタ #3=括弧の中身 \Right
+% の順で記述がなされていなければならない
+  \setbox0=\hbox{$#3$}%
+% 括弧の中身を一旦 \box0 に保存
+  \vrule\@height0.9\ht0\@depth0.9\dp0\@width\z@
+% 重なり防止のため，支柱を立てておく
+% これがないと全体の高さ深さを変えているために重なりが生じてしまう
+  \dimen@=\ht0 \advance\dimen@-#1 \ht0=\dimen@
+% \box0 の高さを \dimen@ へ代入したあと #1 だけ縮め
+% さらにそれを強制的に \box0 の高さにしてしまう
+  \dimen@=\dp0 \advance\dimen@-#1 \dp0=\dimen@
+% 深さについて同様の処理
+  \origleft#2\box0\right}
+% オリジナルの \left#2 #3 \right を実行
+
+\def\@sn#1{%
+\settodepth{\dimen0}{$\mathstrut #1$}%
+\advance\dimen0 2pt
+\hbox{\vrule width0pt height0pt depth\dimen0}#1}
+
+\def\@cn#1{%
+\settodepth{\dimen0}{$\mathstrut #1$}%
+\settoheight{\dimen1}{$\mathstrut #1$}%
+%\advance\dimen0 2pt
+%\advance\dimen1 2pt
+\hbox{\vrule width0pt height\dimen1 depth\dimen0}#1}
+
+\def\@un#1{%
+\settoheight{\dimen0}{$\mathstrut #1$}%
+\advance\dimen0 2pt
+\hbox{\vrule width0pt height\dimen0 depth0pt}#1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%転置行列のtをつける
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlength{\spacetro}
+\newlength{\spacetri}
+\newlength{\spacetrh}
+\spacetrh=-2pt % 転置t下げ分
+\spacetro=1pt % 転置tの左側の空き
+\spacetri=-2pt % 転置tと本体の間の寄せ幅
+\def\tenti#1{%
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \advance\dimen0 \spacetrh% 転置t下げ
+  \settodepth{\dimen1}{$#1$}%
+  \hspace{\spacetro}\hbox{\vrule width0pt height\dimen0 depth\dimen1}^t
+\hspace{\spacetri}\hbox{$#1$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2次元列ベクトル
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\tvec{%
+  \@ifnextchar<{\@tvec}{\@tvec<0,0>}}
+\def\@tvec<#1,#2>[#3,#4]{%
+{\Left<#1 pt>(\def\arraystretch{#2}\hspace{\spacemi}\begin{array}{c}
+\@sn{#3}\\
+\@un{#4}
+\end{array}\hspace{\spacemi}\Right)}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%ベクトルで添え字をふるときのためのSvec
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\Svec#1#2{\overrightarrow{\vphantom{h}\text{#1}{_{#2}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3次元列ベクトル
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\Tvec{%
+  \@ifnextchar<{\@Tvec}{\@Tvec<0,0>}}
+\def\@Tvec<#1,#2>[#3,#4,#5]{%
+{\Left<#1 pt>(\def\arraystretch{#2}\hspace{\spacemi}\begin{array}{c}
+\@sn{#3}\\
+\@cn{#4}\\
+\@un{#5}
+\end{array}\hspace{\spacemi}\Right)}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2次正方行列
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\mat{%
+  \@ifnextchar<{\@mat}{\@mat<0,0>}}
+\def\@mat<#1,#2>[#3,#4,#5,#6]{%
+{{\Left<#1 pt>(\def\arraystretch{#2}\hspace{\spacemi}\begin{array}{cc}
+\@sn{#3} & \hspace{-3pt}\@sn{#4}\\
+\@un{#5} & \hspace{-3pt}\@un{#6}
+\end{array}\hspace{\spacemi}\Right)\hspace{-1pt}
+  \settoheight{\dimen2}{$\mathstrut \begin{array}{cc}
+\@sn{#3} & \hspace{-3pt}\@sn{#4}\\
+\@un{#5} & \hspace{-3pt}\@un{#6}
+\end{array}$}%
+  \advance\dimen2 \spacemh
+\hbox{\vrule width0pt height\dimen2}}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3次正方行列
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newdimen\DelimReduceM \DelimReduceM=0pt
+%デフォルト括弧サイズ減少分
+
+\def\Mat[#1,#2,#3][#4,#5,#6][#7,#8,#9]{%
+{\Left<\DelimReduceM>(\hspace{\spacemi}\begin{array}{ccc}
+\@sn{#1} & \hspace{-3pt}\@sn{#2} &\hspace{-3pt}\@sn{#3}\\
+\@cn{#4} & \hspace{-3pt}\@cn{#5} &\hspace{-3pt}\@cn{#6}\\
+\@un{#7} & \hspace{-3pt}\@un{#8} &\hspace{-3pt}\@un{#9}
+\end{array}\hspace{\spacemi}\Right)\hspace{-1pt}
+\settoheight{\dimen2}{$\mathstrut \begin{array}{ccc}
+\@sn{#1} & \hspace{-3pt}\@sn{#2} &\hspace{-3pt}\@sn{#3}\\
+\@cn{#4} & \hspace{-3pt}\@cn{#5} &\hspace{-3pt}\@cn{#6}\\
+\@un{#7} & \hspace{-3pt}\@un{#8} &\hspace{-3pt}\@un{#9}
+\end{array}$}%
+\advance\dimen2 \spacemh
+\hbox{\vrule width0pt height\dimen2}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2次元列ベクトル
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\rvec{%
+  \@ifnextchar<{\@rvec}{\@rvec<0,0>}}
+\def\@rvec<#1,#2>(#3,#4){%
+\Left<#1 pt>(\def\arraystretch{#2}\hspace{\spacemi}\begin{array}{c}
+\@sn{#3}\\
+\@un{#4}
+\end{array}\hspace{\spacemi}\Right)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3次元列ベクトル
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\Rvec{%
+  \@ifnextchar<{\@Rvec}{\@Rvec<0,0>}}
+\def\@Rvec<#1,#2>(#3,#4,#5){%
+\Left<#1 pt>(\def\arraystretch{#2}\hspace{\spacemi}\begin{array}{c}
+\@sn{#3}\\
+\@cn{#4}\\
+\@un{#5}
+\end{array}\hspace{\spacemi}\Right)}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2次行列式
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newdimen\spacemggi \spacemggi=-1.5pt
+\def\Det{%
+  \@ifnextchar<{\@detrix}{\@detrix<0,0>}}
+\def\@detrix<#1,#2>[#3,#4,#5,#6]{%
+\Left<#1 pt>|\def\arraystretch{#2}\hspace{\spacemggi}\begin{array}{cc}
+\@sn{#3} & \@sn{#4}\\
+\@un{#5} & \@un{#6}
+\end{array}\hspace{\spacemggi}\Right|\hspace{-1pt}
+  \settoheight{\dimen2}{$\mathstrut \begin{array}{cc}
+\@sn{#3} & \@sn{#4}\\
+\@un{#5} & \@un{#6}
+\end{array}$}%
+  \advance\dimen2 \spacemh
+\hbox{\vrule width0pt height\dimen2}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3次行列式
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\DET[#1,#2,#3][#4,#5,#6][#7,#8,#9]{%
+\Left<\DelimReduceM>|\hspace{\spacemggi}\begin{array}{ccc}
+\@sn{#1} & \@sn{#2} &\@sn{#3}\\
+\@cn{#4} & \@cn{#5} &\@cn{#6}\\
+\@un{#7} & \@un{#8} &\@un{#9}
+\end{array}\hspace{\spacemggi}\Right|\hspace{-1pt}
+\settoheight{\dimen2}{$\mathstrut \begin{array}{ccc}
+\@sn{#1} & \@sn{#2} &\@sn{#3}\\
+\@cn{#4} & \@cn{#5} &\@cn{#6}\\
+\@un{#7} & \@un{#8} &\@un{#9}
+\end{array}$}%
+\advance\dimen2 \spacemh
+\hbox{\vrule width0pt height\dimen2}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%場合分け関数cases（名前を変えた）2つと3つだけ
+%
+%2つの式を併記するheikiも
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\baai{%
+  \@ifnextchar<{\@baai}{\@baai<2,1>}}
+\def\@baai<#1,#2>[#3,#4][#5,#6]{%
+{\Left<#1 pt>\{\def\arraystretch{#2}\begin{array}{ll}
+\hspace{-3.5pt}\@sn{#3}&\@sn{#4}\\
+\hspace{-3.5pt}\@un{#5}&\@un{#6}
+\end{array}\hspace{-4pt} \Right.}}
+
+\def\Baai{%
+  \@ifnextchar<{\@Baai}{\@Baai<2,1>}}
+\def\@Baai<#1,#2>[#3,#4][#5,#6][#7,#8]{%
+{\Left<#1 pt>\{\def\arraystretch{#2}\begin{array}{ll}
+\hspace{-3.5pt}\@sn{#3}&\@sn{#4}\\
+\hspace{-3.5pt}\@cn{#5}&\@cn{#6}\\
+\hspace{-3.5pt}\@un{#7}&\@un{#8}
+\end{array}\hspace{-4pt} \Right.}}
+
+\def\heiki{%
+  \@ifnextchar<{\@heiki}{\@heiki<2,1>}}
+\def\@heiki<#1,#2>#3#4{%
+{\Left<#1 pt>\{\def\arraystretch{#2}\begin{array}{l}
+\hspace{-3.5pt}#3\\
+\hspace{-3.5pt}#4
+\end{array}\hspace{-4pt} \Right.}}
+
+
+\def\Heiki{%
+  \@ifnextchar<{\@Heiki}{\@Heiki<2,2>}}
+\def\@Heiki<#1,#2>#3#4#5#6{%
+{\Left<#1 pt>\{\def\arraystretch{#2}\begin{array}{l}
+\hspace{-3.5pt}\@sn{#3}\hfill #4\\
+\hspace{-3.5pt}\@un{#5}\hfill #6
+\end{array}\hspace{-4pt} \Right.}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%任意サイズ行列
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\freearray{\@testopt\@freearray{c}}
+\def\@freearray[#1]{%
+  \let\\\cr
+  \if#1t\vtop\else \if#1b\vbox\else \if#1c\vcenter\fi\fi\fi%$
+  \bgroup
+  \halign\bgroup&\hskip\arraycolsep\hfil\hbox{$##$}\hfil\hskip\arraycolsep\crcr}
+\def\endfreearray{
+  \crcr
+  \egroup\m@th\egroup}
+
+%%% \MATRIX(#,#,#)(#,#) の形で自由に行列
+\edef\Array@Entries{}%
+\def\Array{%
+  \edef\Array@Entries{}%
+  \begin{freearray}%
+  % freearray 環境を開始
+  \@Array}%
+\def\@Array(#1){%
+  % 次の括弧を引数として取り込む
+  \@tempcnta\z@
+  % 列数を数えるカウンタ
+  \@for\@tempa:=#1\do{% コンマ区切の要素を1つずつ \@tempa に取り出して…
+    \advance\@tempcnta\@ne
+    \ifnum\@tempcnta=\@ne
+      \global\protected@edef\Array@Entries{\Array@Entries\@tempa}%
+      % 1列目ならそのまま \Matrix@Entries に保存
+    \else
+      \global\protected@edef\Array@Entries{\Array@Entries&\@tempa}%
+      % 2列目以降は & を頭につけて保存
+    \fi}%
+    \protected@edef\Array@Entries{\Array@Entries\\}%
+    % 括弧の中身を保存し終ったら \\ を追加して行を終了
+  \@ifnextchar(%)
+    \@Array{\Array@Entries\end{freearray}}}
+    % 次の文字が ( なら再び繰り返す %)
+    % そうじゃなければ保存した要素を全て吐き出して
+    % freearray 環境を閉じる
+\def\MATRIX{\@ifnextchar<{\@MATRIX}{\@MATRIX<3pt>}}
+\def\@MATRIX<#1>#2{\Left<#1>(\Array#2\Right)}
+
+\endinput

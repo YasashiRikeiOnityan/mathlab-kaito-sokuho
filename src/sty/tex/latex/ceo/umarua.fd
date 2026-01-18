@@ -1,0 +1,10 @@
+\ProvidesFile{umarua.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{marua}{}
+\DeclareFontShape{U}{marua}{m}{n}{	%medium
+     <->marua%
+}{}
+
+\endinput
+

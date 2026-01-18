@@ -1,0 +1,67 @@
+\NeedsTeXFormat{LaTeX2e}
+% Create by Toru Yasuda, 2008-11-13
+\ProvidesPackage{daisu}
+
+%問題番号を黒塗りに変更
+\renewcommand{\thereidaibango}{\kigoum{\symbol{\arabic{reidaibango}}}\quad}
+
+%記号の変更．上段が少し上目．今は下目にしてある
+\def\bekkai{\kigoum{\char"DB}}
+\def\bekkai{\kigoum{\char"E3}}
+
+\def\kai{\kigoum{\char"DC}}
+\def\kai{\kigoum{\char"E4}}
+
+\def\CHECK{\kigoum{\char"DD}}
+\def\CHECK{\kigoum{\char"E5}}
+
+\def\kangaekata{\kigoum{\char"DE}}
+\def\kangaekata{\kigoum{\char"E6}}
+
+\def\sankoumondai{\kigoum{\char"D7}}
+\def\chu{\kigoum{\char"E7}}
+
+%[年度を原稿には入れるが印刷しない,大学名]を常時年度も印刷に変更したもの
+\def\@syutten[#1,#2]{{%
+  \unskip\nobreak\hfil\penalty0%
+  \hskip0\zw\hbox{}\nobreak\hfil
+ \scalebox{0.9}{(#1\hskip1\zw{#2})}%
+  \parfillskip=0em\finalhyphendemerits=0\@@par}}
+
+%$$で数式を作ったときの点々と式番号をつけるTENTENとTEN
+ \def\TENTEN{%
+ \refstepcounter{equation}
+ \leavevmode
+\leaders\hbox to.3333\zw{\hss\raise.5ex\hbox{.}\hss}\hfill
+ \kern\z@\mrunumb{\theequation}}
+
+\def\TEN{%
+ \refstepcounter{equation}
+\cdots \cdots \cdots
+ \kern\z@\mrunumb{\theequation}}
+
+\def\TENAB{%
+ \leavevmode
+\leaders\hbox to.3333\zw{\hss\raise.5ex\hbox{.}\hss}\hfill
+ \kern\z@}
+
+%注環境の調整
+\def\Chu{%
+\par
+\leftskip=1\zw \hspace{-0.8\zw}\chu\quad \;
+\noindent\kern-1\zw}
+\def\endChu{\par}
+
+%太字
+\def\gt{\gtfamily\bfseries}
+
+\let\ne=\neeqb
+\let\neq\neeqb
+
+\def\yhako#1{\;\fbox{\hss#1\hss}\;}
+\def\dot#1{\IDO{0.7}{-#1}{\scalebox{0.9}{・}}}
+\def\dot#1{{\ooalign{
+\hfil$#1$\hfil\cr\raise1.4ex\hbox to0pt{\hskip1pt$\cdot$}}}}
+
+
+\endinput

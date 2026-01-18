@@ -1,0 +1,833 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{waku}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B$3$N%W%m%0%i%`$OCJ$d%Z!<%8$r$^$?$$$GN.$l$k3Q$,;M3Q$$(B
+%$BOH0O$_$G$9!%(B
+%$B2,K\42$,(Beclbkbox.sty$B$r2~JQ$7%?%$%H%k$rIU$1$k$h$&$K$7(B
+%indent.sty$B!J%3%^%s%IJQ99!K$rMQ$$$FD4@0$7!$(B
+%$B$7$C$]0&9%2H;a$N%^%/%m$r1~MQ$7$FGK@~HG$r:n$j(B
+%$B$$$m$$$m$J9)IW$r;\$7$?$b$N$G$9!%(B
+%$BBgH>$N:n6H$O2,K\42$,9T$$!$0lIt$r0BED5|(B
+%$B$,9T$$$^$7$?!%(Beclbkbox.sty$B$NFbMF$O<h$j9~$s$G$"$k$N$G(B
+%$B$OFs=E$KFI$_9~$`I,MW$O$"$j$^$;$s!%(B
+%indent.sty$B$OFs=E$KFI$_9~$s$G$bLdBj$O$"$j$^$;$s!%(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B$3$NOH%9%?%$%k$O(Bceo.sty$B$H$OFHN)$K;HMQ$9$k$3$H$,$G$-$^$9(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B%0%l%$%\%C%/%9$r;H$&>l9g!$(B
+%\usepackage[dvips]{graphicx,color}
+%$B$,I,MW$G$9(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B0J2<$O>e:8!$>e1&!$B&@~!$2<@~$r8DJL;XDj(B
+%$B$9$k$?$a$KH4$-=P$7$?!%L\E*$O(B
+%$B%0%l%$%\%C%/%9$H%5%s%I%$%C%A$GMxMQ$9$k$?$a$G$9(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\sokusen{\vrule \@width\fboxrule}
+\def\uehidarisen{\vrule height\fboxrule depth0pt width\midashikaishiichi pt}
+\def\kahenhrulefill{\leavevmode\leaders\hrule height\fboxrule\hfill\kern\z@}
+\def\sitasen{\hrule\@height\fboxrule}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%$B0J2<$,(Bindent.sty$B%3%^%s%IL>$OJQ99(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newenvironment{indentc}[2]%
+{%
+  \par
+  \setlength{\leftmargin}{#1}%
+  \setlength{\rightmargin}{#2}%
+  \advance\linewidth -\leftmargin
+  \advance\linewidth -\rightmargin
+  \advance\@totalleftmargin\leftmargin
+  \@setpar{{\@@par}}%
+  \parshape 1 \@totalleftmargin \linewidth
+  \ignorespaces
+  \topsep=0pt
+  \partopsep=0pt}%
+{\par}
+
+\newdimen\@totalrightmargin \@totalrightmargin=0pt
+
+\newenvironment{indentb}[2]%
+{%
+  \par
+  \setlength{\leftmargin}{#1}%
+  \setlength{\rightmargin}{#2}%
+  \advance\linewidth -\leftmargin
+  \advance\linewidth -\rightmargin
+  \advance\@totalleftmargin\leftmargin
+  \advance\@totalrightmargin\rightmargin
+  \leftskip=\@totalleftmargin
+  \rightskip=\@totalrightmargin
+ \ignorespaces
+  \topsep=0pt
+  \partopsep=0pt}%
+{\par}
+
+\newenvironment{indente}[2]%
+{%
+ \par
+ \leftskip=#1
+  \rightskip=#2
+  \ignorespaces
+  \topsep=0pt
+  \partopsep=0pt}%
+{\par}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%eclbkbox.sty$B$H$=$N2~JQ(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newbox\bk@bxb
+\newbox\bk@bxa
+\newif\if@bkcont 
+\newif\ifbkcount
+\newcount\bk@lcnt
+\def\breakboxskip{2pt}
+\def\breakboxparindent{0em}
+\def\breakbox{\vskip\breakboxskip\relax
+\setbox\bk@bxb\vbox\bgroup
+\advance\linewidth -2\fboxrule
+\advance\linewidth -2\fboxsep
+\hsize\linewidth\@parboxrestore
+\parindent\breakboxparindent\relax}
+
+% \@tempdimb: amount of vertical skip 
+% between the first line (\bk@bxa) and the rest (\bk@bxb)
+\def\bk@split{%
+\@tempdimb\ht\bk@bxb % height of original box
+\advance\@tempdimb\dp\bk@bxb 
+\setbox\bk@bxa\vsplit\bk@bxb to\z@ % split it
+\setbox\bk@bxa\vbox{\unvbox\bk@bxa}% recover height & depth of \bk@bxa
+\setbox\@tempboxa\vbox{\copy\bk@bxa\copy\bk@bxb}% naive concatenation
+\advance\@tempdimb-\ht\@tempboxa 
+\advance\@tempdimb-\dp\@tempboxa}% gap between two boxes
+ 
+
+% \@tempdima: height of the first line (\bk@bxa) + fboxsep
+\def\bk@addfsepht{%
+     \setbox\bk@bxa\vbox{\vskip\fboxsep\box\bk@bxa}}
+%
+\def\bk@addskipht{%
+     \setbox\bk@bxa\vbox{\vskip\@tempdimb\box\bk@bxa}}
+%
+% \@tempdima: depth of the first line (\bk@bxa) + fboxsep
+\def\bk@addfsepdp{%
+     \@tempdima\dp\bk@bxa
+     \advance\@tempdima\fboxsep
+     \dp\bk@bxa\@tempdima}
+%
+% \@tempdima: depth of the first line (\bk@bxa) + vertical skip
+\def\bk@addskipdp{%
+     \@tempdima\dp\bk@bxa
+     \advance\@tempdima\@tempdimb
+     \dp\bk@bxa\@tempdima}
+%
+\def\bk@line{%
+    \hbox to \linewidth{\ifbkcount\smash{\llap{\the\bk@lcnt\ }}\fi
+    \sokusen\hskip\fboxsep
+    \box\bk@bxa\hfil
+    \hskip\fboxsep\sokusen}}
+\def\endbreakbox{\egroup
+\ifhmode\par\fi{\noindent\bk@lcnt\@ne 
+\@bkconttrue\baselineskip\z@\lineskiplimit\z@
+\lineskip\z@\vfuzz\maxdimen
+\bk@split\bk@addfsepht\bk@addskipdp
+\ifvoid\bk@bxb      % Only one line
+\def\bk@fstln{\bk@addfsepdp
+\vbox{\sitasen\bk@line\hrule\sitasen}}%
+\else               % More than one line
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%$B!!!!(B\midashiposi$B!!!!(B%%%%%%%%
+\def\bk@fstln{%
+\setbox\z@\hbox{\box0}%\vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}
+\ifcase \midashiposi
+\uehidarisen \vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}\kahenhrulefill\hrulefill
+\or%
+\uehidarisen \vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}\kahenhrulefill\hrulefill
+\or%
+\kahenhrulefill\vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}\vrule height\fboxrule depth0pt width\midashikaishiichi pt\hrulefill
+\or
+\kahenhrulefill\vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}\kahenhrulefill\hrulefill
+\fi%
+\vbox{\bk@line}\hfil%%
+%
+\advance\bk@lcnt\@ne
+\loop 
+ \bk@split\bk@addskipdp\leavevmode
+\ifvoid\bk@bxb      % The last line
+ \@bkcontfalse\bk@addfsepdp
+ \vtop{\bk@line\sitasen}%
+\else               % 2,...,(n-1)
+ \bk@line
+\fi
+ \hfil\advance\bk@lcnt\@ne
+\if@bkcont\repeat}%
+\fi
+\leavevmode\bk@fstln\par}\vskip\breakboxskip\relax}
+%
+\bkcountfalse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B0J2<GK@~(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\breakboxparindent{0\zw}%%% $BOH$N%$%s%G%s%H(B
+%%% $BOH$KMQ$$$kGK@~$N<B@~ItJ,$ND9$5(B
+\newdimen\dashMboxlinelength
+\dashMboxlinelength=1pt
+%
+%%% $BOH$KMQ$$$kGK@~$N6uGrItJ,$ND9$5(B
+\newdimen\dashMboxlinegap
+\dashMboxlinegap=1pt
+%
+%%% $BOH@~$NB@$5$O!$(Beclbkbox.sty $B$G$N=hM}$K=`$8$F(B \fboxrule $B$GM?$($^$9!%(B
+%
+%\fboxrule=.4pt
+\newdimen\bk@lastgap
+\newdimen\bk@processed@height
+\newdimen\bk@remaining@height
+\newbox\bk@sideline
+\let\dashMbox\breakbox
+\def\bk@mkhdashline{%
+   \hbox to\linewidth{%
+      \@tempdima\dashMboxlinelength\relax \@tempdima.5\@tempdima
+      \@tempdimb\dashMboxlinegap\relax    \@tempdimb.5\@tempdimb
+     %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%$B!!!!(B\midashiposi$B!!!!(B%%%%%%%%
+\setbox\z@\hbox{\box0}%
+\ifcase \midashiposi
+      \cleaders
+              \hbox{%
+            \hskip\@tempdimb
+           \vrule\@width\tw@\@tempdima\@height\fboxrule
+           \hskip\@tempdimb} \hfill
+    \vrule\@width\@tempdima \@height\fboxrule%$B=D@~(B
+\or
+%
+      \cleaders
+         \hbox{%
+            \hskip\@tempdimb
+            \vrule\@width\tw@\@tempdima\@height\fboxrule
+            \hskip\@tempdimb\hfill}%
+       \hskip\midashikaishiichi pt
+   \vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}%
+   %\vbox to\ht\z@{\vss \box\z@ \vss}%
+      \cleaders
+              \hbox{%
+            \hskip\@tempdimb
+           \vrule\@width\tw@\@tempdima\@height\fboxrule
+           \hskip\@tempdimb} \hfill
+    \vrule\@width\@tempdima \@height\fboxrule%$B=D@~(B
+\or
+          \cleaders
+         \hbox{%
+            \hskip\@tempdimb
+            \vrule\@width\tw@\@tempdima\@height\fboxrule
+            \hskip\@tempdimb\hfill}%
+\hfill
+       \vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}%
+      \cleaders%
+              \hbox{%
+            \hskip\@tempdimb
+           \vrule\@width\tw@\@tempdima\@height\fboxrule
+           \hskip\@tempdimb}% 
+           \hskip\midashikaishiichi pt 
+    \vrule\@width\@tempdima \@height\fboxrule%$B=D@~(B
+\or
+          \cleaders
+         \hbox{%
+            \hskip\@tempdimb%
+            \vrule\@width\tw@\@tempdima\@height\fboxrule%
+            \hskip\@tempdimb\hfill}%
+\hfill%
+      \vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}%
+     \cleaders
+              \hbox{%
+            \hskip\@tempdimb\hfill
+           \vrule\@width\tw@\@tempdima\@height\fboxrule
+           \hskip\@tempdimb} \hfill
+   \vrule\@width\@tempdima \@height\fboxrule%$B=D@~(B
+    \fi   
+    }}
+\def\enddashMbox{%
+   \egroup
+   \ifhmode \par \fi
+  {\noindent\bk@lcnt\@ne
+   \@bkconttrue
+   \baselineskip\z@ \lineskiplimit\z@ \lineskip\z@
+   \vfuzz\maxdimen \vbadness\@M
+   \bk@remaining@height\ht\bk@bxb \advance\bk@remaining@height\dp\bk@bxb
+   \advance\bk@remaining@height\tw@\fboxsep
+   \bk@processed@height\z@
+   \@tempdima\bk@remaining@height \advance\@tempdima-\dashMboxlinelength
+   \@tempdimb\dashMboxlinelength \advance\@tempdimb\dashMboxlinegap
+   \dimen@\@tempdima \divide\@tempdima\@tempdimb \multiply\@tempdima\@tempdimb
+   \advance\dimen@-\@tempdima \advance\dimen@\dashMboxlinegap
+   \divide\dimen@\tw@ \bk@lastgap\dimen@
+   \bk@split \bk@addfsepht \bk@addskipdp
+   \ifvoid\bk@bxb      % Only one line
+      \def\bk@fstln{%
+         \bk@addfsepdp
+         \bk@make@sideline
+         \vbox{%
+            \bk@mkhdashline
+            \bk@line@with@vdashlines
+            \bk@mkhdashline}}%
+   \else               % More than one line
+      \def\bk@fstln{%
+         \bk@make@sideline
+         \vbox{\bk@mkhdashline \bk@line@with@vdashlines}\hfil
+         \advance\bk@lcnt\@ne
+         \loop
+            \bk@split \bk@addskipdp
+            \leavevmode
+            \ifvoid\bk@bxb      % The last line
+               \@bkcontfalse \bk@addfsepdp
+               \bk@make@sideline
+               \vtop{%
+                  \bk@line@with@vdashlines
+                  \bk@mkhdashlinelast}%
+            \else               % 2,...,(n-1)
+               \bk@make@sideline
+               \bk@line@with@vdashlines
+            \fi
+            \hfil
+            \advance\bk@lcnt\@ne
+         \if@bkcont\repeat}%
+   \fi
+   \leavevmode\bk@fstln\par}%
+   \vskip\breakboxskip\relax}
+
+\def\bk@mkhdashlinelast{%
+   \hbox to\linewidth{%
+      \@tempdima\dashMboxlinelength\relax \@tempdima.5\@tempdima
+      \@tempdimb\dashMboxlinegap\relax    \@tempdimb.5\@tempdimb
+      \vrule\@width\@tempdima \@height\fboxrule
+      \cleaders
+         \hbox{%
+            \hskip\@tempdimb
+            \vrule\@width\tw@\@tempdima\@height\fboxrule
+            \hskip\@tempdimb}%
+         \hfil 
+      \vrule\@width\@tempdima \@height\fboxrule}
+      }
+
+\def\bk@sideline@patterns{%
+   \cleaders
+      \hbox{%
+         \dimen@ii\dashMboxlinelength
+         \advance\dimen@ii\dashMboxlinegap
+         \vrule\@height\dimen@ii \@depth-\dashMboxlinegap}%
+      \vfil}
+\def\bk@sideline@firstpiece{%
+   \bk@get@firstpiece@number
+   \advance\@tempcnta\@ne \@tempdimb\@tempcnta\dimen@ii
+   \advance\@tempdimb-\bk@processed@height \advance\@tempdimb\dimen@
+   \hbox{%
+      \ifdim\@tempdimb>\dashMboxlinegap
+         \vrule \@height\@tempdimb \@depth-\dashMboxlinegap
+      \fi
+      \vrule\@height\@tempdimb \@width\z@}}
+\def\bk@get@firstpiece@number{%
+   \dimen@ii\dashMboxlinelength
+   \advance\dimen@ii\dashMboxlinegap
+   \@tempdimb\bk@processed@height \advance\@tempdimb-\dimen@
+   \divide\@tempdimb\dimen@ii \@tempcnta\@tempdimb}
+\def\bk@sideline@lastpiece{%
+   \bk@get@lastpiece@number
+   \multiply\@tempdimb\dimen@ii
+   \advance\@tempdimb-\bk@processed@height
+   \advance\@tempdimb-\@tempdima \advance\@tempdimb\dimen@
+   \@tempdimb-\@tempdimb
+   \dimen@ii\dashMboxlinelength \advance\dimen@ii-\@tempdimb
+   \ifdim\dimen@ii>\z@ \dimen@ii\z@ \fi
+   \hbox{\vrule \@height\@tempdimb \@depth\dimen@ii \@width\fboxrule}}
+\def\bk@get@lastpiece@number{%
+   \dimen@ii\dashMboxlinelength
+   \advance\dimen@ii\dashMboxlinegap
+   \@tempdimb\bk@processed@height \advance\@tempdimb\@tempdima
+   \advance\@tempdimb-\dimen@
+   \divide\@tempdimb\dimen@ii \@tempcntb\@tempdimb}
+\def\bk@sideline@intermediatepiece{%
+   \bk@get@firstpiece@number
+   \multiply\@tempdimb\dimen@ii
+   \advance\@tempdimb-\bk@processed@height \advance\@tempdimb\dimen@
+   \@tempdimb-\@tempdimb \dimen@ii\@tempdimb \advance\dimen@ii\@tempdima
+   \hbox{%
+      \ifdim\@tempdimb<\dashMboxlinelength
+         \ifdim\dimen@ii>\dashMboxlinelength
+            \dimen@ii\dashMboxlinelength
+         \fi
+         \advance\dimen@ii-\@tempdima \advance\dimen@ii-\@tempdimb
+         \vrule\@height\@tempdima \@depth\dimen@ii \@width\fboxrule
+      \fi
+      \vrule\@height\@tempdima \@width\z@}}
+\def\bk@line@with@vdashlines{%
+   \hbox to \linewidth{%
+      \ifbkcount\smash{\llap{\the\bk@lcnt\ }}\fi
+      \copy\bk@sideline \hskip\fboxsep
+      \box\bk@bxa\hfil
+      \hskip\fboxsep \box\bk@sideline}}
+\def\bk@make@sideline{%
+   \dimen@.5\dashMboxlinelength \advance\dimen@\bk@lastgap
+   \@tempdima\ht\bk@bxa \advance\@tempdima\dp\bk@bxa
+   \ifdim\bk@processed@height<\dimen@
+      \@tempdimb\@tempdima \advance\@tempdimb\bk@processed@height
+      \advance\bk@remaining@height-\@tempdima
+      \ifdim\@tempdimb<\dimen@
+         %%% $B:G=i$NCGJR$N0lIt(B
+         \setbox\bk@sideline\hbox{%
+            \ifdim\bk@processed@height<.5\dashMboxlinelength
+               \advance\@tempdimb-.5\dashMboxlinelength
+               \ifdim\@tempdimb<\z@ \@tempdimb\z@ \fi
+               \vrule \@height\@tempdima \@depth-\@tempdimb
+                      \@width\fboxrule
+            \fi
+            \vrule\@height\@tempdima \@width\z@}%
+      \else
+         \ifdim\bk@remaining@height<\dimen@
+            %%% $B:G=i$NCGJR$+$i;O$^$j!$:G8e$NCGJR$KF~$k>l9g(B
+            \ifdim\@tempdima<\dashMboxlinelength
+               \setbox\bk@sideline\hbox{%
+                  \vrule\@height\@tempdima \@width\fboxrule}%
+            \else
+               \setbox\bk@sideline\vbox to\@tempdima{%
+                  \hbox{%
+                     \dimen@ii\dimen@ \advance\dimen@ii-\bk@processed@height
+                     \ifdim\bk@processed@height<.5\dashMboxlinelength
+                        \vrule \@height\dimen@ii \@depth-\bk@lastgap
+                               \@width\fboxrule
+                     \fi
+                     \vrule\@height\dimen@ii \@width\z@}%
+                  \bk@sideline@patterns
+                  \vskip-\dashMboxlinegap
+                  \hbox{%
+                     \dimen@ii\dimen@ \advance\dimen@ii-\bk@remaining@height
+                     \ifdim\bk@remaining@height<.5\dashMboxlinelength
+                        \@tempdimb.5\dashMboxlinelength
+                        \advance\@tempdimb-\bk@remaining@height
+                        \vrule \@height\@tempdimb \@width\fboxrule
+                     \fi
+                     \vrule\@height\dimen@ii \@width\z@}}%
+            \fi
+         \else
+            %%% $B:G=i$NCGJR$+$i;O$^$j!$Cf4VItJ,$G;_$^$k>l9g(B
+            \setbox\bk@sideline\vbox to\@tempdima{%
+               \hbox{%
+                  \dimen@ii\dimen@ \advance\dimen@ii-\bk@processed@height
+                  \ifdim\bk@processed@height<.5\dashMboxlinelength
+                     \vrule \@height\dimen@ii \@depth-\bk@lastgap
+                            \@width\fboxrule
+                  \fi
+                  \vrule\@height\dimen@ii \@width\z@}%
+               \bk@sideline@patterns
+               \bk@sideline@lastpiece}%
+         \fi
+      \fi
+   \else
+      \ifdim\bk@remaining@height<\dimen@
+         %%% $B:G8e$NCGJR$N0lIt(B
+         \setbox\bk@sideline\hbox{%
+            \@tempdimb\bk@remaining@height \dimen@ii\@tempdimb
+            \advance\@tempdimb-\@tempdima
+            \ifdim\@tempdimb<\z@ \@tempdimb\z@ \fi
+            \ifdim\@tempdimb<.5\dashMboxlinelength
+               \ifdim\dimen@ii>.5\dashMboxlinelength
+                  \dimen@ii.5\dashMboxlinelength
+               \fi
+               \advance\dimen@ii-\@tempdimb
+               \vrule \@height\dimen@ii \@width\fboxrule
+            \fi
+            \vrule\@height\@tempdima \@width\z@}%
+         \advance\bk@remaining@height-\@tempdima
+      \else
+         \advance\bk@remaining@height-\@tempdima
+         \ifdim\bk@remaining@height<\dimen@
+            %%% $BCf4VItJ,$+$i;O$^$j!$:G8e$NCGJR$KF~$k>l9g(B
+            \setbox\bk@sideline\vbox to\@tempdima{%
+               \bk@sideline@firstpiece
+               \bk@sideline@patterns
+               \vskip-\dashMboxlinegap
+               \hbox{%
+                  \dimen@ii\dimen@ \advance\dimen@ii-\bk@remaining@height
+                  \ifdim\bk@remaining@height<.5\dashMboxlinelength
+                     \@tempdimb.5\dashMboxlinelength
+                     \advance\@tempdimb-\bk@remaining@height
+                     \vrule \@height\@tempdimb \@width\fboxrule
+                  \fi
+                  \vrule\@height\dimen@ii \@width\z@}}%
+         \else
+            %%% $BCf4VItJ,$NFbIt(B
+            \setbox\bk@sideline\vbox to\@tempdima{%
+               \bk@get@firstpiece@number
+               \bk@get@lastpiece@number
+               \ifnum\@tempcnta<\@tempcntb
+                  \bk@sideline@firstpiece
+                  \bk@sideline@patterns
+                  \bk@sideline@lastpiece
+               \else
+                  \bk@sideline@intermediatepiece
+               \fi}%
+         \fi
+      \fi
+   \fi
+   \setbox\bk@sideline\hbox{\lower\dp\bk@bxa\box\bk@sideline}%
+   \advance\bk@processed@height\@tempdima}
+
+\columnsep=2\zw
+%$B!s!s!s!s!s(B[]$B$K8+=P$7$rF~$l$F!J(B[]$B$,$J$$$H$-$O8+=P$7$J$7!K!$(B<>$B$G0LCV;XDj(B<r>$B1&4s$;!$(B<c>$B%;%s%?!<!$(B<l>$B$*$h$S$J$7$O:84s$;!J<B$O2?$G$b:84s$;!K(B
+%\midashikaishiichi$B$O:8$b1&$b%G%U%)%k%H$G(B30pt
+%%$B$3$l$O(B( )$B$G;XDj2DG=$G$9!*(B
+%%%\midashikaishiichi$B$O!$(B0=$B$J$7!$(B1=$B:8$+$i!$(B2=$B1&$+$i!$(B3=$B%;%s%?!<(B
+%\midashikaishiichi$B$O:8$b1&$b%G%U%)%k%H$G(B30pt
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B<B@~:YOH(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\jituwaku{%
+\@ifnextchar[{\@jituwaku}{\@@jituwaku[]<l>}}
+\def\@jituwaku[#1]{%
+\@ifnextchar<{\@@jituwaku[#1]}{\@@jituwaku[#1]<l>}}
+\def\@@jituwaku[#1]<#2>{%
+\@ifnextchar({\@@@jituwaku[#1]<#2>}{\@@@jituwaku[#1]<#2>(30)}}
+\def\@@@jituwaku[#1]<#2>(#3){%
+\vspace{0.2\baselineskip}
+\setbox0=\hbox{#1}
+\if#2r%$B1&4s$;(B
+\chardef\midashiposi=2
+\chardef\midashikaishiichi=#3
+\else\if#2c%$B%;%s%?!<(B
+\chardef\midashiposi=3
+\chardef\midashikaishiichi=0
+\else%$B:84s$;(B
+\chardef\midashiposi=1
+\chardef\midashikaishiichi=#3
+\fi\fi
+\begin{breakbox}
+\begin{indentb}{0.65\zw}{0.65\zw}\vspace{\dp0}\vspace{0.3cm}}
+\def\endjituwaku{\vspace{0.2cm}\end{indentb}\end{breakbox}\vspace{0.2cm}}
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B<B@~B@OH(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\futowaku{%
+\@ifnextchar[{\@futowaku}{\@@futowaku[]<l>}}
+\def\@futowaku[#1]{%
+\@ifnextchar<{\@@futowaku[#1]}{\@@futowaku[#1]<l>}}
+\def\@@futowaku[#1]<#2>{%
+\@ifnextchar({\@@@futowaku[#1]<#2>}{\@@@futowaku[#1]<#2>(30)}}
+\def\@@@futowaku[#1]<#2>(#3){%
+\setbox0=\hbox{#1}
+\vspace{0.2\baselineskip}
+\if#2r%$B1&4s$;(B
+\chardef\midashiposi=2
+\chardef\midashikaishiichi=#3
+\else\if#2c%$B%;%s%?!<(B
+\chardef\midashiposi=3
+\chardef\midashikaishiichi=0
+\else%$B:84s$;(B
+\chardef\midashiposi=1
+\chardef\midashikaishiichi=#3
+\fi\fi
+\fboxrule=3\fboxrule
+\begin{breakbox}
+\begin{indentb}{0.5\zw}{0.5\zw}
+\vspace{\dp0}\vspace{0.3cm}}
+\def\endfutowaku{\vspace{0.2cm}\end{indentb}\end{breakbox}\vspace{0.2cm}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$BGK@~:YOH(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\waku{%
+\@ifnextchar[{\@waku}{\@@waku[e]<l>}}
+\def\@waku[#1]{%
+\@ifnextchar<{\@@waku[#1]}{\@@waku[#1]<l>}}
+\def\@@waku[#1]<#2>{%
+\@ifnextchar({\@@@waku[#1]<#2>}{\@@@waku[#1]<#2>(30)}}
+\def\@@@waku[#1]<#2>(#3){%
+\setbox0=\hbox{#1}
+\vspace{0.2\baselineskip}
+\ifx#1e%%$B!s!s!s!s!s8+=P$7$J$7(B
+%\setbox0=\hbox{}%
+\chardef\midashiposi=0
+\chardef\midashikaishiichi=0
+\else\if#2r%$B1&4s$;(B
+\chardef\midashiposi=2
+\chardef\midashikaishiichi=#3
+\else\if#2c%$B%;%s%?!<(B
+\chardef\midashiposi=3
+\chardef\midashikaishiichi=0
+\else%$B:84s$;(B
+\chardef\midashiposi=1
+\chardef\midashikaishiichi=#3
+\fi\fi\fi
+\begin{dashMbox}\vspace{0.2cm}
+\begin{indentb}{0.65\zw}{0.65\zw}\vspace{\dp0}\vspace{0.1cm}}
+\def\endwaku{\vspace{0.2cm}\end{indentb}\end{dashMbox}\vspace{0.2cm}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B%0%l%$%\%C%/%9(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\gwaku{%
+\@ifnextchar[{\@gwaku}{\@@gwaku[]<l>}}
+\def\@gwaku[#1]{%
+\@ifnextchar<{\@@gwaku[#1]}{\@@gwaku[#1]<l>}}
+\def\@@gwaku[#1]<#2>{%
+\@ifnextchar({\@@@gwaku[#1]<#2>}{\@@@gwaku[#1]<#2>(30)}}
+\def\@@@gwaku[#1]<#2>(#3){%
+\fboxrule=5.5\fboxrule
+\setbox0=\hbox{#1}
+\vspace{0.3\baselineskip}
+\def\sokusen{\textcolor[gray]{.7}{\vrule \@width\fboxrule}}
+\def\uehidarisen{\textcolor[gray]{.7}{\vrule height\fboxrule depth0pt width\midashikaishiichi pt}}
+\def\kahenhrulefill{\textcolor[gray]{.7}{\leavevmode\leaders\hrule height\fboxrule\hfill\kern\z@}}
+\def\sitasen{\textcolor[gray]{.7}{\hrule\@height\fboxrule}}
+\if#2r%$B1&4s$;(B
+\chardef\midashiposi=2
+\chardef\midashikaishiichi=#3
+\else\if#2c%$B%;%s%?!<(B
+\chardef\midashiposi=3
+\chardef\midashikaishiichi=0
+\else%$B:84s$;(B
+\chardef\midashiposi=1
+\chardef\midashikaishiichi=#3
+\fi\fi
+\begin{breakbox}\vspace{0.2cm}
+\begin{indentb}{0.5\zw}{0.5\zw}\vspace{\dp0}\vspace{0.1cm}}
+\def\endgwaku{\vspace{0.2cm}\end{indentb}\end{breakbox}\vspace{0.2cm}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B%5%s%I%$%C%AOH(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\sandw{%
+\@ifnextchar[{\@sandw}{\@@sandw[]<l>}}
+\def\@sandw[#1]{%
+\@ifnextchar<{\@@sandw[#1]}{\@@sandw[#1]<l>}}
+\def\@@sandw[#1]<#2>{%
+\@ifnextchar({\@@@sandw[#1]<#2>}{\@@@sandw[#1]<#2>(30)}}
+\def\@@@sandw[#1]<#2>(#3){%
+\fboxrule=2pt
+\setbox0=\hbox{#1}
+\vspace{0.2\baselineskip}
+\def\sokusen{\vrule \@width 0pt}
+\def\uehidarisen{\vrule height\fboxrule depth0pt width\midashikaishiichi pt}
+\def\kahenhrulefill{\leavevmode\leaders\hrule height\fboxrule\hfill\kern\z@}
+\def\sitasen{\hrule\@height0.4pt}
+\if#2r%$B1&4s$;(B
+\chardef\midashiposi=2
+\chardef\midashikaishiichi=#3
+\else\if#2c%$B%;%s%?!<(B
+\chardef\midashiposi=3
+\chardef\midashikaishiichi=0
+\else%$B:84s$;(B
+\chardef\midashiposi=1
+\chardef\midashikaishiichi=#3
+\fi\fi
+\begin{breakbox}
+\begin{indentb}{0.5\zw}{0.5\zw}
+\vspace{\dp0}\vspace{0.3cm}}
+\def\endsandw{\vspace{0.2cm}\end{indentb}\end{breakbox}\vspace{0.2cm}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$BOH0O$_8+=P$7$D$-!&B@@~OH!JJFB<L@K';a:n!K(B
+%$B4D6-7A(Bmidashifuto
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\hrulefillthick{\leaders\hrule depth0.4pt\hfill}
+\newenvironment{midashifuto}[1]{\begin{trivlist}\item[]
+  \raisebox{-1truept}[0pt][0pt]{\makebox[\linewidth]{%
+	\hrulefillthick\raisebox{-.3zh}{\hskip.3\zw\textgt{\inhibitglue 『\inhibitglue}}\ \hrulefillthick}}\par%
+  \hbox to \linewidth\bgroup
+   \advance\linewidth by -3\zw
+   \hsize=\linewidth
+   \vrule width0.8pt\hfill
+   \vbox\bgroup
+    \vskip1\zw%15pt
+\begin{indentb}{-1.5\zw}{0.5\zw}
+    \begin{minipage}{\linewidth}}{%
+    \end{minipage}\end{indentb}
+\vskip1\zw%15pt
+   \egroup\hfill\vrule width0.8pt
+  \egroup\hrule depth0.4pt
+\end{trivlist}}
+
+\newenvironment{jyouge}[1]{\begin{trivlist}\item[]
+  \raisebox{-1truept}[0pt][0pt]{\makebox[\linewidth]{%
+	\hrulefillthick\raisebox{-.3zh}{\hskip.3\zw\textgt{\inhibitglue 』\inhibitglue}}\ \hrulefillthick}}\par%
+   \hbox to \linewidth\bgroup
+   \advance\linewidth by -3\zw
+    \hsize=\linewidth
+    \hfill
+    \vbox\bgroup
+     \vskip1\zw%15pt
+    \begin{minipage}{\linewidth}}{%
+    \end{minipage}\vskip1\zw%15pt
+    \egroup\hfill
+  \egroup 
+\hrule height .6truept
+\end{trivlist}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B$D$$$G$KCm4D6-$r$3$3$KCV$-$^$9(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newenvironment{Chu}{\begin{trivlist}\item[]%
+\begin{indentb}{1\zw}{0\zw}%
+    \begin{minipage}{\linewidth}\chu\;}{%
+    \end{minipage}\end{indentb}
+\end{trivlist}\par}
+
+\def\Chu{%
+\par
+\leftskip=1\zw \hspace{-0.5\zw}\chu\quad \;
+\noindent\kern-1\zw}
+\def\endChu{\par}
+
+\def\Com{%
+\par
+\leftskip=1\zw\comment\;
+\noindent\kern-0.6\zw}
+\def\endCom{\par}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$BFs=EOH!J8+=P$7$J$7!KFs=E:YOH(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\dbhosowaku{%
+\@ifnextchar[{\@dbhosowaku}{\@@dbhosowaku[e]<l>}}
+\def\@dbhosowaku[#1]{%
+\@ifnextchar<{\@@dbhosowaku[#1]}{\@@dbhosowaku[#1]<l>}}
+\def\@@dbhosowaku[#1]<#2>{%
+\@ifnextchar({\@@@dbhosowaku[#1]<#2>}{\@@@dbhosowaku[#1]<#2>(30)}}
+\def\@@@dbhosowaku[#1]<#2>(#3){%
+\setbox0=\hbox{}
+\vspace{0.2\baselineskip}
+\if#1%%$B8+=P$7$J$7(B
+%\setbox0=\hbox{}%
+\chardef\midashiposi=0
+\chardef\midashikaishiichi=0
+\else\if#2r%$B1&4s$;(B
+\chardef\midashiposi=2
+\chardef\midashikaishiichi=#3
+\else\if#2c%$B%;%s%?!<(B
+\chardef\midashiposi=3
+\chardef\midashikaishiichi=0
+\else%$B:84s$;(B
+\chardef\midashiposi=1
+\chardef\midashikaishiichi=#3
+\fi\fi\fi
+\begin{breakbox}%
+\par\vspace{-.1\baselineskip}\begin{breakbox}%
+\begin{indentb}{0.1\zw}{0.1\zw}
+\vspace{0.2cm}}
+\def\enddbhosowaku{\vspace{0.2cm}\end{indentb}\end{breakbox}\par\vspace{-0.11\baselineskip}\end{breakbox}\vspace{0.2cm}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$BFs=EB@:YOH!J8+=P$7$J$7!K(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\dbfutowaku{%
+\@ifnextchar[{\@dbfutowaku}{\@@dbfutowaku[]<l>}}
+\def\@dbfutowaku[#1]{%
+\@ifnextchar<{\@@dbfutowaku[#1]}{\@@dbfutowaku[#1]<l>}}
+\def\@@dbfutowaku[#1]<#2>{%
+\@ifnextchar({\@@@dbfutowaku[#1]<#2>}{\@@@dbfutowaku[#1]<#2>(30)}}
+\def\@@@dbfutowaku[#1]<#2>(#3){%
+\fboxrule=2pt
+\setbox0=\hbox{}
+\vspace{0.2\baselineskip}
+\if#2r%$B1&4s$;(B
+\chardef\midashiposi=2
+\chardef\midashikaishiichi=#3
+\else\if#2c%$B%;%s%?!<(B
+\chardef\midashiposi=3
+\chardef\midashikaishiichi=0
+\else%$B:84s$;(B
+\chardef\midashiposi=1
+\chardef\midashikaishiichi=#3
+\fi\fi
+\begin{breakbox}%
+\par\vspace{-.1\baselineskip}\fboxrule=0.4pt\begin{breakbox}%
+\begin{indentb}{0.1\zw}{0.1\zw}
+\vspace{0.2cm}}
+\def\enddbfutowaku{\vspace{0.2cm}\end{indentb}\end{breakbox}\par\vspace{-0.11\baselineskip}\end{breakbox}\vspace{0.2cm}}
+%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$BN>B&$K7S@~=P$7$F64$`(Bbarbox
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\fboxarule{2pt}
+\def\fboxasep{0pt}
+
+\def\breakaboxskip{0pt}
+%\def\breakboxparindent{0em}
+ 
+\def\beforeline{\ifhmode\par\fi\vskip\breakaboxskip\relax} %%%
+
+\def\bkvz@set@linewidth{\advance\linewidth -2\fboxarule %%%%%%%%%%%%%%%%
+  \advance\linewidth -2\fboxasep} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\bkvz@countlines{%
+  \ifdim\wd\bk@bxa>1mm\advance\bk@lcnt\@ne\fi
+}
+
+\def\bk@aline{%
+    \hbox to \linewidth{%
+      \ifdim\wd\bk@bxa>1mm %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        \ifbkcount\smash{\llap{\the\bk@lcnt\ }}\fi
+      \fi %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \barleft %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \box\bk@bxa
+      \hfil %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+      \barright}} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+ \def\barleft{\hskip-0.7\zw\textcolor{red}{\vrule \@width2pt\hskip0.5\zw}}
+ \def\barright{\vrule \@width0.5pt\hskip16.5\zw}
+ \def\bkvz@top{}
+ \def\bkvz@bottom{}
+ 
+
+\def\barbox#1{%
+\vskip 0.4\baselineskip 
+\beforeline
+\setbox\bk@bxb\vbox\bgroup
+\bkvz@set@linewidth
+\hsize#1
+\@parboxrestore
+\parindent1\zw
+\relax
+}
+
+\def\endbarbox{%
+\egroup
+{\noindent
+\bk@lcnt 0%
+\@bkconttrue
+\baselineskip\z@
+\lineskiplimit\z@
+\lineskip\z@
+\vfuzz\maxdimen
+\bk@split
+\bk@addfsepht
+\bk@addskipdp
+\ifvoid\bk@bxb
+
+\def\bk@afstln{%
+\bk@addfsepdp
+\bkvz@countlines
+\vbox{\bkvz@top\bk@aline\bkvz@bottom}}% 
+\else
+\def\bk@afstln{%
+\bkvz@countlines
+\vbox{\bkvz@top\bk@aline}% 
+\hfil 
+\loop 
+ \bk@split
+ \bk@addskipdp
+ \bkvz@countlines
+\leavevmode
+\ifvoid\bk@bxb
+ \@bkcontfalse
+ \bk@addfsepdp
+ \vtop{\bk@aline\bkvz@bottom}% 
+\else              
+ \bk@aline
+\fi
+ \hfil
+\if@bkcont\repeat}%
+\fi
+\leavevmode\bk@afstln\par}\vskip\breakaboxskip\relax}
+
+
+\endinput

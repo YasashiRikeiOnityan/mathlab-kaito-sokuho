@@ -1,0 +1,27 @@
+% EMzref.sty
+%
+\RequirePackage[savepos]{zref}%
+%
+\newcounter{xp@s}%
+\def\initxpos{%
+  \noindent
+  \zsavepos{Ltop}\hfill\zsavepos{Rbottom}%
+  \xdef\Rxsp{\zposx{Rbottom}}% 終点x座標
+%  \vspace{-.75\baselineskip}\par
+  \vspace{-.72\baselineskip}\par
+}%
+\def\getcurrentxpos#1{%
+  \refstepcounter{xp@s}%
+  \zsavepos{c@xpos\thexp@s}%
+  \EMedef#1{\zposx{c@xpos\thexp@s}}%
+  \ignorespaces
+}%
+\def\getcurrentPxy#1{%
+  \refstepcounter{xp@s}%
+  \zsavepos{c@xpos\thexp@s}%
+  \@tempdima=\zposx{c@xpos\thexp@s}sp\relax
+  \@tempdimb=\zposy{c@xpos\thexp@s}sp\relax
+  \edef#1{(\strip@pt\@tempdima,\strip@pt\@tempdimb)}%
+  \ignorespaces
+}%
+\endinput

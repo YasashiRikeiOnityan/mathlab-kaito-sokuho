@@ -1,0 +1,12 @@
+\ProvidesFile{omlceo.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{OML}{ceo}{}
+\DeclareFontShape{OML}{ceo}{m}{it}{	%medium
+     <->ceoi%
+}{}
+\DeclareFontShape{OML}{ceo}{bx}{it}{	%bolditalic
+     <->ceoib%
+}{}
+\endinput
+

@@ -1,0 +1,10 @@
+\ProvidesFile{umarub.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{marub}{}
+\DeclareFontShape{U}{marub}{m}{n}{	%medium
+     <->marub%
+}{}
+
+\endinput
+

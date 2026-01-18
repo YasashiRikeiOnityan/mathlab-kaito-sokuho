@@ -1,0 +1,30 @@
+% 共通のプリアンブルを読み込むコマンド
+\newcommand{\loadcommonpreamble}{%
+  % パッケージ
+  \usepackage{luatexja}%
+  \usepackage{amsmath,amssymb,amsfonts}%
+  \usepackage{ascolorbox}%
+  \usepackage{url}%
+  \usepackage[ceo]{emath}%
+  
+  % 行間や文字間隔の調整
+  \thickmuskip=1.0\thickmuskip
+  \medmuskip=0.8\medmuskip
+  \thinmuskip=0.8\thinmuskip
+  \arraycolsep=0.3\arraycolsep
+  \AtBeginDocument{%
+    \abovedisplayskip=0.85\abovedisplayskip
+    \belowdisplayskip=0.55\belowdisplayskip
+    \abovedisplayshortskip=0.5\abovedisplayshortskip
+    \belowdisplayshortskip=0.5\belowdisplayshortskip
+  }%
+  
+  % 数式の改ページを許可
+  \allowdisplaybreaks
+  
+  % ヘッダーの基本設定（\lhead と \rhead は各ファイルで設定）
+  \usepackage{fancyhdr}%
+  \pagestyle{fancy}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \cfoot{}%
+}

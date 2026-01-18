@@ -1,0 +1,10 @@
+\ProvidesFile{ukigon.fd}
+	[2011/10/15 v1.0]
+
+\DeclareFontFamily{U}{kigon}{}
+\DeclareFontShape{U}{kigon}{m}{n}{	%medium
+     <->kigon%
+}{}
+
+\endinput
+

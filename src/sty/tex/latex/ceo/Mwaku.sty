@@ -1,0 +1,572 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{Mwaku}
+\RequirePackage{keyval}
+\RequirePackage{namemacro}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%角丸ボックス
+%このプログラムは段やページをまたいで流れる角が丸い
+%枠囲みです．プログラムの大半を吉永徹美氏が作成し
+%それを改変したものです．
+%改変作業は安田亨が行い，一部を岡本寛
+%が行いました．
+%専用のtype1フォントを使用していますので使用には
+%ceo.styが必要です．呼び出す記号はnamemacroに記されています
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%グレイボックスを使う場合，
+%\usepackage[dvips]{graphicx,color}
+%が必要です
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%グレイボックスで個別指定するために上線，側線，下線を
+%抜き出したのが以下です.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\ruesen{\vrule\@height\@senhaba\@depth\z@\@width\@tempdima}
+\def\ruesenni{\vrule\@height\@senhaba\@depth\z@\@width\@tempdimb}
+\def\sokusentasiue{\vrule\@width\@senhaba\@height\@tempdimb}
+\def\rsokusen{\vrule\@width\@senhaba}
+\def\sokusenaidatasi{\vrule\@width\@senhaba\@height\@rdbkbox@lineskip}
+\def\rsitasen{\hrule\@height\@senhaba\@depth\z@\@width\@tempdima}
+\def\hidariuekado{\enko{\char\@nameuse{hidariue@\@futosa @\@hankei}}}
+\def\migiuekado{\enko{\char\@nameuse{migiue@\@futosa @\@hankei}}}
+\def\hidarisitakado{\enko{\char\@nameuse{hidarisita@\@futosa @\@hankei}}}
+\def\migisitakado{\enko{\char\@nameuse{migisita@\@futosa @\@hankei}}}
+\def\ruetantasi{\vrule\@height\@tempdimb\@depth\z@}
+\def\rkatantasi{\vrule\@width\@senhaba\@depth\dimen@}
+\def\kadozerojitugitasia{\vrule\@height\z@\@depth\@tempdimb\@width\@senhaba}
+\def\kadozerojitugitasib{\vrule\@height\@tempdimb\@depth\z@\@width\@senhaba}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%初期設定
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlength{\roundboxaboveskip}	%above box space (\baselineskip)
+\roundboxaboveskip=0.5\baselineskip\relax
+\newdimen\round@aboveskip
+\newlength{\roundboxunderskip}		%under box space (\baselineskip)
+\roundboxunderskip=0.5\baselineskip\relax
+\newdimen\round@underskip
+\newdimen\@senhaba                   %枠の幅
+\newdimen\@rdbkbox@cornersize
+\newdimen\@rdbkbox@leftmargin
+\newdimen\@rdbkbox@rightmargin
+\newdimen\@rdbkbox@topmargin
+\newdimen\@rdbkbox@bottommargin
+\newdimen\@rdbkbox@width
+\newdimen\@rdbkbox@bordersize@top
+\newdimen\@rdbkbox@bordersize@bottom
+\newdimen\@rdbkbox@prevheight
+\newdimen\@rdbkbox@lineskip
+\newbox\@rdbkbox@textbox
+\newbox\@rdbkbox@tempbox
+\newbox\@rdbkbox@topbox
+\newbox\@rdbkbox@bottombox
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%RBKBOX本体
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\define@key{RBKBOX}{cornersize}{%
+   \dimen@#1\relax
+   \ifdim\dimen@>\z@
+      \advance\dimen@\p@
+      \divide\dimen@\tw@
+      \divide\dimen@\p@
+      \count@\dimen@
+\belowdisplayskip=0pt
+      \ifnum\count@<\@ne \count@\@ne \fi
+      \ifnum\count@>10   \count@10   \fi
+      \multiply\count@\tw@
+      \edef\@rdbkbox@cornersize{\the\count@}%
+   \else
+      \def\@rdbkbox@cornersize{-1}%
+   \fi}
+\define@key{RBKBOX}{senhaba}{\def\@senhaba{#1}}
+\define@key{RBKBOX}{futosa}{\def\@futosa{#1}
+\ifcase\@futosa\relax
+   \def\@senhaba{0.4pt}
+\or
+   \def\@senhaba{0.4pt}
+\or
+   \def\@senhaba{0.8pt}
+\or
+   \def\@senhaba{1.2pt}
+\else
+   \def\@senhaba{2.1pt}
+\fi}
+\define@key{RBKBOX}{hankei}{\def\@hankei{#1}}
+\define@key{RBKBOX}{topmargin}{\@rdbkbox@option@set@margin{top}{#1}}
+\define@key{RBKBOX}{bottommargin}{\@rdbkbox@option@set@margin{bottom}{#1}}
+\define@key{RBKBOX}{leftmargin}{\@rdbkbox@option@set@margin{left}{#1}}
+\define@key{RBKBOX}{rightmargin}{\@rdbkbox@option@set@margin{right}{#1}}
+\define@key{RBKBOX}{title}{\def\@rdbkbox@title{#1}}
+\def\@rdbkbox@option@set@margin#1#2{%
+   \dimen@#2\relax
+   \ifdim\dimen@>\z@\else \dimen@\fboxsep \fi
+   \csname @rdbkbox@#1margin\endcsname\dimen@}
+\setkeys{RBKBOX}{%
+     futosa=1,%
+   hankei=6,%
+   topmargin=1\zw,%
+   bottommargin=1\zw,%
+   leftmargin=.6\zw,%
+   rightmargin=.8\zw,%
+   title=}
+%
+%%% definition of roundedbreakbox environment
+\newif\if@roundedbreakbox@checkmarks \@roundedbreakbox@checkmarksfalse
+\global\let\@roundedbreakbox@prevmark\@empty
+\let\@roundedbreakbox@firstmark\@empty
+\let\@roundedbreakbox@botmark\@empty
+\def\roundedbreakbox{\@testopt\@roundedbreakbox{}}
+\def\@roundedbreakbox[#1]{%
+   \ifhmode\par\fi
+   \setkeys{RBKBOX}{#1}%
+\setkeys{RBKBOX}{cornersize=\@hankei pt}%
+   \hrule\@height\z@\@depth\z@
+   \@rdbkbox@width\linewidth
+\round@aboveskip\roundboxaboveskip\relax%
+\vskip\round@aboveskip\relax%
+   \dimen@\@rdbkbox@width
+   \advance\dimen@-.8\p@
+   \advance\dimen@-\@rdbkbox@leftmargin
+   \advance\dimen@-\@rdbkbox@rightmargin
+   \setbox\@rdbkbox@textbox\vbox\bgroup
+      \hsize\dimen@
+      \@parboxrestore
+      \linewidth\dimen@
+      \@totalleftmargin\z@}
+\def\endroundedbreakbox{%
+   \ifhmode\par\fi
+   \egroup
+   \if@roundedbreakbox@checkmarks
+      \begingroup \vfuzz\maxdimen \vbadness\@M
+      \setbox\tw@\copy\@rdbkbox@textbox
+      \setbox\tw@\vsplit\tw@ to\maxdimen
+      \edef\@tempa{\splitfirstmark}%
+      \edef\@tempb{\splitbotmark}%
+      \ifx\@tempa\@empty \toks@{}%
+      \else              \toks@\expandafter{\@tempa}%
+      \fi
+      \ifx\@tempb\@empty \@temptokena{}%
+      \else              \@temptokena\expandafter{\@tempb}%
+      \fi
+      \edef\@tempa{%
+         \def\noexpand\@roundedbreakbox@firstmark{\the\toks@}%
+         \def\noexpand\@roundedbreakbox@botmark{\the\@temptokena}}%
+      \expandafter\endgroup\@tempa
+   \fi
+   \@endpetrue
+   \begingroup
+   \offinterlineskip
+   \vbadness\@M
+   \vfuzz\maxdimen
+   \splitmaxdepth\maxdimen
+   \@rdbkbox@set@topbox
+   \dimen@\ht\@rdbkbox@textbox
+   \advance\dimen@\dp\@rdbkbox@textbox
+   \@tempdima\@rdbkbox@bordersize@top
+   \advance\@tempdima\@rdbkbox@bordersize@bottom
+   \ifdim\dimen@>\@tempdima
+      \if@roundedbreakbox@checkmarks
+         \ifdim\pagetotal>\topskip
+            \ifx\@roundedbreakbox@prevmark\@empty\else
+               \protected@edef\@tempz{\mark{\@roundedbreakbox@prevmark}}%
+               \@tempz\allowbreak
+            \fi
+         \fi
+      \fi
+      \@rdbkbox@prevheight\z@
+      \@rdbkbox@split@box@loop
+      \global\setbox\@rdbkbox@tempbox\box\@tempboxa
+   \else
+      \global\setbox\@rdbkbox@tempbox\vbox{%
+         \if@roundedbreakbox@checkmarks
+            \ifdim\pagetotal>\topskip
+               \ifx\@roundedbreakbox@prevmark\@empty\else
+                  \protected@edef\@tempz{\mark{\@roundedbreakbox@prevmark}}%
+                  \@tempz\allowbreak
+               \fi
+            \fi
+         \fi
+         \box\@tempboxa
+         \if@roundedbreakbox@checkmarks
+            \ifx\@roundedbreakbox@firstmark\@empty\else
+               \protected@edef\@tempz{\mark{\@roundedbreakbox@firstmark}}%
+               \@tempz
+            \fi
+         \fi
+         \hbox to\@rdbkbox@width{%
+%           \kern.4\p@
+         \kern\@senhaba
+            \kern\@rdbkbox@leftmargin
+            \vbox to\@tempdima{%
+               \vss
+               \unvbox\@rdbkbox@textbox
+               \vss}%
+            \hss}%
+         \if@roundedbreakbox@checkmarks
+            \ifx\@roundedbreakbox@botmark\@empty\else
+               \protected@edef\@tempz{\mark{\@roundedbreakbox@botmark}}%
+               \@tempz
+            \fi
+            \global\let\@roundedbreakbox@prevmark\@roundedbreakbox@botmark
+         \fi
+         \box\@rdbkbox@bottombox}%
+   \fi
+   \endgroup
+   \unvbox\@rdbkbox@tempbox
+\round@underskip\roundboxunderskip\relax%
+\vskip\round@underskip\relax}
+
+\def\@rdbkbox@set@topbox{%
+   \count@\@rdbkbox@cornersize\relax
+   \ifnum\count@>\z@
+      \dimen@\count@\p@
+      \multiply\count@\tw@
+      \advance\count@-4\relax
+      \@tempdima\@rdbkbox@width
+      \advance\@tempdima-\tw@\dimen@
+      \setbox\@tempboxa\vbox{%
+         \hbox to\@rdbkbox@width{%
+            \tencircw
+            \hbox to\z@{%
+               \advance\count@ 3\relax
+      \setbox\z@\hbox{\hidariuekado}%
+               \ht\z@\z@ \dp\z@\z@
+               \box\z@
+               \hss}%
+            \kern\dimen@
+            \ifx\@rdbkbox@title\@empty
+             \ruesen
+%              \vrule\@height.4\p@\@depth\z@\@width\@tempdima
+            \else
+%%%%%%%%%%%%以下右寄せ左寄せの分岐%%%%%%%%%%%%%%%%%%%%
+\ifcase \roundboxmidashiposi
+	 \ruesen
+\or  
+    \@tempdimb\roundboxmidashikaishiichi pt\relax \advance\@tempdimb-\dimen@
+                \ruesenni
+%             \vrule\@height.4\p@\@depth\z@\@width\@tempdimb     %上左
+               \setbox\z@\hbox{\,{\@rdbkbox@title}\,}%
+               \advance\@tempdima-\@tempdimb
+               \advance\@tempdima-\wd\z@
+               \vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}%
+             \ruesen
+%              \vrule\@height.4\p@\@depth\z@\@width\@tempdima %上右
+\or 
+            \setbox\z@\hbox{\,{\@rdbkbox@title}\,}%
+	\@tempdimb\roundboxmidashikaishiichi pt\relax 
+              \advance\@tempdima-\@tempdimb
+              \advance\@tempdima-\wd\z@
+              \advance\@tempdima+\dimen@
+	\ruesen
+%             \vrule\@height.4\p@\@depth\z@\@width\@tempdimb     %上左
+                \vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}%
+%%	\advance\@tempdima-\@tempdimb
+	\advance\@tempdimb-\wd\z@
+	\advance\@tempdimb-\dimen@
+             \ruesenni
+%              \vrule\@height.4\p@\@depth\z@\@width\@tempdima %上右
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\or  
+            \setbox\z@\hbox{\,{\@rdbkbox@title}\,}%
+%	\@tempdimb\roundboxmidashikaishiichi pt\relax 
+             \advance\@tempdima-0.5\@tempdima
+              \advance\@tempdima-0.5\wd\z@
+%              \advance\@tempdima-\dimen@
+	\ruesen
+%             \vrule\@height.4\p@\@depth\z@\@width\@tempdimb     %上左
+\vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}
+%                \vbox to\z@{\vss \box\z@ \vss}%
+%%	\advance\@tempdima-\@tempdimb
+	\advance\@tempdima-0.5\wd\z@
+%	\advance\@tempdima+\dimen@
+             \ruesen
+\fi
+            \fi
+            \kern\dimen@
+            \hbox to\z@{%
+%               \kern-.4\p@  %上位置合わせ
+               \kern-\@senhaba
+               \setbox\z@\hbox{\migiuekado}%
+               \ht\z@\z@ \dp\z@\z@
+               \box\z@
+               \hss}}%
+%         \kern-.4\p@
+         \kern-\@senhaba
+         \ifdim\@rdbkbox@topmargin<\dimen@
+            \kern\@rdbkbox@topmargin
+         \else
+            \kern\dimen@
+            \@tempdimb\@rdbkbox@topmargin
+            \advance\@tempdimb-\dimen@
+            \hbox to\@rdbkbox@width{%
+               \ruetantasi
+              \hfil
+               \ruetantasi}%
+         \fi}%
+      \setbox\@rdbkbox@bottombox\vbox{%
+%         \kern-.4\p@
+         \kern-\@senhaba
+         \ifdim\@rdbkbox@bottommargin<\dimen@
+            \kern\@rdbkbox@bottommargin
+         \else
+            \@tempdimb\@rdbkbox@bottommargin
+            \advance\@tempdimb-\dimen@
+            \hbox to\@rdbkbox@width{%
+               \ruetantasi
+               \hfil
+               \ruetantasi}%
+            \kern\dimen@
+         \fi
+         \hbox to\@rdbkbox@width{%
+            \tencircw
+            \hbox to\z@{%
+               \advance\count@ 2\relax
+               \setbox\z@\hbox{\hidarisitakado}%
+               \ht\z@\z@ \dp\z@\z@
+               \box\z@
+               \hss}%
+            \kern\dimen@
+            \ruesen
+%            \vrule\@height.4\p@\@depth\z@\@width\@tempdima
+            \kern\dimen@
+            \hbox to\z@{%
+%               \kern-.4\p@
+               \kern-\@senhaba
+               \advance\count@ 1\relax
+               \setbox\z@\hbox{\migisitakado}%
+               \ht\z@\z@ \dp\z@\z@
+               \box\z@
+               \hss}}}%
+      \ifdim\@rdbkbox@topmargin<\dimen@
+         \@rdbkbox@bordersize@top-\@rdbkbox@topmargin
+         \advance\@rdbkbox@bordersize@top\dimen@
+      \else
+         \@rdbkbox@bordersize@top\z@
+      \fi
+      \ifdim\@rdbkbox@bottommargin<\dimen@
+         \@rdbkbox@bordersize@bottom-\@rdbkbox@bottommargin
+         \advance\@rdbkbox@bordersize@bottom\dimen@
+      \else
+         \@rdbkbox@bordersize@bottom\z@
+      \fi
+   \else
+      \@tempdima\@rdbkbox@width
+      \setbox\@tempboxa\vbox{%
+         \hbox{%
+            \ifx\@rdbkbox@title\@empty
+%               \vrule\@height.4\p@\@depth\z@\@width\@tempdima
+               \ruesen
+            \else
+            \fi}%
+%         \kern-.4\p@
+         \kern-\@senhaba
+         \@tempdimb\@rdbkbox@topmargin
+         \hbox to\@rdbkbox@width{%
+            \kadozerojitugitasia
+            \hfil
+            \kadozerojitugitasia}}%
+      \setbox\@rdbkbox@bottombox\vbox{%
+         \@tempdimb\@rdbkbox@bottommargin
+         \hbox to\@rdbkbox@width{%
+            \kadozerojitugitasib
+            \hfil
+            \kadozerojitugitasib}%
+         \rsitasen}%下線 なお\@width\@senhaba\@senhabaを４か所加
+%         \hrule\@height.4\p@\@depth\z@\@width\@tempdima}%
+      \@rdbkbox@bordersize@top\z@
+      \@rdbkbox@bordersize@bottom\z@
+   \fi}
+\def\@rdbkbox@split@box@loop{%
+   \ifx\@roundedbreakbox@firstmark\@empty\else
+      \setbox\@tempboxa\vbox{\box\@tempboxa
+         \if@roundedbreakbox@checkmarks
+            \ifx\@roundedbreakbox@firstmark\@empty\else
+               \protected@edef\@tempz{\mark{\@roundedbreakbox@firstmark}}%
+               \@tempz
+            \fi
+         \fi}%
+   \fi
+   \let\@roundedbreakbox@firstmark\@empty
+   \ifvoid\@rdbkbox@textbox\else
+      \dimen@\ht\@rdbkbox@textbox
+      \advance\dimen@\dp\@rdbkbox@textbox
+      \setbox\z@\vsplit\@rdbkbox@textbox to\z@
+      \setbox\z@\vbox{\unvbox\z@}%
+      \advance\dimen@-\ht\z@
+      \advance\dimen@-\dp\z@
+      \advance\dimen@-\ht\@rdbkbox@textbox
+      \advance\dimen@-\dp\@rdbkbox@textbox
+      \@rdbkbox@lineskip\dimen@
+      \dimen@\ht\@rdbkbox@textbox
+      \advance\dimen@\dp\@rdbkbox@textbox
+      \ifdim\dimen@>\@rdbkbox@bordersize@bottom
+         \ifdim\@rdbkbox@prevheight<\@rdbkbox@bordersize@top
+            \@tempdima\ht\z@
+            \advance\@tempdima\dp\z@
+            \advance\@tempdima\@rdbkbox@prevheight
+            \ifdim\@tempdima<\@rdbkbox@bordersize@top
+               \@rdbkbox@add@vrule+\relax
+               \advance\@tempdima\@rdbkbox@lineskip
+            \else
+               \@tempdimb\@rdbkbox@prevheight
+               \advance\@tempdimb-\@rdbkbox@bordersize@top
+               \advance\@tempdimb\ht\z@
+        \@rdbkbox@add@vrule+{\sokusentasiue}%
+%               \@rdbkbox@add@vrule+{\vrule\@width.4\p@\@height\@tempdimb}%
+            \fi
+            \@rdbkbox@prevheight\@tempdima
+         \else
+            \@rdbkbox@add@vrule+{\rsokusen}%
+%            \@rdbkbox@prevheight\@tempdima
+%         \else
+%            \@rdbkbox@add@vrule+{\vrule\@width.4\p@}%
+         \fi
+      \else
+         \advance\dimen@-\@rdbkbox@bordersize@bottom
+         \advance\dimen@\dp\z@
+         \ifdim\@rdbkbox@prevheight<\@rdbkbox@bordersize@top
+            \@tempdima\ht\z@
+            \advance\@tempdima-\@rdbkbox@bordersize@top
+            \advance\@tempdima\@rdbkbox@prevheight
+            \@rdbkbox@add@vrule-{\rkatantasiB}%
+         \else
+            \advance\dimen@\@rdbkbox@lineskip
+            \@rdbkbox@add@vrule-{\rkatantasi}%
+%            \@rdbkbox@add@vrule-{\vrule\@width.4\p@\@depth\dimen@}%
+         \fi
+         \setbox\@tempboxa\vbox{%
+            \unvbox\@tempboxa
+            \hbox to\@rdbkbox@width{%
+%               \kern.4\p@ \kern\@rdbkbox@leftmargin
+               \kern\@senhaba \kern\@rdbkbox@leftmargin
+               \box\@rdbkbox@textbox
+               \hss}%
+            \if@roundedbreakbox@checkmarks
+               \ifx\@roundedbreakbox@botmark\@empty\else
+                  \protected@edef\@tempz{\mark{\@roundedbreakbox@botmark}}%
+                  \@tempz
+               \fi
+               \global\let\@roundedbreakbox@prevmark\@roundedbreakbox@botmark
+            \fi
+            \box\@rdbkbox@bottombox}%
+      \fi
+      \expandafter\@rdbkbox@split@box@loop
+   \fi}
+\def\@rdbkbox@add@vrule#1#2{%
+   \setbox\@tempboxa\vbox{%
+      \unvbox\@tempboxa
+      \ifdim\@rdbkbox@prevheight<\@rdbkbox@bordersize@top\else
+         \penalty\interlinepenalty
+      \fi
+      \hbox to\@rdbkbox@width{%
+         #2%
+         \kern\@rdbkbox@leftmargin
+         \box\z@
+         \hss
+         \kern\@rdbkbox@rightmargin
+         #2}%
+      \if#1+\relax
+         \ifdim\@rdbkbox@lineskip>\z@
+            \nobreak
+            \hbox to\@rdbkbox@width{%
+               \sokusenaidatasi
+               \hfil
+               \sokusenaidatasi}%
+%               \vrule\@width.4\p@\@height\@rdbkbox@lineskip
+%               \hfil
+%               \vrule\@width.4\p@\@height\@rdbkbox@lineskip}%
+         \else
+            \kern\@rdbkbox@lineskip
+         \fi
+      \else
+         \kern\@rdbkbox@lineskip
+      \fi}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%角丸ボックス
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\Mwaku{%,futosa=1,hankei=6],futosa=#2,hankei=#3
+%\@ifnextchar[{\@Mwaku}{\@Mwaku[]}}
+%\def\@Mwaku[#1]{%
+%\@ifnextchar({\@@Mwaku[#1]}{\@@Mwaku[#1](1,6)}}
+%\def\@@Mwaku[#1](#2,#3){%
+%\@ifnextchar<{\@@@Mwaku[#1](#2,#3)}{\@@@Mwaku[#1](#2,#3)<l>}}
+%\def\@@@Mwaku[#1](#2,#3)<#4>{%
+%\@ifnextchar[{\@@@@Mwaku[#1](#2,#3)<#4>}{\@@@@Mwaku[#1](#2,#3)<#4>[30]}}
+\def\Mwaku{%(futosa,hankei)[見出し],<posi>(位置指定)futosa=#2,hankei=#3
+\@ifnextchar({\@Mwaku}{\@Mwaku(1,6)}}
+\def\@Mwaku(#1,#2){%
+\@ifnextchar[{\@@Mwaku(#1,#2)}{\@@Mwaku(#1,#2)[]}}
+\def\@@Mwaku(#1,#2)[#3]{%
+\@ifnextchar<{\@@@Mwaku(#1,#2)[#3]}{\@@@Mwaku(#1,#2)[#3]<l>}}
+\def\@@@Mwaku(#1,#2)[#3]<#4>{%
+\@ifnextchar({\@@@@Mwaku(#1,#2)[#3]<#4>}{\@@@@Mwaku(#1,#2)[#3]<#4>(30)}}
+\def\@@@@Mwaku(#1,#2)[#3]<#4>(#5){%
+\vspace{-0.1\baselineskip}
+%\if#1e%%％％％％％見出しなし
+%\chardef\roundboxmidashiposi=0
+%\chardef\roundboxmidashikaishiichi=0
+%\begin{roundedbreakbox}[futosa=#2,hankei=#3]
+%\vspace{0.3\ht\z@}
+\setbox0=\hbox{#3}
+\if#4r%右寄せ
+\chardef\roundboxmidashiposi=2
+\chardef\roundboxmidashikaishiichi=#5
+\else\if#4c%センター
+\chardef\roundboxmidashiposi=3
+\chardef\roundboxmidashikaishiichi=0
+\else\if#4l%左寄せ
+\chardef\roundboxmidashiposi=1
+\chardef\roundboxmidashikaishiichi=#5
+\fi\fi\fi
+\begin{roundedbreakbox}[title=#3,futosa=#1,hankei=#2]\vskip\dp0 \vskip2 pt\par}
+\def\endMwaku{\end{roundedbreakbox}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%角丸のグレイボックス
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\Mgwaku{%(futosa,hankei)[見出し],<posi>(位置指定)futosa=#2,hankei=#3
+\@ifnextchar({\@Mgwaku}{\@Mgwaku(1,6)}}
+\def\@Mgwaku(#1,#2){%
+\@ifnextchar[{\@@Mgwaku(#1,#2)}{\@@Mgwaku(#1,#2)[]}}
+\def\@@Mgwaku(#1,#2)[#3]{%
+\@ifnextchar<{\@@@Mgwaku(#1,#2)[#3]}{\@@@Mgwaku(#1,#2)[#3]<l>}}
+\def\@@@Mgwaku(#1,#2)[#3]<#4>{%
+\@ifnextchar({\@@@@Mgwaku(#1,#2)[#3]<#4>}{\@@@@Mgwaku(#1,#2)[#3]<#4>(30)}}
+\def\@@@@Mgwaku(#1,#2)[#3]<#4>(#5){%
+\vspace{-0.2\baselineskip}
+\setbox0=\hbox{#3}
+\if#4r%右寄せ
+\chardef\roundboxmidashiposi=2
+\chardef\roundboxmidashikaishiichi=#5
+\else\if#4c%センター
+\chardef\roundboxmidashiposi=3
+\chardef\roundboxmidashikaishiichi=0
+\else\if#4l%左寄せ
+\chardef\roundboxmidashiposi=1
+\chardef\roundboxmidashikaishiichi=#5
+\fi\fi\fi
+\def\ruesen{\textcolor[gray]{.55}{\vrule\@height\@senhaba\@depth\z@\@width\@tempdima}}%
+\def\ruesenni{\textcolor[gray]{.55}{\vrule\@height\@senhaba\@depth\z@\@width\@tempdimb}}%
+\def\sokusentasiue{\textcolor[gray]{.55}{\vrule\@width\@senhaba\@height\@tempdimb}}%
+\def\rsokusen{\textcolor[gray]{.55}{\vrule\@width\@senhaba}}%
+\def\sokusenaidatasi{\textcolor[gray]{.55}{\vrule\@width\@senhaba\@height\@rdbkbox@lineskip}}%
+\def\rsitasen{\textcolor[gray]{.55}{\hrule\@height\@senhaba\@depth\z@\@width\@tempdima}}%
+\def\hidariuekado{\textcolor[gray]{.55}{\enko{\char\@nameuse{hidariue@\@futosa @\@hankei}}}}%
+\def\migiuekado{\textcolor[gray]{.55}{\enko{\char\@nameuse{migiue@\@futosa @\@hankei}}}}%
+\def\hidarisitakado{\textcolor[gray]{.55}{\enko{\char\@nameuse{hidarisita@\@futosa @\@hankei}}}}%
+\def\migisitakado{\textcolor[gray]{.55}{\enko{\char\@nameuse{migisita@\@futosa @\@hankei}}}}%
+\def\ruetantasi{\textcolor[gray]{.55}{\vrule\@height\@tempdimb\@depth\z@}}%
+\def\rkatantasi{%
+  \edef\@rkatantasi@temp{\vrule\@width\@senhaba\@depth\the\dimen@}%
+  \textcolor[gray]{.55}{\@rkatantasi@temp}}
+\def\rkatantasiB{%
+  \edef\@rkatantasi@temp{\vrule\@width\@senhaba\@height\@tempdima\@depth\the\dimen@}%
+  \textcolor[gray]{.55}{\@rkatantasi@temp}}
+\def\kadozerojitugitasia{\textcolor[gray]{.55}{\vrule\@height\z@\@depth\@tempdimb\@width\@senhaba}}
+\def\kadozerojitugitasib{\textcolor[gray]{.55}{\vrule\@height\@tempdimb\@depth\z@\@width\@senhaba}}
+\begin{roundedbreakbox}[title=#3,futosa=#1,hankei=#2]\vskip\dp0 \vskip2 pt\par}
+\def\endMgwaku{\end{roundedbreakbox}}
+
+\endinput

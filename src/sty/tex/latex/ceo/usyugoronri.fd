@@ -1,0 +1,10 @@
+\ProvidesFile{usyugoronri.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{syugoronri}{}
+\DeclareFontShape{U}{syugoronri}{m}{n}{	%medium
+     <->syugoronri%
+}{}
+
+\endinput
+

@@ -1,0 +1,157 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{colorwaku}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%以下カラーで枠内を塗る
+%2007年1月9日吉永さん作成
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\bk@line{%
+    \hbox to \linewidth{\ifbkcount\smash{\llap{\the\bk@lcnt\ }}\fi
+    \bk@set@bgcolor\linewidth%%% 追加
+    \sokusen\hskip\fboxsep
+    \box\bk@bxa\hfil
+    \hskip\fboxsep\sokusen}}
+
+\def\bk@line@with@vdashlines{%
+   \hbox to \linewidth{%
+      \ifbkcount\smash{\llap{\the\bk@lcnt\ }}\fi
+      \bk@set@bgcolor\linewidth%%% 追加
+      \copy\bk@sideline \hskip\fboxsep
+      \box\bk@bxa\hfil
+      \hskip\fboxsep \box\bk@sideline}}
+
+\def\bk@set@bgcolor#1{%%% このマクロも追加
+   \ifx\breakboxbgcolor\@empty\else
+      \begingroup
+      \breakboxbgcolor
+      \@tempdima\ht\bk@bxa \@tempdimb\dp\bk@bxa
+      \ifdim\@tempdimb<\z@ \@tempdimb\z@ \fi
+      \advance\@tempdimb.1\p@
+      \smash{\vrule \@height\@tempdima \@depth\@tempdimb \@width#1}%
+      \endgroup
+      \kern-#1\relax
+   \fi}
+
+\def\endbreakbox{\egroup
+\ifhmode\par\fi{\noindent\bk@lcnt\@ne
+\@bkconttrue\baselineskip\z@\lineskiplimit\z@
+\lineskip\z@\vfuzz\maxdimen
+\bk@split\bk@addfsepht\bk@addskipdp
+\ifvoid\bk@bxb      % Only one line
+\def\bk@fstln{\bk@addfsepdp
+\vbox{\sitasen\bk@line\hrule\sitasen}}%
+\else               % More than one line
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%　　\midashiposi　　%%%%%%%%
+%%% 変更部分始
+\def\bk@fstln{%
+\setbox\tw@\vbox{%
+   \noindent
+   \setbox\z@\hbox{\box0}%\vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}
+   \ifcase \midashiposi
+   \uehidarisen \vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}\kahenhrulefill
+   \or%
+   \uehidarisen \vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}\kahenhrulefill
+   \or%
+   \kahenhrulefill\vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}\uehidarisen
+   \or
+   \kahenhrulefill\vbox to0.6\ht\z@{\hbox{\box\z@}\vskip0pt}\kahenhrulefill
+   \fi}%
+\dimen@\ht\tw@ \advance\dimen@\dp\tw@
+\setbox4=\vbox{\bk@line}%
+\dimen@ii\ht4 \advance\dimen@ii\dp4\relax \vskip\dimen@ \box4\par \nobreak \vskip-\dimen@ii\vskip-\dimen@ \box\tw@\par \nobreak \vskip\dimen@ii \noindent %%% 変更部分終
+%
+\advance\bk@lcnt\@ne
+\loop
+ \bk@split\bk@addskipdp\leavevmode
+\ifvoid\bk@bxb      % The last line
+ \@bkcontfalse\bk@addfsepdp
+ \vtop{\bk@line\sitasen}%
+\else               % 2,...,(n-1)
+ \bk@line
+\fi
+ \hfil\advance\bk@lcnt\@ne
+\if@bkcont\repeat}%
+\fi
+\leavevmode\bk@fstln\par}\vskip\breakboxskip\relax}
+
+\def\enddashMbox{%
+   \egroup
+   \ifhmode \par \fi
+  {\noindent\bk@lcnt\@ne
+   \@bkconttrue
+   \baselineskip\z@ \lineskiplimit\z@ \lineskip\z@
+   \vfuzz\maxdimen \vbadness\@M
+   \bk@remaining@height\ht\bk@bxb \advance\bk@remaining@height\dp\bk@bxb
+   \advance\bk@remaining@height\tw@\fboxsep
+   \bk@processed@height\z@
+   \@tempdima\bk@remaining@height \advance\@tempdima-\dashMboxlinelength
+   \@tempdimb\dashMboxlinelength \advance\@tempdimb\dashMboxlinegap
+   \dimen@\@tempdima \divide\@tempdima\@tempdimb \multiply\@tempdima\@tempdimb
+   \advance\dimen@-\@tempdima \advance\dimen@\dashMboxlinegap
+   \divide\dimen@\tw@ \bk@lastgap\dimen@
+   \bk@split \bk@addfsepht \bk@addskipdp
+   \ifvoid\bk@bxb      % Only one line
+      \def\bk@fstln{%
+         \bk@addfsepdp
+         \bk@make@sideline
+         \vbox{%
+            \bk@mkhdashline
+            \bk@line@with@vdashlines
+            \bk@mkhdashline}}%
+   \else               % More than one line
+      \def\bk@fstln{%
+         \bk@make@sideline
+%%% 変更部分始
+         \vbox{%
+            \setbox\z@\vbox{\bk@mkhdashline}%
+            \dimen@\ht\z@ \advance\dimen@\dp\z@
+            \setbox\tw@\vbox{\bk@line@with@vdashlines}%
+            \dimen@ii\ht\tw@ \advance\dimen@ii\dp\tw@
+            \vskip\dimen@
+            \box\tw@
+            \vskip-\dimen@ \vskip-\dimen@ii
+            \box\z@
+            \vskip\dimen@ii}%
+%%% 変更部分終
+         \hfil
+         \advance\bk@lcnt\@ne
+         \loop
+            \bk@split \bk@addskipdp
+            \leavevmode
+            \ifvoid\bk@bxb      % The last line
+               \@bkcontfalse \bk@addfsepdp
+               \bk@make@sideline
+               \vtop{%
+                  \bk@line@with@vdashlines
+                  \bk@mkhdashlinelast}%
+            \else               % 2,...,(n-1)
+               \bk@make@sideline
+               \bk@line@with@vdashlines
+            \fi
+            \hfil
+            \advance\bk@lcnt\@ne
+         \if@bkcont\repeat}%
+   \fi
+   \leavevmode\bk@fstln\par}%
+   \vskip\breakboxskip\relax}
+
+
+\def\breakboxbgcolor{\color[named]{YellowGreen}}
+%%% 背景色を設定する場合は \breakboxbgcolor を色指定のコマンドに設定．
+%%% このような \breakboxbgcolor を導入すると，
+%%% 個々の環境の定義の中で \breakboxbgcolor を定義することで
+%%% 背景色の有無を切り換えることができます．
+%%% 例:
+%%% \newenvironment{amigwaku}
+%%%    {\def\breakboxbgcolor{\color[gray]{.9}}\gwaku}{\endgwaku}
+
+\newenvironment{amigwaku}
+   {\def\breakboxbgcolor{\color[gray]{.9}}\gwaku}{\endgwaku}
+
+
+%\def\breakboxbgcolor{}
+%%% 背景色を設定しない場合は \breakboxbgcolor を空文字列に設定．
+\endinput

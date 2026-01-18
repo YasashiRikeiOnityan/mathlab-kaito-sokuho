@@ -1,0 +1,81 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{sijisen}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TeX Q&Aからみなも氏による
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\noarrowfill{$\mathsurround=0pt \smash-\mkern-7mu%
+  \cleaders\hbox{$\mkern-2mu\smash-\mkern-2mu$}\hfill
+  \mkern-7mu\mathord-$}
+
+\def\backarrow#1{{\leavevmode
+  \setbox0=\hbox to 0pt{\hss
+    \vbox{\hsize=2em % 矢印の横幅
+      \smash{\hbox to \hsize{\kern-0.8pt\rightarrowfill}}\nointerlineskip
+      \vskip-\the\fontdimen22\textfont2
+      \noindent\vrule height#1\baselineskip width 0.4pt\par\nointerlineskip
+      \vskip\the\fontdimen22\textfont2
+      \smash{\hbox to \hsize{\kern-0.8pt\noarrowfill}}\nointerlineskip
+    }\hskip1mm}%
+  \ht0=0pt \box0}}
+
+\def\coleftline#1#2{{\leavevmode
+  \setbox0=\hbox to 0pt{\hss
+    \vbox{\hsize=#1em % 矢印の横幅
+      \smash{\hbox to \hsize{\kern-0.8pt\noarrowfill}}\nointerlineskip
+      \vskip-\the\fontdimen22\textfont2
+      \noindent\vrule height#2\baselineskip width 0.4pt\par\nointerlineskip
+      \vskip\the\fontdimen22\textfont2
+      \smash{\hbox to \hsize{\kern-0.8pt\noarrowfill}}\nointerlineskip
+    }\hskip1mm}%
+  \ht0=0pt \box0}}
+
+\def\corightline#1#2{{\leavevmode
+  \setbox0=\hbox to 0pt{\hskip1mm
+    \vbox{\hsize=#1em % 矢印の横幅
+      \smash{\hbox to \hsize{\kern-0.8pt\noarrowfill}}\nointerlineskip
+      \vskip-\the\fontdimen22\textfont2
+      \noindent\hfill\vrule height#2\baselineskip width 0.4pt \hskip0.8pt\null\par\nointerlineskip
+      \vskip\the\fontdimen22\textfont2
+      \smash{\hbox to \hsize{\kern-0.8pt\noarrowfill}}\nointerlineskip
+    }\hskip1mm}%
+  \ht0=0pt \box0}}
+
+\def\Backarrow#1{{\leavevmode
+  \setbox0=\hbox to 0pt{\hskip1mm
+    \vbox{\hsize=2em % 矢印の横幅
+      \smash{\hbox to \hsize{\kern-0.8pt\leftarrowfill}}\nointerlineskip
+      \vskip-\the\fontdimen22\textfont2
+      \noindent\hfill\vrule height#1\baselineskip width 0.4pt \hskip0.8pt\null\par\nointerlineskip
+      \vskip\the\fontdimen22\textfont2
+      \smash{\hbox to \hsize{\kern-0.8pt\noarrowfill}}\nointerlineskip
+    }\hss}%
+  \ht0=0pt \box0}}
+
+
+\def\counderline#1#2{\leavevmode\hbox to 0mm{\hskip-0.5\zw\relax
+  \vtop{\hsize=#1\relax \vskip1pt
+    \hbox to \hsize{\vrule height#2\hfill\hbox to 0pt{\vrule height#2}}\nointerlineskip
+    \hrule}
+  }}
+
+
+\def\downuparrow#1#2{\leavevmode\hbox to 0mm{%
+ \hskip-0.5\zw\relax
+  \vtop{\hsize=#1\relax \vskip1pt
+    \hbox to \hsize{\vrule height#2\hfill
+      \hbox to 0pt{\hss\hskip-0.2pt\vrule height#2\hss}%
+      \raise#2\hbox{\raise-1ex\hbox to 0pt{\hss$\uparrow$\hss}}%
+    }\nointerlineskip\hrule}
+  }}
+
+%\def\downuparrow#1#2{\leavevmode\hbox to 0mm{%
+%\hskip-0.5\zw\relax
+%  \vtop{\hsize=#1\relax \vskip1pt
+%    \hbox to \hsize{\vrule height#2\hfill\hbox to 0pt{%
+%\vrule height#2\hskip-0.22\zw\raisebox{#2}{%
+%\raisebox{-5pt}{\hss$\uparrow$\hss}}}}%
+%\nointerlineskip\hrule}
+%  }}
+
+\endinput

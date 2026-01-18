@@ -1,0 +1,10 @@
+\ProvidesFile{unmaru.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{nmaru}{}
+\DeclareFontShape{U}{nmaru}{m}{n}{	%medium
+     <->nmaru%
+}{}
+
+\endinput
+

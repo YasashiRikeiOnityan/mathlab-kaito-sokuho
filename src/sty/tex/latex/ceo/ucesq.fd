@@ -1,0 +1,10 @@
+\ProvidesFile{ucesq.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{cesq}{}
+\DeclareFontShape{U}{cesq}{m}{n}{	%medium
+     <->cesq%
+}{}
+
+\endinput
+

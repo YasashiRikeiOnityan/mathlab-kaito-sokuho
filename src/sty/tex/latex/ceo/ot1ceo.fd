@@ -1,0 +1,19 @@
+\ProvidesFile{ot1ceo.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{OT1}{ceo}{\hyphenchar\font45 }
+\DeclareFontShape{OT1}{ceo}{m}{n}{	%medium
+     <->ceor%
+}{}
+\DeclareFontShape{OT1}{ceo}{m}{it}{	%italic
+     <->ceomi%
+}{}
+\DeclareFontShape{OT1}{ceo}{bx}{n}{	%bold
+     <->ceorb
+}{}
+\DeclareFontShape{OT1}{ceo}{bx}{it}{   	%bold italic
+     <->ceomib
+}{}
+
+\endinput
+

@@ -1,0 +1,38 @@
+% abcvec.sty
+%
+%\def\va{\bekutoru*a}%
+%\def\vb{\bekutoru*b}%
+%\def\vc{\bekutoru*c}%
+%\def\vp{\bekutoru*p}%
+%\def\vq{\bekutoru*q}%
+%\def\vr{\bekutoru*r}%
+%
+% 位置ベクトル
+%
+\def\pvO{O}%
+\DeclareRobustCommand\pv{\@ifstar{\pv@}{\@pv}}%
+\def\@pv#1{\bekutoru{\pvO#1}}%
+\def\pv@#1{\bekutoru*{#1}}%
+%
+% 一般のベクトル
+%
+%\let\vt\bekutoru
+\def\vt{\bekutoru}%
+%
+% ベクトルの内積
+%
+\def\vp{\vnaiseki}%
+\def\pvp{\@ifstar{\pvp@}{\@pvp}}%
+\def\@pvp#1#2{\pv{#1}\cdot\pv{#2}}%
+\def\pvp@#1#2{\pv*{#1}\cdot\pv*{#2}}%
+%
+% ベクトルの絶対値
+%
+\let\va\EMvabs
+\let\vabs\EMvabs
+%
+% 単位ベクトル
+%
+\def\uv#1{\bns{#1}{\EMabs{#1}}}%
+%
+\endinput

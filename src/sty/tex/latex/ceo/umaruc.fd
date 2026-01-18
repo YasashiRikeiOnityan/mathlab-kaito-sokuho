@@ -1,0 +1,10 @@
+\ProvidesFile{umaruc.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{maruc}{}
+\DeclareFontShape{U}{maruc}{m}{n}{	%medium
+     <->maruc%
+}{}
+
+\endinput
+

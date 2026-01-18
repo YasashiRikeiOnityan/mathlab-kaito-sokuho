@@ -1,0 +1,10 @@
+\ProvidesFile{usikab.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{sikab}{}
+\DeclareFontShape{U}{sikab}{m}{n}{	%medium
+     <->sikab%
+}{}
+
+\endinput
+

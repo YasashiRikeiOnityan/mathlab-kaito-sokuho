@@ -1,0 +1,28 @@
+% abchako.sty
+%
+\ProvidesPackage{abchako}[2025/02/13 v0.00]%
+%
+\@ifpackageloaded{hako}{}{\RequirePackage{hako}}%
+%
+\let\Hu\H% long Hungarian umraut
+%
+\let\H\Hako
+\let\dH\dHako
+\let\RH\RefHako
+\let\RdH\RefdHako
+\let\rH\refHako
+\let\rdH\refdHako
+%
+\@ifundefined{renHako}{}{%
+  \let\renH\renHako
+  \let\RrenH\RefrenHako
+  \let\rrenH\refrenHako
+}%
+\endinput
+%
+\let\HK\Hako
+\let\dHK\dHako
+\let\RHK\RefHako
+\let\RdHK\RefdHako
+\let\rHK\refHako
+\let\rdHK\refdHako

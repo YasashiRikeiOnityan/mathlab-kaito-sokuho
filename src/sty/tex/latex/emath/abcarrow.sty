@@ -1,0 +1,30 @@
+% abcarrow.sty
+%
+\ProvidesPackage{abcarrow}[2025/06/29 v0.00]%
+%
+\def\too{\longrightarrow}%
+\def\lto{\longrightarrow}%
+\def\To{\Rightarrow}%
+\def\TO{\Longrightarrow}%
+\def\lTo{\Longrightarrow}%
+\def\oT{\Leftarrow}%
+\def\OT{\Longleftarrow}%
+\def\iffs{\Leftrightarrow}
+\endinput
+%
+\documentclass[dvipdfmx]{jarticle}
+\usepackage{emath}
+\usepackage{abcarrow}
+\usepackage{showexample}
+\begin{document}
+\begin{showEx}(.54,.4){\cmd{To} etc.}
+\begin{gather*}
+  abc \To xyz\\
+  abc \oT xyz\\
+  abc \TO xyz\\
+  abc \OT xyz\\
+  abc \iff xyz\\
+  abc \iffs xyz\\
+\end{gather*}
+\end{showEx}
+\end{document}

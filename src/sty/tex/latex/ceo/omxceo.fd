@@ -1,0 +1,9 @@
+\ProvidesFile{omxceo.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{OMX}{ceo}{}
+\DeclareFontShape{OMX}{ceo}{m}{n}{	%medium
+     <->ceoex%
+}{}
+\endinput
+

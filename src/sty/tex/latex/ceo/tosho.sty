@@ -1,0 +1,197 @@
+\NeedsTeXFormat{LaTeX2e}
+% Create by Toru Yasuda, 2008-11-13
+\ProvidesPackage{tosho}
+
+%記号の変更
+\renewcommand*{\thereidaibango}{%
+  \expandafter\protect\expandafter\protectedreidaibango
+  \expandafter{\the\c@reidaibango}\quad\,}
+\def\protectedreidaibango#1{%
+  \kigoun{\char"41}%
+  \mbox{\hskip-2.4pt
+     \ooalign{%
+        \hskip2.4pt\textcolor[gray]{.55}{\kigoun{\char"53}}\cr
+        \hfil
+        \hbox to0pt{\hss
+           \fontsize{18Q}{0H}\romanfamily{phv}\romanseries{b}\selectfont
+           {\color[gray]{1}%
+           \ifnum#1>9\relax
+              \ifnum#1>99\relax \scalebox{.667}[1]{#1}%
+              \else             \scalebox{.9}[1]{#1}%
+              \fi
+           \else
+              #1%
+           \fi
+           }\hss}%
+        \hfil}}}
+\def\midashiB#1{%
+   \if@noskipsec \leavevmode \fi
+   \ifhmode \unskip\par \fi
+   \hbox{\vrule \@width\z@ \@height\Cht \@depth\z@}%
+   \nointerlineskip \nobreak \vskip-\Cht
+   \dimen@\Cht \advance\dimen@\baselineskip
+   \vbox to\dimen@{\vss
+     \hbox{%
+\kanjifamily{gt}\romanfamily{phv}%
+        \fontsize{11Q}{17H}\selectfont\boldmath
+        \setbox\z@\hbox{#1}%
+        \edef\@tempht{\the\ht\z@}%
+        \edef\@tempdp{\the\dp\z@}%
+        \box\z@
+        \hskip.5mm
+      \kigouc{\char"C7}\hskip-.05mm
+      \kigouc{\char"C9}}
+     \vss}%
+   \nobreak
+   \@afterindenttrue
+   \@afterheading}
+
+\def\timea{\mbox{%
+  \vtop{\offinterlineskip
+     \setbox0\hbox{\ooalign{%
+        \hfil\textcolor[gray]{0.7}{\kigoun{\char"4D}}\hfil\cr
+        \hskip.5pt\hfil\textcolor[gray]{0.2}{\kigoun{\char"4E}}\hfil}}%
+     \copy0 \vskip2pt
+     \hbox to\wd0{\hfil\kigoun{\char"52}\hfil}}}}
+\def\timeb{\mbox{%
+  \vtop{\offinterlineskip
+     \setbox0\hbox{\ooalign{%
+        \hfil\textcolor[gray]{0.55}{\kigoun{\char"4D}}\hfil\cr
+        \hskip1pt\hfil\textcolor[gray]{0}{\kigoun{\char"4F}}\hfil}}%
+     \copy0 \vskip2pt
+     \hbox to\wd0{\hfil\kigoun{\char"52}\hfil}}}}
+\def\timec{\mbox{%
+  \vtop{\offinterlineskip
+     \setbox0\hbox{\ooalign{%
+        \hfil\textcolor[gray]{0.2}{\kigoun{\char"4D}}\hfil\cr
+        \hfil\textcolor[gray]{0.8}{\kigoun{\char"50}}\hfil}}%
+     \copy0 \vskip2pt
+     \hbox to\wd0{\hfil\kigoun{\char"52}\hfil}}}}
+\def\timed{\mbox{%
+  \vtop{\offinterlineskip
+     \setbox0\hbox{\ooalign{%
+        \hfil\textcolor[gray]{0}{\kigoun{\char"4D}}\hfil\cr
+        \hfil\textcolor[gray]{1}{\kigoun{\char"51}}\hfil}}%
+     \copy0 \vskip2pt
+     \hbox to\wd0{\hfil\kigoun{\char"52}\hfil}}}}
+
+\def\kangaekata{\kigoun{\char"49}}
+\def\kai{\kigoun{\char"4A}}
+\def\bekkai{\kigoun{\char"4B}}
+\def\chu{\kigoun{\char"4C}}
+\def\kaisetu{\kigoun{\char"54}}
+\def\ruidai{\kigoun{\char"47}}
+\def\rei{\kigoun{\char"48}}
+\def\reidais{\kigoun{\char"59}}
+\def\sankoumondai{\kigoun{\char"D7}}
+
+
+%[年度を原稿には入れるが印刷しない,大学名]を常時年度も印刷に変更したもの
+\def\@syutten[#1,#2]{{%
+  \unskip\nobreak\hfil\penalty0%
+  \hskip0\zw\hbox{}\nobreak\hfil
+ \scalebox{0.9}{(#1\hskip1\zw{#2})}%
+  \parfillskip=0em\finalhyphendemerits=0\@@par}}
+
+%$$で数式を作ったときの点々と式番号をつけるTENTENとTEN
+ \def\TENTEN{%
+ \refstepcounter{equation}
+ \leavevmode
+\leaders\hbox to.3333\zw{\hss\raise.5ex\hbox{.}\hss}\hfill
+ \kern\z@\mrunumb{\theequation}}
+
+\def\TEN{%
+ \refstepcounter{equation}
+\cdots \cdots \cdots
+ \kern\z@\mrunumb{\theequation}}
+
+\def\TENAB{%
+ \leavevmode
+\leaders\hbox to.3333\zw{\hss\raise.5ex\hbox{.}\hss}\hfill
+ \kern\z@}
+
+%注環境の調整
+\def\Chu{%
+\par
+\leftskip=1\zw \hspace{-0.8\zw}\chu\quad \;
+\noindent\kern-1\zw}
+\def\endChu{\par}
+
+%太字
+\def\gt{\gtfamily\bfseries}
+
+\let\ne=\neeqb
+\let\neq\neeqb
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%枠で囲むチェックボックス+明日へのグランジュテ
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\CHECK{\kigoun{\char"56}}
+\def\checkbox{\@ifnextchar[\@@checkbox\@checkbox}
+
+\def\@checkbox#1{\vspace{1mm}
+\CHECK\fbox{\parbox[c]{60mm}{
+\begin{flushleft}
+\leftskip3\zw
+\vspace{-2mm}
+\gt #1
+\vspace{-2mm}
+\end{flushleft}
+}
+\vspace{1mm}
+}
+\vspace{1mm}}
+
+\def\@@checkbox[#1]#2{\vspace{1mm}
+\CHECK \fbox{\parbox[c]{60mm}{
+\begin{flushleft}
+\leftskip#1\zw
+\vspace{-2mm}
+\gt #2
+\vspace{-2mm}
+\end{flushleft}
+}
+\vspace{1mm}
+}
+\vspace{1mm}}
+
+
+
+\def\CHECKB{\kigoun{\char"57}}
+\def\checkboxb{\@ifnextchar[\@@checkboxb\@checkboxb}
+
+\def\@checkboxb#1{\vspace{1mm}
+\CHECKB\fbox{\parbox[c]{60mm}{
+\begin{flushleft}
+\leftskip3\zw
+\vspace{-2mm}
+\gt #1
+\vspace{-2mm}
+\end{flushleft}
+}
+\vspace{1mm}
+}
+\vspace{1mm}}
+
+\def\@@checkboxb[#1]#2{\vspace{1mm}
+\CHECKB \fbox{\parbox[c]{60mm}{
+\begin{flushleft}
+\leftskip#1\zw
+\vspace{-2mm}
+\gt #2
+\vspace{-2mm}
+\end{flushleft}
+}
+\vspace{1mm}
+}
+\vspace{1mm}}
+
+
+\def\yhako#1{\;\fbox{\hss#1\hss}\;}
+\def\dot#1{\IDO{0.7}{-#1}{\scalebox{0.9}{・}}}
+\def\dot#1{{\ooalign{
+\hfil$#1$\hfil\cr\raise1.4ex\hbox to0pt{\hskip1pt$\cdot$}}}}
+
+\endinput

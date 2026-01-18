@@ -1,0 +1,9 @@
+\ProvidesFile{ot1ceott.fd}
+	[2009/8/15 v1.0]
+
+\DeclareFontFamily{OT1}{ceott}{\hyphenchar\font45 }
+\DeclareFontShape{OT1}{ceott}{m}{n}{	%medium
+     <->ceott%
+}{}
+\endinput
+

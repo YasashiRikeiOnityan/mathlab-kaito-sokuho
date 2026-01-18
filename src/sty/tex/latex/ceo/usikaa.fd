@@ -1,0 +1,10 @@
+\ProvidesFile{usikaa.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{sikaa}{}
+\DeclareFontShape{U}{sikaa}{m}{n}{	%medium
+     <->sikaa%
+}{}
+
+\endinput
+

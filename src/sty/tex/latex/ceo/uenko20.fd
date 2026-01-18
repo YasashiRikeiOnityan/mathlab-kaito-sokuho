@@ -1,0 +1,10 @@
+\ProvidesFile{uenko20.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{enko20}{}
+\DeclareFontShape{U}{enko20}{m}{n}{	%medium
+     <->enko20%
+}{}
+
+\endinput
+

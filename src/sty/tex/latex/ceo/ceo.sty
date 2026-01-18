@@ -1,0 +1,2399 @@
+\NeedsTeXFormat{LaTeX2e}
+%
+% Create by Toru Yasuda, May 2005:
+%Thanks for all my friends and adviser.
+\ProvidesPackage{ceo}
+
+\RequirePackage{waku}
+\RequirePackage{Mwaku}
+\RequirePackage{gyoretuvec}
+\RequirePackage{zogeny}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Text Serif (Century old) %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\rmdefault}{ceo}
+\renewcommand{\ttdefault}{ceott}
+
+\DeclareSymbolFont{operators}{OT1}{ceo}{m}{n}
+\SetSymbolFont{operators}{bold}{OT1}{ceo}{bx}{n}
+\def\operator@font{\mathgroup\symoperators}
+
+\DeclareSymbolFont{largesymbols}{OMX}{ceo}{m}{n}
+\DeclareFontSubstitution{OMX}{ceo}{m}{n}
+
+\DeclareSymbolFont{ruto}{U}{cesq}{m}{n}
+\DeclareSymbolFont{yakumono}{U}{marua}{m}{n}
+\DeclareSymbolFont{daikako}{U}{muparen}{m}{n}
+
+\DeclareSymbolFontAlphabet{\mathrm}{operators}
+\DeclareMathAlphabet{\mathbf}{OT1}{ceo}{bx}{n}
+\DeclareMathAlphabet{\mathit}{OT1}{ceo}{m}{it}
+\SetMathAlphabet{\mathit}{bold}{OT1}{ceo}{bx}{it}
+
+%%%%%%%%%%%%%%%
+% Math Italic %
+%%%%%%%%%%%%%%%
+
+\DeclareSymbolFont{letters}{OML}{ceo}{m}{it}
+\SetSymbolFont{letters}{bold}{OML}{ceo}{bx}{it}
+\DeclareFontSubstitution{OML}{ceo}{m}{it}
+
+%%%%%%%%%%%%%%%
+% Math Symbol %
+%%%%%%%%%%%%%%%
+
+\DeclareSymbolFont{symbols}{OMS}{ceo}{m}{n}
+\SetSymbolFont{symbols}{bold}{OMS}{ceo}{bx}{n}
+\DeclareFontSubstitution{OMS}{ceo}{m}{n}
+
+\RequirePackage{kigou}
+\RequirePackage{graphicx}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% size designable root%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\xsqrt{\@ifnextchar[\@sqrta\@@sqrta}
+\def\@@sqrta#1#2#3{{%
+\setbox\z@\hbox{$#1$}%
+\ht\z@#2pt\dp\z@#3pt\sqrt{\box\z@}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macro undefined%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\let\vec\undefined
+\let\not\undefined
+\let\coprod\undefined
+\let\bigvee\undefined
+\let\bigwedge\undefined
+\let\biguplus\undefined
+\let\bigcap\undefined
+\let\bigcup\undefined
+\let\prod\undefined
+\let\bigotimes\undefined
+\let\bigoplus\undefined
+\let\bigodot\undefined
+\let\bigsqcup\undefined
+\let\colon\undefined
+\let\mod\undefined
+\let\dfrac\undefined
+\let\sankaku\undefined
+\let\maru\undefined
+\let\heikou\undefined
+\let\kaku\undefined
+\let\dint\undefined
+\let\abs\undefined
+%\let\ldots\undefined
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% size fixed root%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\sqrta{\radical"270}
+\def\sqrtb#1{\radical"762{\vphantom{h}#1}}
+\def\sqrtc{\radical"763}
+\def\sqrtd{\radical"764}
+\def\sqrte{\radical"765}
+\def\sqrtf{\radical"766}
+\def\sqrtg{\radical"767}
+\def\sqrth{\radical"768}
+\def\sqrti{\radical"769}
+\def\sqrtj{\radical"76A}
+\def\sqrtk{\radical"76B}
+\def\sqrtl{\radical"76C}
+\def\sqrtm{\radical"76D}
+\def\sqrtn{\radical"76E}
+\def\sqrto{\radical"76F}
+\def\sqrtp{\radical"770}
+\def\sqrtq{\radical"771}
+\def\sqrtr{\radical"772}
+%%%%%%%%%%%%%%%
+% Macro %
+%%%%%%%%%%%%%%%
+
+\newcommand{\bd}[1]{\mbox{\boldmath$#1$}}
+
+\newcommand{\Comb}[2]{{}_{#1}\text{C}_{#2}}
+\newcommand{\Perm}[2]{{}_{#1}\text{P}_{#2}}
+\newcommand{\Ppi}[2]{{}_{#1}\Pi_{#2}}
+\newcommand{\comb}[2]{{}_{#1}\text{C}_{#2}}
+\newcommand{\perm}[2]{{}_{#1}\text{P}_{#2}}
+\newcommand{\ppi}[2]{{}_{#1}\Pi_{#2}}
+
+\DeclareMathAccent{\kosymbola}{\mathord}{largesymbols}{"D7}
+\def\koa#1{\kosymbola{\vphantom{A}\text{#1}}}
+\DeclareMathAccent{\kosymbolb}{\mathord}{largesymbols}{"D8}
+\def\kob#1{\kosymbolb{\vphantom{A}\text{#1}}}
+\DeclareMathAccent{\kosymbolc}{\mathord}{largesymbols}{"D9}
+\def\koc#1{\kosymbolc{\vphantom{A}\text{#1}}}
+
+\DeclareMathAccent{\kosymbola}{\mathord}{largesymbols}{"D7}
+\def\kod#1{\kosymbola{\vphantom{A}{#1}}}
+\DeclareMathAccent{\kosymbolb}{\mathord}{largesymbols}{"D8}
+\def\koe#1{\kosymbolb{\vphantom{A}{#1}}}
+\DeclareMathAccent{\kosymbolc}{\mathord}{largesymbols}{"D9}
+\def\kof#1{\kosymbolc{\vphantom{A}{#1}}}
+
+
+\DeclareRobustCommand*\frac[2]{%
+   \mathchoice
+      {\@frac\textstyle{3}{#1}{#2}}%
+      {\@frac\textstyle{3}{#1}{#2}}%
+      {\@frac\scriptstyle{1.5}{#1}{#2}}%
+      {\@frac\relax{1.5}{#1}{#2}}}
+\def\@frac#1#2#3#4{%
+   {\begingroup#1\mkern#2mu#3\mkern#2mu\endgroup
+    \over #1\mkern#2mu#4\mkern#2mu}}
+
+%\def\frac#1#2{{\begingroup\,#1\,\endgroup\over#2}}
+\def\dfrac#1#2{\displaystyle{\begingroup\,#1\,\endgroup\over#2}}
+%\def\mfrac#1#2{\scalebox{1}{$\frac{#1}{#2}$}}
+%\def\sfrac#1#2{\raisebox{-0.2ex}{\scalebox{1}{$\frac{#1}{#2}$}}}
+\def\sfrac{\@ifnextchar<{\@sfrac}{\@@sfrac}}
+\def\@sfrac<#1>#2#3{\raisebox{-.01ex}{\scalebox{#1}{$\dfrac{#2}{#3}$}}}
+\def\@@sfrac#1#2{\raisebox{-.01ex}{\scalebox{0.7}{$\dfrac{#1}{#2}$}}}
+
+
+\def\sum{\sumop\limits}
+\def\prod{\prodop\limits}
+\def\seki#1#2{\displaystyle{\prod\limits_{#1}^{#2}}}
+\def\wa#1#2{\displaystyle{\sum\limits_{#1}^{#2}}}
+
+\DeclareMathAccent{\vectorsymbol}{\mathord}{letters}{"7E}
+\def\vec#1{\vectorsymbol{\vphantom{h}{#1}}}
+\def\Vec#1{\overrightarrow{\vphantom{h}\text{#1}}}
+\def\Avec#1{\overrightarrow{\vphantom{h}#1}}
+\def\Bvec#1{\overrightarrow{\vphantom{h}{\rm #1}}}
+
+\def\mod{\mathop{\operator@font mod}\nolimits}
+\def\lim{\mathop{\operator@font lim}\limits}
+\def\max{\mathop{\operator@font max}\limits}
+\def\min{\mathop{\operator@font min}\limits}
+
+\DeclareMathSymbol{\mdots}{\mathalpha}{symbols}{"DD}
+\DeclareMathSymbol{\mdot}{\mathalpha}{symbols}{"DE}
+\DeclareMathSymbol{\udots}{\mathalpha}{symbols}{"DF}
+
+
+\DeclareMathSymbol{\chouhoukei}{\mathalpha}{letters}{"D3}
+\DeclareMathSymbol{\sikaku}{\mathalpha}{letters}{"C6}
+\DeclareMathSymbol{\sankaku}{\mathalpha}{letters}{"C7}
+\DeclareMathSymbol{\seihoukei}{\mathalpha}{letters}{"C8}
+\DeclareMathSymbol{\maru}{\mathalpha}{letters}{"C9}
+\DeclareMathSymbol{\daikei}{\mathalpha}{letters}{"CA}
+\DeclareMathSymbol{\heikoushihenkei}{\mathalpha}{letters}{"CB}
+\DeclareMathSymbol{\hankon}{\mathalpha}{letters}{"CC}
+\DeclareMathSymbol{\heikou}{\mathrel}{letters}{"CD}
+\DeclareMathSymbol{\neheikou}{\mathrel}{letters}{"CE}
+\DeclareMathSymbol{\heikoua}{\mathrel}{letters}{"CF}
+\DeclareMathSymbol{\neheikoua}{\mathrel}{letters}{"D0}
+\DeclareMathSymbol{\parallel}{\mathrel}{letters}{"CD}
+\DeclareMathSymbol{\neparallel}{\mathrel}{letters}{"CE}
+\DeclareMathSymbol{\notparallel}{\mathrel}{letters}{"CE}
+
+\DeclareMathSymbol{a}{\mathalpha}{letters}{`a}
+\DeclareMathSymbol{b}{\mathalpha}{letters}{`b}
+\DeclareMathSymbol{c}{\mathalpha}{letters}{`c}
+\DeclareMathSymbol{d}{\mathalpha}{letters}{`d}
+\DeclareMathSymbol{e}{\mathalpha}{letters}{`e}
+\DeclareMathSymbol{f}{\mathalpha}{letters}{`f}
+\DeclareMathSymbol{g}{\mathalpha}{letters}{`g}
+\DeclareMathSymbol{h}{\mathalpha}{letters}{`h}
+\DeclareMathSymbol{i}{\mathalpha}{letters}{`i}
+\DeclareMathSymbol{j}{\mathalpha}{letters}{`j}
+\DeclareMathSymbol{k}{\mathalpha}{letters}{`k}
+\DeclareMathSymbol{l}{\mathalpha}{letters}{`l}
+\DeclareMathSymbol{m}{\mathalpha}{letters}{`m}
+\DeclareMathSymbol{n}{\mathalpha}{letters}{`n}
+\DeclareMathSymbol{o}{\mathalpha}{letters}{`o}
+\DeclareMathSymbol{p}{\mathalpha}{letters}{`p}
+\DeclareMathSymbol{q}{\mathalpha}{letters}{`q}
+\DeclareMathSymbol{r}{\mathalpha}{letters}{`r}
+\DeclareMathSymbol{s}{\mathalpha}{letters}{`s}
+\DeclareMathSymbol{t}{\mathalpha}{letters}{`t}
+\DeclareMathSymbol{u}{\mathalpha}{letters}{`u}
+\DeclareMathSymbol{v}{\mathalpha}{letters}{`v}
+\DeclareMathSymbol{w}{\mathalpha}{letters}{`w}
+\DeclareMathSymbol{x}{\mathalpha}{letters}{`x}
+\DeclareMathSymbol{y}{\mathalpha}{letters}{`y}
+\DeclareMathSymbol{z}{\mathalpha}{letters}{`z}
+\DeclareMathSymbol{A}{\mathalpha}{letters}{`A}
+\DeclareMathSymbol{B}{\mathalpha}{letters}{`B}
+\DeclareMathSymbol{C}{\mathalpha}{letters}{`C}
+\DeclareMathSymbol{D}{\mathalpha}{letters}{`D}
+\DeclareMathSymbol{E}{\mathalpha}{letters}{`E}
+\DeclareMathSymbol{F}{\mathalpha}{letters}{`F}
+\DeclareMathSymbol{G}{\mathalpha}{letters}{`G}
+\DeclareMathSymbol{H}{\mathalpha}{letters}{`H}
+\DeclareMathSymbol{I}{\mathalpha}{letters}{`I}
+\DeclareMathSymbol{J}{\mathalpha}{letters}{`J}
+\DeclareMathSymbol{K}{\mathalpha}{letters}{`K}
+\DeclareMathSymbol{L}{\mathalpha}{letters}{`L}
+\DeclareMathSymbol{M}{\mathalpha}{letters}{`M}
+\DeclareMathSymbol{N}{\mathalpha}{letters}{`N}
+\DeclareMathSymbol{O}{\mathalpha}{letters}{`O}
+\DeclareMathSymbol{P}{\mathalpha}{letters}{`P}
+\DeclareMathSymbol{Q}{\mathalpha}{letters}{`Q}
+\DeclareMathSymbol{R}{\mathalpha}{letters}{`R}
+\DeclareMathSymbol{S}{\mathalpha}{letters}{`S}
+\DeclareMathSymbol{T}{\mathalpha}{letters}{`T}
+\DeclareMathSymbol{U}{\mathalpha}{letters}{`U}
+\DeclareMathSymbol{V}{\mathalpha}{letters}{`V}
+\DeclareMathSymbol{W}{\mathalpha}{letters}{`W}
+\DeclareMathSymbol{X}{\mathalpha}{letters}{`X}
+\DeclareMathSymbol{Y}{\mathalpha}{letters}{`Y}
+\DeclareMathSymbol{Z}{\mathalpha}{letters}{`Z}
+\DeclareMathSymbol{0}{\mathalpha}{operators}{`0}
+\DeclareMathSymbol{1}{\mathalpha}{operators}{`1}
+\DeclareMathSymbol{2}{\mathalpha}{operators}{`2}
+\DeclareMathSymbol{3}{\mathalpha}{operators}{`3}
+\DeclareMathSymbol{4}{\mathalpha}{operators}{`4}
+\DeclareMathSymbol{5}{\mathalpha}{operators}{`5}
+\DeclareMathSymbol{6}{\mathalpha}{operators}{`6}
+\DeclareMathSymbol{7}{\mathalpha}{operators}{`7}
+\DeclareMathSymbol{8}{\mathalpha}{operators}{`8}
+\DeclareMathSymbol{9}{\mathalpha}{operators}{`9}
+\DeclareMathSymbol{!}{\mathclose}{operators}{"21}
+\DeclareMathSymbol{*}{\mathbin}{symbols}{"A4} % \ast
+\DeclareMathSymbol{+}{\mathbin}{operators}{"2B}
+\DeclareMathSymbol{,}{\mathpunct}{letters}{"3B}
+\DeclareMathSymbol{-}{\mathbin}{symbols}{"A1}
+\DeclareMathSymbol{.}{\mathord}{letters}{"3A}
+\DeclareMathSymbol{:}{\mathrel}{operators}{"3A}
+\DeclareMathSymbol{;}{\mathpunct}{operators}{"3B}
+\DeclareMathSymbol{=}{\mathrel}{operators}{"3D}
+\DeclareMathSymbol{?}{\mathclose}{operators}{"3F}
+\mathcode`\ ="8000 % \space
+\mathcode`\'="8000 % ^\prime
+\mathcode`\_="8000 % \_
+
+%\DeclareMathDelimiter{(}{\mathopen} {operators}{"28}{largesymbols}{"A1}
+%\DeclareMathDelimiter{)}{\mathclose}{operators}{"29}{largesymbols}{"A2}
+\DeclareMathDelimiter{\lparen}{\mathopen} {operators}{"28}{largesymbols}{"A1}
+\DeclareMathDelimiter{\rparen}{\mathclose}{operators}{"29}{largesymbols}{"A2}
+\DeclareMathDelimiter{\lbra}{\mathclose}{symbols}{"66}{largesymbols}{"A9}
+\DeclareMathDelimiter{\rbra}{\mathopen}{symbols}{"67}{largesymbols}{"AA}
+
+\DeclareMathDelimiter{(}{\mathopen} {operators}{"28}{daikako}{"21}
+\DeclareMathDelimiter{)}{\mathclose}{operators}{"29}{daikako}{"39}
+%\DeclareMathDelimiter{lbrace}{\mathclose}{symbols}{"66}{largesymbols}{"A9}
+%\DeclareMathDelimiter{rbrace}{\mathopen}{symbols}{"67}{largesymbols}{"AA}
+%\DeclareMathDelimiter{{}{\mathopen} {symbols}{"66}{largesymbols}{"A9}
+%\DeclareMathDelimiter{}}{\mathclose}{symbols}{"67}{largesymbols}{"AA}
+%moto\DeclareMathDelimiter{}{\mathopen} {operators}{"5B}{largesymbols}{"A3}
+%moto\DeclareMathDelimiter{]}{\mathclose}{operators}{"5D}{largesymbols}{"A4}
+\DeclareMathDelimiter{[}{\mathopen} {operators}{"5B}{daikako}{"14}
+\DeclareMathDelimiter{]}{\mathclose}{operators}{"5D}{daikako}{"95}
+\DeclareMathDelimiter{\lbrac}{\mathopen} {operators}{"5B}{largesymbols}{"A3}
+\DeclareMathDelimiter{\rbrac}{\mathclose}{operators}{"5D}{largesymbols}{"A4}
+\DeclareMathDelimiter{<}{\mathopen}{symbols}{"68}{largesymbols}{"AD}
+\DeclareMathDelimiter{>}{\mathclose}{symbols}{"69}{largesymbols}{"AE}
+\DeclareMathSymbol{<}{\mathrel}{letters}{"3C}
+\DeclareMathSymbol{>}{\mathrel}{letters}{"3E}
+\DeclareMathDelimiter{/}{\mathord}{operators}{"2F}{largesymbols}{"B1}
+\DeclareMathSymbol{/}{\mathord}{letters}{"3D}
+\DeclareMathDelimiter{|}{\mathord}{symbols}{"6A}{largesymbols}{"AF}
+\expandafter\DeclareMathDelimiter\@backslashchar
+                        {\mathord}{symbols}{"6E}{largesymbols}{"BA}
+\DeclareMathSymbol{\alpha}{\mathord}{letters}{"AE}
+\DeclareMathSymbol{\beta}{\mathord}{letters}{"AF}
+\DeclareMathSymbol{\gamma}{\mathord}{letters}{"B0}
+\DeclareMathSymbol{\delta}{\mathord}{letters}{"B1}
+\DeclareMathSymbol{\epsilon}{\mathord}{letters}{"B2}
+\DeclareMathSymbol{\zeta}{\mathord}{letters}{"B3}
+\DeclareMathSymbol{\eta}{\mathord}{letters}{"B4}
+\DeclareMathSymbol{\theta}{\mathord}{letters}{"B5}
+\DeclareMathSymbol{\iota}{\mathord}{letters}{"B6}
+\DeclareMathSymbol{\kappa}{\mathord}{letters}{"B7}
+\DeclareMathSymbol{\lambda}{\mathord}{letters}{"B8}
+\DeclareMathSymbol{\mu}{\mathord}{letters}{"B9}
+\DeclareMathSymbol{\nu}{\mathord}{letters}{"BA}
+\DeclareMathSymbol{\xi}{\mathord}{letters}{"BB}
+\DeclareMathSymbol{\pi}{\mathord}{letters}{"BC}
+\DeclareMathSymbol{\rho}{\mathord}{letters}{"BD}
+\DeclareMathSymbol{\sigma}{\mathord}{letters}{"BE}
+\DeclareMathSymbol{\tau}{\mathord}{letters}{"BF}
+\DeclareMathSymbol{\upsilon}{\mathord}{letters}{"C0}
+\DeclareMathSymbol{\phi}{\mathord}{letters}{"C1}
+\DeclareMathSymbol{\chi}{\mathord}{letters}{"C2}
+\DeclareMathSymbol{\psi}{\mathord}{letters}{"C3}
+\DeclareMathSymbol{\omega}{\mathord}{letters}{"21}
+\DeclareMathSymbol{\varepsilon}{\mathord}{letters}{"22}
+\DeclareMathSymbol{\vartheta}{\mathord}{letters}{"23}
+\DeclareMathSymbol{\varpi}{\mathord}{letters}{"24}
+\DeclareMathSymbol{\varrho}{\mathord}{letters}{"25}
+\DeclareMathSymbol{\varsigma}{\mathord}{letters}{"26}
+\DeclareMathSymbol{\varphi}{\mathord}{letters}{"27}
+\DeclareMathSymbol{\Gamma}{\mathalpha}{operators}{"A1}
+\DeclareMathSymbol{\varGamma}{\mathalpha}{letters}{"A1}
+\DeclareMathSymbol{\Delta}{\mathalpha}{operators}{"A2}
+\DeclareMathSymbol{\varDelta}{\mathalpha}{letters}{"A2}
+\DeclareMathSymbol{\vardelta}{\mathalpha}{letters}{"C5}
+\DeclareMathSymbol{\doru}{\mathalpha}{operators}{"C5}
+\DeclareMathSymbol{\kane}{\mathalpha}{operators}{"C6}
+\DeclareMathSymbol{\baku}{\mathalpha}{operators}{"C7}
+\DeclareMathSymbol{\Theta}{\mathalpha}{operators}{"A3}
+\DeclareMathSymbol{\Lambda}{\mathalpha}{operators}{"A4}
+\DeclareMathSymbol{\varLambda}{\mathalpha}{letters}{"A4}
+\DeclareMathSymbol{\Xi}{\mathalpha}{operators}{"A5}
+\DeclareMathSymbol{\Pi}{\mathalpha}{operators}{"A6}
+\DeclareMathSymbol{\Sigma}{\mathalpha}{operators}{"A7}
+\DeclareMathSymbol{\Upsilon}{\mathalpha}{operators}{"A8}
+\DeclareMathSymbol{\Phi}{\mathalpha}{operators}{"A9}
+\DeclareMathSymbol{\varPhi}{\mathalpha}{letters}{"A9}
+\DeclareMathSymbol{\varTheta}{\mathalpha}{letters}{"A3}
+\DeclareMathSymbol{\Psi}{\mathalpha}{operators}{"AA}
+\DeclareMathSymbol{\varPsi}{\mathalpha}{letters}{"AA}
+\DeclareMathSymbol{\Omega}{\mathalpha}{operators}{"AD}
+\DeclareMathSymbol{\varOmega}{\mathalpha}{letters}{"AD}
+\DeclareMathSymbol{\aleph}{\mathord}{symbols}{"40}
+\def\hbar{{\mathchar"B9\mkern-9muh}}
+\DeclareMathSymbol{\imath}{\mathord}{letters}{"7B}
+\DeclareMathSymbol{\jmath}{\mathord}{letters}{"7C}
+\DeclareMathSymbol{\ell}{\mathord}{letters}{"60}
+\DeclareMathSymbol{\wp}{\mathord}{letters}{"7D}
+\DeclareMathSymbol{\Re}{\mathord}{symbols}{"3C}
+\DeclareMathSymbol{\Im}{\mathord}{symbols}{"3D}
+\DeclareMathSymbol{\partial}{\mathord}{letters}{"40}
+\DeclareMathSymbol{\infty}{\mathord}{symbols}{"31}
+\DeclareMathSymbol{\prime}{\mathord}{symbols}{"30}
+\DeclareMathSymbol{\emptyset}{\mathord}{symbols}{"3B}
+\DeclareMathSymbol{\nabla}{\mathord}{symbols}{"72}
+\def\surd{{\mathchar"1270}}
+\DeclareMathSymbol{\top}{\mathord}{symbols}{"3E}
+\DeclareMathSymbol{\bot}{\mathord}{symbols}{"3F}
+\DeclareMathSymbol{\sektion}{\mathord}{symbols}{"78}
+\DeclareMathSymbol{\koyaa}{\mathord}{symbols}{"C5}
+\DeclareMathSymbol{\koyab}{\mathord}{symbols}{"C6}
+\DeclareMathSymbol{\koyac}{\mathord}{symbols}{"C7}
+\DeclareMathSymbol{\koyad}{\mathord}{symbols}{"C8}
+\DeclareMathSymbol{\yaouzou}{\mathord}{symbols}{"C5}
+\DeclareMathSymbol{\yaougen}{\mathord}{symbols}{"C6}
+\DeclareMathSymbol{\yatotugen}{\mathord}{symbols}{"C7}
+\DeclareMathSymbol{\yatotuzou}{\mathord}{symbols}{"C8}
+\DeclareMathSymbol{\kakukal}{\mathord}{symbols}{"C9}
+\DeclareMathSymbol{\kakukar}{\mathord}{symbols}{"CA}
+\DeclareMathSymbol{\neequal}{\mathrel}{symbols}{"CB}
+\DeclareMathSymbol{\yaku}{\mathrel}{symbols}{"CC}
+\DeclareMathSymbol{\soji}{\mathrel}{symbols}{"CD}
+\DeclareMathSymbol{\kaku}{\mathbin}{symbols}{"CE}
+\DeclareMathSymbol{\negodo}{\mathrel}{symbols}{"CF}
+\DeclareMathSymbol{\gyakusoji}{\mathrel}{symbols}{"D0}
+\DeclareMathSymbol{\doti}{\mathrel}{symbols}{"D1}
+\DeclareMathSymbol{\douti}{\mathrel}{symbols}{"D1}
+\DeclareMathSymbol{\narabaa}{\mathrel}{symbols}{"D2}
+\DeclareMathSymbol{\naraba}{\mathrel}{symbols}{"D2}
+\DeclareMathSymbol{\narabab}{\mathrel}{symbols}{"D3}
+\DeclareMathSymbol{\narabala}{\mathrel}{symbols}{"E1}
+\DeclareMathSymbol{\narabalb}{\mathrel}{symbols}{"E0}
+\DeclareMathSymbol{\hebia}{\mathord}{symbols}{"D4}
+\DeclareMathSymbol{\hebib}{\mathord}{symbols}{"D5}
+\DeclareMathSymbol{\neyosoa}{\mathrel}{symbols}{"D6}
+\DeclareMathSymbol{\neyosob}{\mathrel}{symbols}{"D7}
+\DeclareMathSymbol{\neeqb}{\mathrel}{symbols}{"D8}
+\DeclareMathSymbol{\negodob}{\mathrel}{symbols}{"D9}
+\DeclareMathSymbol{\yueni}{\mathrel}{symbols}{"DA}
+\DeclareMathSymbol{\nazenara}{\mathrel}{symbols}{"DB}
+\DeclareMathSymbol{\ddo}{\mathord}{symbols}{"DC}
+\DeclareMathSymbol{\degree}{\mathord}{symbols}{"DC}
+\def\Kaku#1{\kaku\mathrm{#1}}
+\def\hen#1{\mathrm{#1}}
+\def\angle{{\vbox{\ialign{$\m@th\scriptstyle##$\crcr
+      \not\mathrel{\mkern14mu}\crcr
+      \noalign{\nointerlineskip}
+      \mkern2.5mu\leaders\hrule \@height.34pt\hfill\mkern2.5mu\crcr}}}}
+\let\angle\undefined
+\let\angle\kaku
+\DeclareMathSymbol{\triangle}{\mathord}{symbols}{"34}
+\DeclareMathSymbol{\forall}{\mathord}{symbols}{"38}
+\DeclareMathSymbol{\exists}{\mathord}{symbols}{"39}
+\DeclareMathSymbol{\neg}{\mathord}{symbols}{"3A}
+\DeclareMathSymbol{\flat}{\mathord}{letters}{"5B}
+\DeclareMathSymbol{\natural}{\mathord}{letters}{"5C}
+\DeclareMathSymbol{\sharp}{\mathord}{letters}{"5D}
+\DeclareMathSymbol{\clubsuit}{\mathord}{symbols}{"7C}
+\DeclareMathSymbol{\diamondsuit}{\mathord}{symbols}{"7D}
+\DeclareMathSymbol{\heartsuit}{\mathord}{symbols}{"7E}
+\DeclareMathSymbol{\spadesuit}{\mathord}{symbols}{"C4}
+\DeclareMathSymbol{\coprod}{\mathop}{largesymbols}{"60}
+\DeclareMathSymbol{\bigvee}{\mathop}{largesymbols}{"57}
+\DeclareMathSymbol{\bigwedge}{\mathop}{largesymbols}{"56}
+\DeclareMathSymbol{\biguplus}{\mathop}{largesymbols}{"55}
+\DeclareMathSymbol{\bigcap}{\mathop}{largesymbols}{"54}
+\DeclareMathSymbol{\bigcup}{\mathop}{largesymbols}{"53}
+\DeclareMathSymbol{\intop}{\mathop}{largesymbols}{"5A}
+    \def\int{\intop\nolimits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareMathSymbol{\rrba}{\mathop}{daikako}{"81}
+    \def\rightba{\rrba\nolimits}
+\DeclareMathSymbol{\rrbb}{\mathop}{daikako}{"82}
+    \def\rightbb{\rrbb\nolimits}
+\DeclareMathSymbol{\rrbc}{\mathop}{daikako}{"83}
+    \def\rightbc{\rrbc\nolimits}
+\DeclareMathSymbol{\rrbd}{\mathop}{daikako}{"84}
+    \def\rightbd{\rrbd\nolimits}
+\DeclareMathSymbol{\rrbe}{\mathop}{daikako}{"85}
+    \def\rightbe{\rrbe\nolimits}
+\DeclareMathSymbol{\rrbf}{\mathop}{daikako}{"86}
+    \def\rightbf{\rrbf\nolimits}
+\DeclareMathSymbol{\rrbg}{\mathop}{daikako}{"87}
+    \def\rightbg{\rrbg\nolimits}
+\DeclareMathSymbol{\rrbh}{\mathop}{daikako}{"88}
+    \def\rightbh{\rrbh\nolimits}
+\DeclareMathSymbol{\rrbi}{\mathop}{daikako}{"89}
+    \def\rightbi{\rrbi\nolimits}
+\DeclareMathSymbol{\rrbj}{\mathop}{daikako}{"8A}
+    \def\rightbj{\rrbj\nolimits}
+\DeclareMathSymbol{\rrbk}{\mathop}{daikako}{"8B}
+    \def\rightbk{\rrbk\nolimits}
+\DeclareMathSymbol{\rrbl}{\mathop}{daikako}{"8C}
+    \def\rightbl{\rrbl\nolimits}
+\DeclareMathSymbol{\rrbm}{\mathop}{daikako}{"8D}
+    \def\rightbm{\rrbm\nolimits}
+\DeclareMathSymbol{\rrbn}{\mathop}{daikako}{"8E}
+    \def\rightbn{\rrbn\nolimits}
+\DeclareMathSymbol{\rrbo}{\mathop}{daikako}{"8F}
+    \def\rightbo{\rrbo\nolimits}
+\DeclareMathSymbol{\rrbp}{\mathop}{daikako}{"90}
+    \def\rightbp{\rrbp\nolimits}
+\DeclareMathSymbol{\rrbq}{\mathop}{daikako}{"91}
+    \def\rightbq{\rrbq\nolimits}
+\DeclareMathSymbol{\llba}{\mathop}{daikako}{"01}
+    \def\leftba{\llba\nolimits}
+\DeclareMathSymbol{\llbb}{\mathop}{daikako}{"02}
+    \def\leftbb{\llbb\nolimits}
+\DeclareMathSymbol{\llbc}{\mathop}{daikako}{"03}
+    \def\leftbc{\llbc\nolimits}
+\DeclareMathSymbol{\llbd}{\mathop}{daikako}{"04}
+    \def\leftbd{\llbd\nolimits}
+\DeclareMathSymbol{\llbe}{\mathop}{daikako}{"05}
+    \def\leftbe{\llbe\nolimits}
+\DeclareMathSymbol{\llbf}{\mathop}{daikako}{"06}
+    \def\leftbf{\llbf\nolimits}
+\DeclareMathSymbol{\llbg}{\mathop}{daikako}{"07}
+    \def\leftbg{\llbg\nolimits}
+\DeclareMathSymbol{\llbh}{\mathop}{daikako}{"08}
+    \def\leftbh{\llbh\nolimits}
+\DeclareMathSymbol{\llbi}{\mathop}{daikako}{"09}
+    \def\leftbi{\llbi\nolimits}
+\DeclareMathSymbol{\llbj}{\mathop}{daikako}{"0A}
+    \def\leftbj{\llbj\nolimits}
+\DeclareMathSymbol{\llbk}{\mathop}{daikako}{"0B}
+    \def\leftbk{\llbk\nolimits}
+\DeclareMathSymbol{\llbl}{\mathop}{daikako}{"0C}
+    \def\leftbl{\llbl\nolimits}
+\DeclareMathSymbol{\llbm}{\mathop}{daikako}{"0D}
+    \def\leftbm{\llbm\nolimits}
+\DeclareMathSymbol{\llbn}{\mathop}{daikako}{"0E}
+    \def\leftbn{\llbn\nolimits}
+\DeclareMathSymbol{\llbo}{\mathop}{daikako}{"0F}
+    \def\leftbo{\llbo\nolimits}
+\DeclareMathSymbol{\llbp}{\mathop}{daikako}{"10}
+    \def\leftbp{\llbp\nolimits}
+\DeclareMathSymbol{\llbq}{\mathop}{daikako}{"11}
+    \def\leftbq{\llbq\nolimits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareMathSymbol{\intopa}{\mathop}{largesymbols}{"DA}
+    \def\inta{\intopa\nolimits}
+\DeclareMathSymbol{\intopb}{\mathop}{largesymbols}{"DB}
+    \def\intb{\intopb\nolimits}
+\DeclareMathSymbol{\intopc}{\mathop}{largesymbols}{"DC}
+    \def\intc{\intopc\nolimits}
+\DeclareMathSymbol{\prodop}{\mathop}{largesymbols}{"59}
+\DeclareMathSymbol{\sumop}{\mathop}{largesymbols}{"50}
+\DeclareMathSymbol{\bigotimes}{\mathop}{largesymbols}{"4E}
+\DeclareMathSymbol{\bigoplus}{\mathop}{largesymbols}{"4C}
+\DeclareMathSymbol{\bigodot}{\mathop}{largesymbols}{"4A}
+\DeclareMathSymbol{\ointop}{\mathop}{largesymbols}{"48}
+    \def\oint{\ointop\nolimits}
+\DeclareMathSymbol{\bigsqcup}{\mathop}{largesymbols}{"46}
+\DeclareMathSymbol{\smallint}{\mathop}{symbols}{"73}
+\DeclareMathSymbol{\triangleleft}{\mathbin}{letters}{"2F}
+\DeclareMathSymbol{\triangleright}{\mathbin}{letters}{"2E}
+\DeclareMathSymbol{\bigtriangleup}{\mathbin}{symbols}{"34}
+\DeclareMathSymbol{\bigtriangledown}{\mathbin}{symbols}{"35}
+   \let \varbigtriangledown \bigtriangledown
+   \let \varbigtriangleup \bigtriangleup
+\DeclareMathSymbol{\wedge}{\mathbin}{symbols}{"5E}
+   \let\land=\wedge
+\DeclareMathSymbol{\vee}{\mathbin}{symbols}{"5F}
+   \let\lor=\vee
+\DeclareMathSymbol{\cap}{\mathbin}{symbols}{"5C}
+\DeclareMathSymbol{\cup}{\mathbin}{symbols}{"5B}
+\DeclareMathSymbol{\ddagger}{\mathbin}{symbols}{"7A}
+\DeclareMathSymbol{\dagger}{\mathbin}{symbols}{"79}
+\DeclareMathSymbol{\sqcap}{\mathbin}{symbols}{"75}
+\DeclareMathSymbol{\sqcup}{\mathbin}{symbols}{"74}
+\DeclareMathSymbol{\uplus}{\mathbin}{symbols}{"5D}
+\DeclareMathSymbol{\amalg}{\mathbin}{symbols}{"71}
+\DeclareMathSymbol{\diamond}{\mathbin}{symbols}{"A6}
+\DeclareMathSymbol{\bullet}{\mathbin}{symbols}{"B2}
+\DeclareMathSymbol{\wr}{\mathbin}{symbols}{"6F}
+\DeclareMathSymbol{\div}{\mathbin}{symbols}{"A5}
+\DeclareMathSymbol{\odot}{\mathbin}{symbols}{"AF}
+\DeclareMathSymbol{\oslash}{\mathbin}{symbols}{"AE}
+\DeclareMathSymbol{\otimes}{\mathbin}{symbols}{"AD}
+\DeclareMathSymbol{\ominus}{\mathbin}{symbols}{"AA}
+\DeclareMathSymbol{\oplus}{\mathbin}{symbols}{"A9}
+\DeclareMathSymbol{\mp}{\mathbin}{symbols}{"A8}
+\DeclareMathSymbol{\pm}{\mathbin}{symbols}{"A7}
+\DeclareMathSymbol{\circ}{\mathbin}{symbols}{"B1}
+\DeclareMathSymbol{\bigcirc}{\mathbin}{symbols}{"B0}
+\DeclareMathSymbol{\setminus}{\mathbin}{symbols}{"6E}
+\DeclareMathSymbol{\cdot}{\mathbin}{symbols}{"A2}
+\DeclareMathSymbol{\ast}{\mathbin}{symbols}{"A4}
+\DeclareMathSymbol{\times}{\mathbin}{symbols}{"A3}
+\DeclareMathSymbol{\star}{\mathbin}{letters}{"3F}
+\DeclareMathSymbol{\propto}{\mathrel}{symbols}{"2F}
+\DeclareMathSymbol{\sqsubseteq}{\mathrel}{symbols}{"76}
+\DeclareMathSymbol{\sqsupseteq}{\mathrel}{symbols}{"77}
+%\DeclareMathSymbol{\parallel}{\mathrel}{symbols}{"6B}
+\DeclareMathSymbol{\mid}{\mathrel}{symbols}{"6A}
+\DeclareMathSymbol{\dashv}{\mathrel}{symbols}{"61}
+\DeclareMathSymbol{\vdash}{\mathrel}{symbols}{"60}
+\DeclareMathSymbol{\nearrow}{\mathrel}{symbols}{"25}
+\DeclareMathSymbol{\searrow}{\mathrel}{symbols}{"26}
+\DeclareMathSymbol{\nwarrow}{\mathrel}{symbols}{"2D}
+\DeclareMathSymbol{\swarrow}{\mathrel}{symbols}{"2E}
+\DeclareMathSymbol{\yaa}{\mathrel}{symbols}{"25}
+\DeclareMathSymbol{\yab}{\mathrel}{symbols}{"26}
+\DeclareMathSymbol{\yac}{\mathrel}{symbols}{"2D}
+\DeclareMathSymbol{\yad}{\mathrel}{symbols}{"2E}
+\DeclareMathSymbol{\yamigiue}{\mathrel}{symbols}{"25}
+\DeclareMathSymbol{\yamigisita}{\mathrel}{symbols}{"26}
+\DeclareMathSymbol{\yahidariue}{\mathrel}{symbols}{"2D}
+\DeclareMathSymbol{\yahidarisita}{\mathrel}{symbols}{"2E}
+\DeclareMathSymbol{\Leftrightarrow}{\mathrel}{symbols}{"2C}
+\DeclareMathSymbol{\Leftarrow}{\mathrel}{symbols}{"28}
+\DeclareMathSymbol{\Rightarrow}{\mathrel}{symbols}{"29}
+\def\neq{\not=}
+\let\ne=\neequal
+\let\neq\neequal
+\DeclareMathSymbol{\leq}{\mathrel}{symbols}{"B7}
+   \let\le=\leq
+\DeclareMathSymbol{\geq}{\mathrel}{symbols}{"B8}
+   \let\ge=\geq
+\DeclareMathSymbol{\succ}{\mathrel}{symbols}{"C2}
+\DeclareMathSymbol{\prec}{\mathrel}{symbols}{"C1}
+\DeclareMathSymbol{\approx}{\mathrel}{symbols}{"BC}
+\DeclareMathSymbol{\succeq}{\mathrel}{symbols}{"BA}
+\DeclareMathSymbol{\preceq}{\mathrel}{symbols}{"B1}
+\DeclareMathSymbol{\supset}{\mathrel}{symbols}{"BE}
+\DeclareMathSymbol{\subset}{\mathrel}{symbols}{"BD}
+\DeclareMathSymbol{\supseteq}{\mathrel}{symbols}{"B6}
+\DeclareMathSymbol{\subseteq}{\mathrel}{symbols}{"B5}
+\DeclareMathSymbol{\yosoa}{\mathrel}{symbols}{"32}
+\DeclareMathSymbol{\yosob}{\mathrel}{symbols}{"33}
+\DeclareMathSymbol{\in}{\mathrel}{symbols}{"32}
+\DeclareMathSymbol{\ni}{\mathrel}{symbols}{"33}
+\DeclareMathSymbol{\nein}{\mathrel}{symbols}{"D6}
+\DeclareMathSymbol{\neni}{\mathrel}{symbols}{"D7}
+    \let\owns=\ni
+   \let\notin\nein
+   \let\notni\neni
+\DeclareMathSymbol{\gg}{\mathrel}{symbols}{"B8}
+\DeclareMathSymbol{\ll}{\mathrel}{symbols}{"B7}
+\DeclareMathSymbol{\not}{\mathrel}{symbols}{"36}
+%\def\not{\raise1pt\hbox{$\mkern0mu\hbox{\ceosy{\char"36}}$}\mkern-6mu}
+%\def\not{\mkern1mu\raise1pt\hbox to 0mm{\ceosy{\char"36}}\mkern-6mu}
+\DeclareMathSymbol{\leftrightarrow}{\mathrel}{symbols}{"24}
+\DeclareMathSymbol{\leftarrow}{\mathrel}{symbols}{"C3}
+   \let\gets=\leftarrow
+\DeclareMathSymbol{\rightarrow}{\mathrel}{symbols}{"21}
+   \let\to=\rightarrow
+\DeclareMathSymbol{\ya}{\mathrel}{symbols}{"21}
+\DeclareMathSymbol{\mapstochar}{\mathrel}{symbols}{"37}
+   \def\mapsto{\mapstochar\rightarrow}
+\DeclareMathSymbol{\sim}{\mathrel}{symbols}{"BB}
+\DeclareMathSymbol{\simeq}{\mathrel}{symbols}{"27}
+\DeclareMathSymbol{\perp}{\mathrel}{symbols}{"3F}
+\DeclareMathSymbol{\equiv}{\mathrel}{symbols}{"B4}
+\DeclareMathSymbol{\godo}{\mathrel}{symbols}{"B4}
+\DeclareMathSymbol{\notequiv}{\mathrel}{symbols}{"CF}
+\DeclareMathSymbol{\neequiv}{\mathrel}{symbols}{"CF}
+\DeclareMathSymbol{\asymp}{\mathrel}{symbols}{"B3}
+\DeclareMathSymbol{\smile}{\mathrel}{letters}{"5E}
+\DeclareMathSymbol{\frown}{\mathrel}{letters}{"5F}
+\DeclareMathSymbol{\leftharpoonup}{\mathrel}{letters}{"28}
+\DeclareMathSymbol{\leftharpoondown}{\mathrel}{letters}{"29}
+\DeclareMathSymbol{\rightharpoonup}{\mathrel}{letters}{"2A}
+\DeclareMathSymbol{\rightharpoondown}{\mathrel}{letters}{"2B}
+\DeclareRobustCommand
+  \cong{\mathrel{\mathpalette\@vereq\sim}} % congruence sign
+\def\@vereq#1#2{\lower.5\p@\vbox{\lineskiplimit\maxdimen\lineskip-.5\p@
+    \ialign{$\m@th#1\hfil##\hfil$\crcr#2\crcr=\crcr}}}
+\DeclareRobustCommand
+  \notin{\mathrel{\m@th\mathpalette\c@ncel\in}}
+\def\c@ncel#1#2{\m@th\ooalign{$\hfil#1\mkern1mu/\hfil$\crcr$#1#2$}}
+\DeclareRobustCommand
+  \rightleftharpoons{\mathrel{\mathpalette\rlh@{}}}
+\def\rlh@#1{\vcenter{\m@th\hbox{\ooalign{\raise2pt
+          \hbox{$#1\rightharpoonup$}\crcr
+        $#1\leftharpoondown$}}}}
+\DeclareRobustCommand
+  \doteq{\buildrel\textstyle.\over=}
+\DeclareRobustCommand
+  \joinrel{\mathrel{\mkern-3mu}}
+\DeclareRobustCommand
+  \relbar{\mathrel{\smash-}} % \smash, because -
+                               % has the same height as +
+\DeclareRobustCommand
+  \Relbar{\mathrel{=}}
+\DeclareMathSymbol{\lhook}{\mathrel}{letters}{"2C}
+   \def\hookrightarrow{\lhook\joinrel\rightarrow}
+\DeclareMathSymbol{\rhook}{\mathrel}{letters}{"2D}
+   \def\hookleftarrow{\leftarrow\joinrel\rhook}
+\DeclareRobustCommand
+  \bowtie{\mathrel\triangleright\joinrel\mathrel\triangleleft}
+\DeclareRobustCommand
+  \models{\mathrel{|}\joinrel\Relbar}
+\DeclareRobustCommand
+  \Longrightarrow{\Relbar\joinrel\Rightarrow}
+\let\Longrightarrow\narabala
+\DeclareRobustCommand\longrightarrow
+     {\relbar\joinrel\rightarrow}
+\DeclareRobustCommand\longleftarrow
+     {\leftarrow\joinrel\relbar}
+\DeclareRobustCommand
+  \Longleftarrow{\Leftarrow\joinrel\Relbar}
+\let\Longleftarrow\narabalb
+\DeclareRobustCommand
+  \longmapsto{\mapstochar\longrightarrow}
+\DeclareRobustCommand
+  \longleftrightarrow{\leftarrow\joinrel\rightarrow}
+\DeclareRobustCommand
+  \Longleftrightarrow{\Leftarrow\joinrel\Rightarrow}
+\DeclareRobustCommand
+  \iff{\;\Longleftrightarrow\;}
+\DeclareMathSymbol{\ldotp}{\mathpunct}{letters}{"3A}
+%\DeclareMathSymbol{\cdotp}{\mathpunct}{symbols}{"A2}
+\let\cdotp\mdot
+\DeclareMathSymbol{\colon}{\mathpunct}{operators}{"3A}
+%\DeclareRobustCommand
+%  \cdots{\mathinner{\cdotp\cdotp\cdotp}}
+
+
+\DeclareRobustCommand
+  \vdots{\vbox{\baselineskip4\p@ \lineskiplimit\z@
+    \kern6\p@\hbox{$\sdot$}\hbox{$\sdot$}\hbox{$\sdot$}}}
+\DeclareRobustCommand
+  \ddots{\mathinner{\mkern1mu\raise7\p@
+    \vbox{\kern7\p@\hbox{$\sdot$}}\mkern0mu
+    \raise4\p@\hbox{$\sdot$}\mkern0mu\raise\p@\hbox{$\sdot$}\mkern0mu}}
+%\DeclareRobustCommand
+%  \vdots{\vbox{\baselineskip4\p@ \lineskiplimit\z@
+%    \kern6\p@\hbox{.}\hbox{.}\hbox{.}}}
+%\DeclareRobustCommand
+%  \ddots{\mathinner{\mkern1mu\raise7\p@
+%    \vbox{\kern7\p@\hbox{.}}\mkern2mu
+%    \raise4\p@\hbox{.}\mkern2mu\raise\p@\hbox{.}\mkern1mu}}
+\DeclareMathAccent{\acute}{\mathalpha}{operators}{"B6}
+\DeclareMathAccent{\grave}{\mathalpha}{operators}{"B5}
+\DeclareMathAccent{\ddot}{\mathalpha}{operators}{"C4}
+\DeclareMathAccent{\tilde}{\mathalpha}{operators}{"7E}
+\DeclareMathAccent{\bar}{\mathalpha}{operators}{"B9}
+\DeclareMathAccent{\breve}{\mathalpha}{operators}{"B8}
+\DeclareMathAccent{\check}{\mathalpha}{operators}{"B7}
+\DeclareMathAccent{\hat}{\mathalpha}{operators}{"5E}
+\DeclareMathAccent{\dot}{\mathalpha}{operators}{"5F}
+\DeclareMathAccent{\widetilde}{\mathord}{largesymbols}{"65}
+\DeclareMathAccent{\widehat}{\mathord}{largesymbols}{"62}
+\DeclareMathAccent{\mathring}{\mathalpha}{operators}{"BA}
+\DeclareMathRadical{\asqrtsign}{symbols}{"70}{largesymbols}{"70}
+\DeclareMathRadical{\sqrtsign}{symbols}{"70}{ruto}{"42}
+\def\overrightarrow#1{\vbox{\m@th\ialign{##\crcr
+      \rightarrowfill\crcr\noalign{\kern-\p@\nointerlineskip}
+      $\hfil\displaystyle{#1}\hfil$\crcr}}}
+\def\overleftarrow#1{\vbox{\m@th\ialign{##\crcr
+      \leftarrowfill\crcr\noalign{\kern-\p@\nointerlineskip}%
+      $\hfil\displaystyle{#1}\hfil$\crcr}}}
+%\def\overbrace#1{\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern.5\p@}%$B85$O(B3
+%      \downbracefill\crcr\noalign{\kern3\p@\nointerlineskip}%
+%      $\hfil\displaystyle{#1}\hfil$\crcr}}}\limits}
+%\def\underbrace#1{\mathop{\vtop{\m@th\ialign{##\crcr
+%   $\hfil\displaystyle{#1}\hfil$\crcr
+%   \noalign{\kern.5\p@\nointerlineskip}%
+%   \upbracefill\crcr\noalign{\kern2\p@}}}}\limits}
+\def\uebrace#1{\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern.5\p@}%$B85$O(B3
+      \downbracefill\crcr\noalign{\kern3\p@\nointerlineskip}%
+      $\hfil\displaystyle{#1}\hfil$\crcr}}}\limits}
+\def\sitabrace#1{\mathop{\vtop{\m@th\ialign{##\crcr
+   $\hfil\displaystyle{#1}\hfil$\crcr
+   \noalign{\kern.5\p@\nointerlineskip}%
+   \upbracefill\crcr\noalign{\kern2\p@}}}}\limits}
+\def\skew#1#2#3{{\muskip\z@#1mu\divide\muskip\z@\tw@ \mkern\muskip\z@
+    #2{\mkern-\muskip\z@{#3}\mkern\muskip\z@}\mkern-\muskip\z@}{}}
+\def\rightarrowfill{$\m@th\smash-\mkern-7mu%
+  \cleaders\hbox{$\mkern-2mu\smash-\mkern-2mu$}\hfill
+  \mkern-7mu\mathord\rightarrow$}
+\def\leftarrowfill{$\m@th\mathord\leftarrow\mkern-7mu%
+  \cleaders\hbox{$\mkern-2mu\smash-\mkern-2mu$}\hfill
+  \mkern-7mu\smash-$}
+\DeclareMathSymbol{\braceld}{\mathord}{largesymbols}{"7A}
+\DeclareMathSymbol{\bracerd}{\mathord}{largesymbols}{"7B}
+\DeclareMathSymbol{\bracelu}{\mathord}{largesymbols}{"7C}
+\DeclareMathSymbol{\braceru}{\mathord}{largesymbols}{"7D}
+\def\downbracefill{$\m@th \setbox\z@\hbox{$\braceld$}%
+  \braceld\leaders\vrule \@height\ht\z@ \@depth\z@\hfill\braceru
+  \bracelu\leaders\vrule \@height\ht\z@ \@depth\z@\hfill\bracerd$}
+\def\upbracefill{$\m@th \setbox\z@\hbox{$\braceld$}%
+  \bracelu\leaders\vrule \@height\ht\z@ \@depth\z@\hfill\bracerd
+  \braceld\leaders\vrule \@height\ht\z@ \@depth\z@\hfill\braceru$}
+\DeclareMathDelimiter{\lmoustache}   % top from (, bottom from )
+   {\mathopen}{largesymbols}{"7A}{largesymbols}{"40}
+\DeclareMathDelimiter{\rmoustache}   % top from ), bottom from (
+   {\mathclose}{largesymbols}{"7B}{largesymbols}{"41}
+\DeclareMathDelimiter{\arrowvert}    % arrow without arrowheads
+   {\mathord}{symbols}{"6A}{largesymbols}{"3C}
+\DeclareMathDelimiter{\Arrowvert}    % double arrow without arrowheads
+   {\mathord}{symbols}{"6B}{largesymbols}{"3D}
+\DeclareMathDelimiter{\Vert}
+   {\mathord}{symbols}{"6B}{largesymbols}{"B0}
+\let\|=\Vert
+\DeclareMathDelimiter{\vert}
+   {\mathord}{symbols}{"6A}{largesymbols}{"AF}
+\DeclareMathDelimiter{\uparrow}
+   {\mathrel}{symbols}{"22}{largesymbols}{"78}
+\DeclareMathDelimiter{\downarrow}
+   {\mathrel}{symbols}{"23}{largesymbols}{"79}
+\DeclareMathDelimiter{\updownarrow}
+   {\mathrel}{symbols}{"6C}{largesymbols}{"3F}
+\DeclareMathDelimiter{\Uparrow}
+   {\mathrel}{symbols}{"2A}{largesymbols}{"7E}
+\DeclareMathDelimiter{\Downarrow}
+   {\mathrel}{symbols}{"2B}{largesymbols}{"7F}
+\DeclareMathDelimiter{\Updownarrow}
+   {\mathrel}{symbols}{"6D}{largesymbols}{"77}
+\DeclareMathDelimiter{\backslash}    % for double coset G\backslash H
+   {\mathord}{symbols}{"6E}{largesymbols}{"BA}
+\DeclareMathDelimiter{\rangle}
+   {\mathclose}{symbols}{"69}{largesymbols}{"AE}
+\DeclareMathDelimiter{\langle}
+   {\mathopen}{symbols}{"68}{largesymbols}{"AD}
+\DeclareMathDelimiter{\rbrace}
+   {\mathclose}{symbols}{"67}{daikako}{"69}
+\DeclareMathDelimiter{\lbrace}
+   {\mathopen}{symbols}{"66}{daikako}{"51}
+\DeclareMathDelimiter{\rceil}
+   {\mathclose}{symbols}{"65}{largesymbols}{"A8}
+\DeclareMathDelimiter{\lceil}
+   {\mathopen}{symbols}{"64}{largesymbols}{"A7}
+\DeclareMathDelimiter{\rfloor}
+   {\mathclose}{symbols}{"63}{largesymbols}{"A6}
+\DeclareMathDelimiter{\lfloor}
+   {\mathopen}{symbols}{"62}{largesymbols}{"A5}
+\DeclareMathDelimiter{\lgroup} % extensible ( with sharper tips
+     {\mathopen}{largesymbols}{"3A}{largesymbols}{"3A}
+\DeclareMathDelimiter{\rgroup} % extensible ) with sharper tips
+     {\mathclose}{largesymbols}{"3B}{largesymbols}{"3B}
+\DeclareMathDelimiter{\bracevert} % the vertical bar that extends braces
+     {\mathord}{largesymbols}{"3E}{largesymbols}{"3E}
+\DeclareMathSymbol{\mathparagraph}{\mathord}{symbols}{"7B}
+\DeclareMathSymbol{\mathsection}{\mathord}{symbols}{"78}
+\DeclareMathSymbol{\mathdollar}{\mathord}{operators}{"24}
+\def\mathsterling{\mathit{\mathchar"7024}}
+\def\mathunderscore{\kern.06em\vbox{\hrule\@width.3em}}
+\def\mathellipsis{\mathinner{\ldotp\ldotp\ldotp}}%
+\def\big#1{{\hbox{$\left#1\vbox to8.5\p@{}\right.\n@space$}}}
+\def\Big#1{{\hbox{$\left#1\vbox to11.5\p@{}\right.\n@space$}}}
+\def\bigg#1{{\hbox{$\left#1\vbox to14.5\p@{}\right.\n@space$}}}
+\def\Bigg#1{{\hbox{$\left#1\vbox to17.5\p@{}\right.\n@space$}}}
+\def\n@space{\nulldelimiterspace\z@ \m@th}
+
+\def\kmod#1{\;\;\;(\mod\;#1)}
+
+\def\dotfill{%
+  \leavevmode
+  \cleaders \hb@xt@ .37em{\hss$\sdot$\hss}\hfill
+  \kern\z@}
+%%%%%%%%%%%%%%%%%%%%%%%
+%$B<0HV9f$r?6$k(B $B4]IU$-?t;z(B
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%$BHFMQ4]IU$-HV9f(B
+%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareRobustCommand*\MARU[1]{%
+   \leavevmode
+   \setbox\z@\hbox{{#1\/}}%
+   \ifdim\wd\z@>.63\zw \def\@tempa{{.63\zw}}%
+   \else              \edef\@tempa{{\the\wd\z@}}%
+   \fi
+   \dimen@\ht\z@ \advance\dimen@\dp\z@
+   \ifdim\dimen@>.63\zw \def\@tempb{{.63\zw}}%
+   \else               \edef\@tempb{{\the\dimen@}}%
+   \fi
+   \edef\@tempa{\noexpand\resizebox*\@tempa\@tempb}%
+   \setbox\z@\hbox{\@tempa{\box\z@}}%
+   \dimen@\ht\z@ \advance\dimen@-\dp\z@ \divide\dimen@\tw@
+   \advance\dimen@-.34\zw
+   \hbox to1\zw{%
+      \hss
+      \ooalign{%
+         \lower.0\zw\hbox{\scalebox{1.0}{\mru}}\cr
+         \hfil \lower\dimen@\box\z@ \hfil}%
+      \hss}}
+      
+\DeclareRobustCommand*\NMARU[1]{%
+   \leavevmode
+   \setbox\z@\hbox{{#1\/}}%
+   \ifdim\wd\z@>.63\zw \def\@tempa{{.63\zw}}%
+   \else              \edef\@tempa{{\the\wd\z@}}%
+   \fi
+   \dimen@\ht\z@ \advance\dimen@\dp\z@
+   \ifdim\dimen@>.63\zw \def\@tempb{{.63\zw}}%
+   \else               \edef\@tempb{{\the\dimen@}}%
+   \fi
+   \edef\@tempa{\noexpand\resizebox*\@tempa\@tempb}%
+   \setbox\z@\hbox{\@tempa{\box\z@}}%
+   \dimen@\ht\z@ \advance\dimen@-\dp\z@ \divide\dimen@\tw@
+   \advance\dimen@-.34\zw
+   \hbox to1\zw{%
+      \hss
+      \ooalign{%
+         \lower.1\zw\hbox{\scalebox{1.0}{\nmru}}\cr
+         \hfil \lower\dimen@\box\z@ \hfil}%
+      \hss}}
+
+\DeclareRobustCommand*\mrunumb[1]{\ifcase#1\or \mruichi \or \mruni \or \mrusan \or \mrushi \or \mrugo \or \mruroku \or \mrushichi \or \mruhachi \or \mrukyu \or \mrujyu \or \mrujyuichi \or \mrujyuni \or \mrujyusan \or \mrujyushi \or \mrujyugo \or \mrujyuroku \or \mrujyushichi \or \mrujyuhachi \or \mrujyukyu \or \mrunijyu \fi}
+
+\newcounter{bango}
+\renewcommand{\thebango}{\@arabic\c@bango}
+\def\writeLabel#1#2{\@bsphack\protected@write\@auxout{}%
+         {\string\newlabel{#1}{{#2}}}%
+  \@esphack}
+
+\def\eqnum#1{%
+  \csname gobble@or@relax@#1\endcsname\@gobble
+  {\refstepcounter{bango}%
+   ~\sdots\sdots
+   ~\mbox{\mrunumb{\thebango}}\writeLabel{#1}{\thebango}}}
+
+\def\eqnm#1{%
+  \csname gobble@or@relax@#1\endcsname\@gobble
+  {\refstepcounter{bango}%
+   \,
+   \mbox{\mrunumb{\thebango}}\writeLabel{#1}{\thebango}}}
+
+\DeclareRobustCommand*\eqref[1]{%
+  \@bsphack\protected@write\@auxout{}{\string\@labelused{#1}}\@esphack%$BDI2C(B
+  \expandafter\ifx\csname r@#1\endcsname\relax
+    \ref{#1}%
+  \else
+    \afterassignment\remove@to@nnil
+    \count@ 0\expandafter\expandafter\expandafter
+      \@firstoftwo\csname r@#1\endcsname
+      \@empty\@empty\relax\@nnil
+    \expandafter\mrunumb\expandafter{\the\count@}%
+  \fi}
+
+\newcommand*\@labelused[1]{% $B?7@_(B
+  \global\expandafter\let\csname gobble@or@relax@#1\endcsname\@gobble}
+%%%%%%%%%%%%%%%%%%%%%%%
+%$B<0HV9f$r?6$k(B $B4](BA
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareRobustCommand*\mrunumbA[1]{\ifcase#1\or \mruA \or \mruB \or \mruC \or \mruD \or \mruE \or \mruF \or \mruG \or \mruH \or \mruI \or \mruJ \or \mruK \or \mruL \or \mruM \or \mruN \or \mruO \or \mruP \or \mruQ \or \mruR \or \mruS \or \mruT \fi}
+
+\newcounter{bangoA}
+
+\renewcommand{\thebangoA}{\@arabic\c@bangoA}
+
+\def\eqnumA#1{%
+  \csname gobble@or@relax@#1\endcsname\@gobble
+{\refstepcounter{bangoA}%
+~\sdots\sdots ~\mbox{\mrunumbA{\thebangoA}}\writeLabel{#1}{\thebangoA}}}
+
+\DeclareRobustCommand*\eqrefA[1]{%
+  \@bsphack\protected@write\@auxout{}{\string\@labelused{#1}}\@esphack%$BDI2C(B
+   \expandafter\ifx\csname r@#1\endcsname\relax
+      \ref{#1}%
+   \else
+      \afterassignment\remove@to@nnil
+      \count@ 0\expandafter\expandafter\expandafter
+         \@firstoftwo\csname r@#1\endcsname
+         \@empty\@empty\relax\@nnil
+      \expandafter\mrunumbA\expandafter{\the\count@}%
+   \fi}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%$B<0HV9f$r?6$k(B $B4](Ba
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareRobustCommand*\mrunumba[1]{\ifcase#1\or \mrua \or \mrub \or \mruc \or \mrud \or \mrue \or \mruf \or \mrug \or \mruh \or \mrui \or \mruj \or \mruk \or \mrul \or \mrum \or \mrun \or \mruo \or \mrup \or \mruq \or \mrur \or \mrus \or \mrut \fi}
+
+\newcounter{bangoa}
+
+\renewcommand{\thebangoa}{\@arabic\c@bangoa}
+
+\def\eqnuma#1{%
+  \csname gobble@or@relax@#1\endcsname\@gobble
+{\refstepcounter{bangoa}%
+~\sdots\sdots ~\mbox{\mrunumba{\thebangoa}}\writeLabel{#1}{\thebangoa}}}
+
+\DeclareRobustCommand*\eqrefa[1]{%
+  \@bsphack\protected@write\@auxout{}{\string\@labelused{#1}}\@esphack%$BDI2C(B
+   \expandafter\ifx\csname r@#1\endcsname\relax
+      \ref{#1}%
+   \else
+      \afterassignment\remove@to@nnil
+      \count@ 0\expandafter\expandafter\expandafter
+         \@firstoftwo\csname r@#1\endcsname
+         \@empty\@empty\relax\@nnil
+      \expandafter\mrunumba\expandafter{\the\count@}%
+   \fi}
+
+%%%%%%%%%%%%%%%
+%$BLdBjHV9f$r?6$k(B
+%%%%%%%%%%%%%%%
+
+
+\newcounter{mondaibango}
+\renewcommand{\themondaibango}{\kigoub{\arabic{mondaibango}}}
+\newcommand{\Mondai}[1][]{\refstepcounter{mondaibango}%
+#1\themondaibango{\ba{.}}}
+
+
+\DeclareRobustCommand*\knumb[1]{\ifcase#1\or \kakkoa \or \kakkoi \or \kakkou \or \kakkoe \or \kakkoo \or \kakkoka \or \kakkoki \or \kakkoku \or \kakkoke \or \kakkosa \or \kakkosi \or \kakkosu \or \kakkose \or \kakkoso \or \kakkota \or \kakkoti \or \kakkotu \or \kakkote \or \kakkoto \fi}
+
+\newcounter{katakanabango}
+\renewcommand{\thekatakanabango}{\knumb{\arabic{katakanabango}}}
+\newcommand{\Katakana}[1][]{\refstepcounter{katakanabango}%
+\noindent#1\thekatakanabango\quad}
+
+
+\DeclareRobustCommand*\shonum[1]{\ifcase#1\or \kakkoichi \or \kakkoni \or \kakkosan \or \kakkoshi \or \kakkogo \or \kakkoroku \or \kakkoshichi \or \kakkohachi \or \kakkokyu \or \kakkojyu \or \kakkojyuichi \or \kakkojyuni \or \kakkojyusan \or \kakkojyushi \or \kakkojyugo \or \kakkojyuroku \or \kakkojyushichi \or \kakkojyuhachi \or \kakkojyukyu \or \kakkonijyu \fi}
+
+\newcounter{shomonbango}[mondaibango]
+\renewcommand{\theshomonbango}{\shonum{\arabic{shomonbango}}}
+\newcommand{\Shomon}[1][]{\refstepcounter{shomonbango}%
+\noindent#1\theshomonbango\quad}
+
+
+\DeclareRobustCommand*\shonumb[1]{\ifcase#1\or \kakkoichib \or \kakkonib \or \kakkosanb \or \kakkoshib \or \kakkogob \or \kakkorokub \or \kakkoshichib \or \kakkohachib \or \kakkokyub \or \kakkojyub \or \kakkojyuichib \or \kakkojyunib \or \kakkojyusanb \or \kakkojyushib \or \kakkojyugob \or \kakkojyurokub \or \kakkojyushichib \or \kakkojyuhachib \or \kakkojyukyub \or \kakkonijyub \fi}
+
+\newcounter{shomonbbango}[mondaibango]
+\renewcommand{\theshomonbbango}{\shonumb{\arabic{shomonbbango}}}
+\newcommand{\Shomonb}[1][]{\refstepcounter{shomonbbango}%
+\noindent#1\theshomonbbango\quad}
+
+
+\DeclareRobustCommand*\shikakunum[1]{\ifcase#1\or \shikakuichi \or \shikakuni \or \shikakusan \or \shikakushi \or \shikakugo \or \shikakuroku \or \shikakushichi \or \shikakuhachi \or \shikakukyu \or \shikakujyu \or  \shikakujyuichi \or \shikakujyuni \or \shikakujyusan \or \shikakujyushi \or \shikakujyugo \or \shikakujyuroku \or \shikakujyushichi \or \shikakujyuhachi \or \shikakujyukyu \or \shikakunijyu \or \shikakunijyuichi \or \shikakunijyuni \or \shikakunijyusan \or \shikakunijyushi \or \shikakunijyugo \or \shikakunijyuroku \or \shikakunijyushichi \or \shikakunijyuhachi \or \shikakunijyuku \or \shikakusanjyu \fi}
+
+\newcounter{shibango}
+\renewcommand{\theshibango}{\shikakunum{\arabic{shibango}}}
+\newcommand{\Shikaku}[1][]{\refstepcounter{shibango}%
+\noindent#1\scalebox{1.2}\theshibango\quad}
+
+
+\newcounter{shomonbangoshi}[shibango]
+\renewcommand{\theshomonbangoshi}{\shonum{\arabic{shomonbangoshi}}}
+\newcommand{\Shomonshikaku}[1][]{\refstepcounter{shomonbangoshi}%
+\noindent#1\theshomonbangoshi\quad}
+
+\newcounter{shomonbangoshib}[shibango]
+\renewcommand{\theshomonbangoshib}{\shonumb{\arabic{shomonbangoshib}}}
+\newcommand{\Shomonshikakub}[1][]{\refstepcounter{shomonbangoshib}%
+\noindent#1\theshomonbangoshib\quad}
+
+
+
+\DeclareRobustCommand*\shikakunumb[1]{\ifcase#1\or \shikakuichib \or \shikakunib \or \shikakusanb \or \shikakushib \or \shikakugob \or \shikakurokub \or \shikakushichib \or \shikakuhachib \or \shikakukyub \or \shikakujyub \or  \shikakujyuichib \or \shikakujyunib \or \shikakujyusanb \or \shikakujyushib \or \shikakujyugob \or \shikakujyurokub \or \shikakujyushichib \or \shikakujyuhachib \or \shikakujyukyub \or \shikakunijyub \or \shikakunijyuichib \or \shikakunijyunib \or \shikakunijyusanb \or \shikakunijyushib \or \shikakunijyugob \or \shikakunijyurokub \or \shikakunijyushichib \or \shikakunijyuhachib \or \shikakunijyukub \or \shikakusanjyub \fi}
+
+\newcounter{shibbango}
+\renewcommand{\theshibbango}{\shikakunumb{\arabic{shibbango}}}
+\newcommand{\Shikakub}[1][]{\refstepcounter{shibbango}%
+\noindent#1\theshibbango\quad}
+
+
+\DeclareRobustCommand*\kuronumb[1]{\ifcase#1\or \kuromaruichi \or \kuromaruni \or \kuromarusan \or \kuromarushi \or \kuromarugo \or \kuromaruroku \or \kuromarushichi \or \kuromaruhachi \or \kuromarukyu \fi}
+
+\newcounter{kurobango}
+\renewcommand{\thekurobango}{\kuronumb{\arabic{kurobango}}}
+\newcommand{\Kuro}[1][]{\refstepcounter{kurobango}%
+\noindent#1\thekurobango\quad}
+
+
+\DeclareRobustCommand*\tokeinum[1]{\ifcase#1\or \tokeiichi \or \tokeini \or \tokeisan \or \tokeishi \or \tokeigo \or \tokeiroku \or \tokeishichi \or \tokeihachi \or \tokeikyu \or \tokeijyu \fi}
+
+\newcounter{tokeibango}
+\renewcommand{\thetokeibango}{\tokeinum{\arabic{tokeibango}}}
+\newcommand{\Tokei}[1][]{\refstepcounter{tokeibango}%
+\noindent#1\thetokeibango\quad}
+
+\newcounter{shimonbango}[mondaibango]
+\renewcommand{\theshimonbango}{\tokeinum{\arabic{shimonbango}}}
+\newcommand{\Shimon}[1][]{\refstepcounter{shimonbango}#1\theshimonbango\quad}
+
+\newcounter{shimonbangok}[kurobango]
+\renewcommand{\theshimonbangok}{\tokeinum{\arabic{shimonbangok}}}
+\newcommand{\Shimonk}[1][]{\refstepcounter{shimonbangok}%
+\noindent#1\theshimonbangok\quad}
+
+\DeclareRobustCommand*\tokeinumb[1]{\ifcase#1\or \tokeiichib \or \tokeinib \or \tokeisanb \or \tokeishib \or \tokeigob \or \tokeirokub \or \tokeishichib \or \tokeihachib \or \tokeikyub \or \tokeijyub \fi}
+
+\newcounter{tokeibbango}
+\renewcommand{\thetokeibbango}{\tokeinumb{\arabic{tokeibbango}}}
+\newcommand{\Tokeib}[1][]{\refstepcounter{tokeibbango}%
+\noindent#1\thetokeibbango\quad}
+
+\newcounter{shimonbbango}[mondaibango]
+\renewcommand{\theshimonbbango}{\tokeinumb{\arabic{shimonbbango}}}
+\newcommand{\Shimonb}[1][]{\refstepcounter{shimonbbango}%
+\noindent#1\theshimonbbango\quad}
+
+\DeclareRobustCommand*\tokeikonum[1]{\ifcase#1\or \toaichi \or \toani \or \toasan \or \toashi \or \toago \or \toaroku \or \toashichi \or \toahachi \or \toakyu \or \toajyu \fi}
+
+\newcounter{tokeikobango}
+\renewcommand{\thetokeikobango}{\tokeikonum{\arabic{tokeikobango}}}
+\newcommand{\Tokeiko}[1][]{\refstepcounter{tokeikobango}%
+\noindent#1\thetokeikobango\quad}
+
+\DeclareRobustCommand*\tokeidainum[1]{\ifcase#1\or \toeichi \or \toeni \or \toesan \or \toeshi \or \toego \or \toeroku \or \toeshichi \or \toehachi \or \toekyu \or \toejyu \fi}
+
+\newcounter{tokeidaibango}
+\renewcommand{\thetokeidaibango}{\tokeidainum{\arabic{tokeidaibango}}}
+\newcommand{\Tokeidai}[1][]{\refstepcounter{tokeidaibango}%
+\noindent#1\thetokeidaibango\quad}
+
+
+\DeclareRobustCommand*\kakusujinum[1]{\ifcase#1\or \kagiichi \or \kagini \or \kagisan \or \kagishi \or \kagigo \or \kagiroku \or \kagishichi \or \kagihachi \or \kagikyu \or \kagijyu \or \kagijyuichi \or \kagijyuni \or \kagijyusan \or \kagijyushi \or \kagijyugo \or \kagijyuroku \or \kagijyushichi \or \kagijyuhachi \or \kagijyukyu \or \kaginijyu \fi}
+
+\newcounter{kakubango}
+\renewcommand{\thekakubango}{\kakusujinum{\arabic{kakubango}}}
+\newcommand{\Kakukakko}[1][]{\refstepcounter{kakubango}%
+\noindent#1\thekakubango\quad}
+
+
+\DeclareRobustCommand*\kakusujinumb[1]{\ifcase#1\or \kagiichib \or \kaginib \or \kagisanb \or \kagishib \or \kagigob \or \kagirokub \or \kagishichib \or \kagihachib \or \kagikyub \or \kagijyub \or \kagijyuichib \or \kagijyunib \or \kagijyusanb \or \kagijyushib \or \kagijyugob \or \kagijyurokub \or \kagijyushichib \or \kagijyuhachib \or \kagijyukyub \or \kaginijyub \fi}
+
+\newcounter{kakubbango}
+\renewcommand{\thekakubbango}{\kakusujinumb{\arabic{kakubbango}}}
+\newcommand{\Kakukakkob}[1][]{\refstepcounter{kakubbango}%
+\noindent#1\thekakubbango\quad}
+
+
+\newcounter{reidaibango}
+\renewcommand{\thereidaibango}{\reidaid\;\;\ceorb{\arabic{reidaibango}.\;\;}}
+\newcommand{\Reidai}[1][]{\refstepcounter{reidaibango}#1\thereidaibango}
+
+\newcounter{shomonbangor}[reidaibango]
+\renewcommand{\theshomonbangor}{\shonum{\arabic{shomonbangor}}}
+\newcommand{\Shomonr}[1][]{\refstepcounter{shomonbangor}%
+\noindent#1\theshomonbangor\quad}
+
+\newcounter{shomonbbangor}[reidaibango]
+\renewcommand{\theshomonbbangor}{\shonumb{\arabic{shomonbbangor}}}
+\newcommand{\Shomonbr}[1][]{\refstepcounter{shomonbbangor}%
+\noindent#1\theshomonbbangor\quad}
+
+\newcounter{tokeibangor}[reidaibango]
+\renewcommand{\thetokeibangor}{\tokeinum{\arabic{tokeibangor}}}
+\newcommand{\Tokeir}[1][]{\refstepcounter{tokeibangor}%
+\noindent#1\thetokeibangor\quad}
+
+
+
+\newcounter{shomonbangok}[kurobango]
+\renewcommand{\theshomonbangok}{\shonum{\arabic{shomonbangok}}}
+\newcommand{\Shomonk}[1][]{\refstepcounter{shomonbangok}%
+\noindent#1\theshomonbangok\quad}
+
+\newcounter{shomonbbangok}[kurobango]
+\renewcommand{\theshomonbbangok}{\shonumb{\arabic{shomonbbangok}}}
+\newcommand{\Shomonbk}[1][]{\refstepcounter{shomonbbangok}%
+\noindent#1\theshomonbbangok\quad}
+
+\newcounter{tokeibangok}[kurobango]
+\renewcommand{\thetokeibangok}{\tokeinum{\arabic{tokeibangok}}}
+\newcommand{\Tokeik}[1][]{\refstepcounter{tokeibangok}%
+\noindent#1\thetokeibangok\quad}
+
+\newcounter{tokeibbangok}[kurobango]
+\renewcommand{\thetokeibbangok}{\tokeinumb{\arabic{tokeibbangok}}}
+\newcommand{\Tokeibk}[1][]{\refstepcounter{tokeibbangok}%
+\noindent#1\thetokeibbangok\quad}
+
+\newcounter{shimonbbangok}[kurobango]
+\renewcommand{\theshimonbbangok}{\tokeinumb{\arabic{shimonbbangok}}}
+\newcommand{\Shimonbk}[1][]{\refstepcounter{shimonbbangok}%
+\noindent#1\theshimonbbangok\quad}
+
+\newcounter{shimonbangor}[shomonbangor]
+\renewcommand{\theshimonbangor}{\tokeinum{\arabic{shimonbangor}}}
+\newcommand{\Shimonr}[1][]{\refstepcounter{shimonbangor}%
+\noindent#1\theshimonbangor\quad}
+
+\newcounter{shimonbbangor}[shomonbbangor]
+\renewcommand{\theshimonbbangor}{\tokeinumb{\arabic{shimonbbangor}}}
+\newcommand{\Shimonbr}[1][]{\refstepcounter{shimonbbangor}%
+\noindent#1\theshimonbbangor\quad}
+
+
+%$B%;%s%?!<;n83MQLdBjHV9f(B
+\DeclareRobustCommand*\Knumm[1]{\ifcase#1\or 一\or 二\or 三\or 四\or 五\or 六\or 七\or 八\or 九\or 十\or 十一\or 十二\or 十三\or 十四\or 十五\or 十六\or 十七\or 十八\or 十九\or 二十\or 二十一\or 二十二\or 二十三\or 二十四\or 二十五\or 二十六\or 二十七\or 二十八\or 二十九\or 三十\or 三十一\or 三十二\or 三十三\or 三十四\or 三十五\or 三十六\or 三十七\or 三十八\or 三十九\or 四十\or 四十一\fi}
+
+
+\newcounter{katab}
+\renewcommand{\thekatab}{\Knumm{\arabic{katab}}}
+\newcommand{\kata}[1][]{\refstepcounter{katab}#1\thekatab}
+
+%$B%;%s%?!<;n83MQD9$$!{HV9f(B
+\DeclareRobustCommand*\Ngnumm[1]{\ifcase#1\or \nagamarurei\or \nagamaruichi\or \nagamaruni\or \nagamarusan\or \nagamarushi\or \nagamarugo\or \nagamaruroku\or \nagamarushichi\or \nagamaruhachi\or \nagamarukyu\fi}
+
+\newcounter{naganum}
+\renewcommand{\thenaganum}{\Ngnumm{\arabic{naganum}}}
+\newcommand{\nagamaru}[1][]{\refstepcounter{naganum}#1\thenaganum}
+
+%$B2U>r=q$-$N!{HV9fIU$1(B
+\DeclareRobustCommand*\Mrnumm[1]{\ifcase#1\or \mruichi\or \mruni\or \mrusan\or \mrushi\or \mrugo\or \mruroku\or \mrushichi\or \mruhachi\or \mrukyu\fi}
+
+\newcounter{Marunum}
+\renewcommand{\theMarunum}{\Mrnumm{\arabic{Marunum}}}
+\newcommand{\Maru}[1][]{\refstepcounter{Marunum}#1\theMarunum\quad}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%counter RESET
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\RESET{\setcounter{bango}{0}
+\setcounter{shomonbango}{0}
+\setcounter{shomonbbango}{0}
+\setcounter{katakanabango}{0}
+\setcounter{bangoa}{0}
+\setcounter{bangoA}{0}
+\setcounter{shomonbangoshi}{0}
+\setcounter{shomonbangoshib}{0}
+\setcounter{shomonbangor}{0}
+\setcounter{shomonbbangor}{0}
+\setcounter{shomonbangok}{0}
+\setcounter{shomonbbangok}{0}
+\setcounter{katab}{0}
+\setcounter{naganum}{0}
+\setcounter{equation}{0}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$BLdBjJT$H2rEzJT$N%j%9%H9=B$(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\alist#1#2{%
+  \ifnum \@listdepth >5\relax
+    \@toodeep
+  \else
+    \global\advance\@listdepth\@ne
+  \fi
+  \rightmargin\z@
+  \listparindent\z@
+  \itemindent\z@
+  \csname @list\romannumeral\the\@listdepth\endcsname
+  \def\@itemlabel{#1}%
+  \let\makelabel\@mklab
+  \@nmbrlistfalse
+  #2\relax
+  \@trivlist
+  \parskip\parsep
+  \parindent\listparindent
+  \advance\linewidth -\rightmargin
+  \advance\linewidth -\leftmargin
+  \advance\@totalrightmargin \rightmargin
+  \advance\@totalleftmargin \leftmargin
+  \leftskip=\@totalleftmargin
+  \rightskip=\@totalrightmargin
+  \ignorespaces}
+
+%$BLdBjJT(B
+
+\def\@mondai#1{%#1:\Mondai etc.
+   \alist{}{%
+      \topsep=0pt
+      \partopsep=0pt
+      \itemsep=0pt
+      \labelwidth=1\zw
+      \labelsep=0\zw
+      %%% $B$3$l0JA0$N%Q%i%a!<%?$OE,59JQ99$J$5$C$F$/$@$5$$(B
+      \leftmargin=1\zw
+         %%% $B%F%-%9%HItJ,$O(B 1 $B;z2<$2(B
+         %%% $B$3$N(B 1\zw $B$r(B 0pt $B$K$9$k$H!$;z2<$2$O9T$o$l$J$/$J$j$^$9!%(B
+      %%% $BLdBjHV9fItJ,$O;z2<$2$5$l$J$$$h$&$K(B \itemindent $B$rD4@0(B
+      \itemindent=\labelwidth
+      \advance\itemindent\labelsep
+      \advance\itemindent-\leftmargin}%
+   \item[#1]}
+\def\@endmondai{\endlist}
+\def\mondai{\@mondai{\Mondai}}
+\def\endmondai{\@endmondai}
+\def\shomon{\@mondai{\Shomon}}
+\def\endshomon{\@endmondai}
+\def\shimon{\@mondai{\Shimon}}
+\def\endshimon{\@endmondai}
+
+
+%$B2rEzJT(B
+
+\def\@kaitou#1{% #1: \Mondai etc.
+   \alist{}{%
+      \topsep=0pt
+      \partopsep=0pt
+      \itemsep=0pt
+      \labelwidth=1\zw
+      \labelsep=0\zw
+      %%% $B$3$l0JA0$N%Q%i%a!<%?$OE,59JQ99$J$5$C$F$/$@$5$$(B
+      \leftmargin=0\zw
+         %%% $B%F%-%9%HItJ,$O(B 1 $B;z2<$2(B
+         %%% $B$3$N(B 1\zw $B$r(B 0pt $B$K$9$k$H!$;z2<$2$O9T$o$l$J$/$J$j$^$9!%(B
+      %%% $BLdBjHV9fItJ,$O;z2<$2$5$l$J$$$h$&$K(B \itemindent $B$rD4@0(B
+      \itemindent=\labelwidth
+      \advance\itemindent\labelsep
+      \advance\itemindent-\leftmargin}%
+   \item[#1]}
+
+\def\@endkaitou{\endlist}
+\def\kaitou{\@kaitou{\Mondai}}
+\def\endkaitou{\@endkaitou}
+\def\shomonb{\@kaitou{\Shomonb}}
+\def\endshomonb{\@endkaitou}
+\def\shimonb{\@kaitou{\Shimonb}}
+\def\endshimonb{\@endkaitou}
+
+%$B9uHV9fLdBjJT(B
+\def\@endmondaik{\endlist}
+\def\kuro{\@mondai{\Kuro}}
+\def\endkuro{\@endmondaik}
+\def\shomonk{\@mondai{\Shomonk}}
+\def\endshomonk{\@endmondaik}
+\def\shimonk{\@mondai{\Shimonk}}
+\def\endshimonk{\@endmondaik}
+
+%$B9uHV9f2rEzJT(B
+\def\@endkaitouk{\endlist}
+\def\kaitouk{\@kaitou{\Kuro}}
+\def\endkaitouk{\@endkaitouk}
+\def\shomonbk{\@kaitou{\Shomonb}}
+\def\endshomonbk{\@endkaitouk}
+\def\shimonbk{\@kaitou{\Shimonb}}
+\def\endshimonb{\@endkaitouk}
+
+
+%$BNcBjJT(B
+\def\@endreidai{\endlist}
+\def\reidai{\@mondai{\Reidai}}
+\def\endreidai{\@endreidai}
+\def\shomonr{\@mondai{\Shomonr}}
+\def\endshomonr{\@endreidai}
+\def\shimonr{\@mondai{\Shimonr}}
+\def\endshimonr{\@endreidai}
+
+
+\def\@kaitour#1{% #1: \Mondai etc.
+   \alist{}{%
+      \topsep=0pt
+      \partopsep=0pt
+      \itemsep=0pt
+      \labelwidth=1\zw
+      \labelsep=0\zw
+      %%% $B$3$l0JA0$N%Q%i%a!<%?$OE,59JQ99$J$5$C$F$/$@$5$$(B
+      \leftmargin=0\zw
+         %%% $B%F%-%9%HItJ,$O(B 1 $B;z2<$2(B
+         %%% $B$3$N(B 1\zw $B$r(B 0pt $B$K$9$k$H!$;z2<$2$O9T$o$l$J$/$J$j$^$9!%(B
+      %%% $BLdBjHV9fItJ,$O;z2<$2$5$l$J$$$h$&$K(B \itemindent $B$rD4@0(B
+      \itemindent=0\zw
+      \advance\itemindent\labelsep
+      \advance\itemindent-\leftmargin}%
+   \item[#1]}
+
+%$BNcBj2rEzJT(B
+\def\@endkaitour{\endlist}
+\def\kaitour{\@kaitou{\kai\quad}}
+\def\endkaitour{\@endkaitour}
+\def\shomonbr{\@kaitou{\Shomonbr}}
+\def\endshomonbr{\@endkaitour}
+\def\shimonbr{\@kaitou{\Shimonbr}}
+\def\endshimonbr{\@endkaitour}
+%%%%%%%%%%%%%%
+%$B9T4V$r5M$a$k(B
+%%%%%%%%%%%%%%
+\def\narrowbaselines{%
+   \narrowbaselinestrue
+   \skip0=\abovedisplayskip
+   \skip2=\abovedisplayshortskip
+   \skip4=\belowdisplayskip
+   \skip6=\belowdisplayshortskip
+   \@currsize \selectfont
+   \abovedisplayskip=\skip0\relax
+   \abovedisplayshortskip=\skip2\relax
+   \belowdisplayskip=\skip4\relax
+   \belowdisplayshortskip=\skip6\relax}
+
+%%%%%%%%%%%%%%%
+%multisqrt
+%%%%%%%%%%%%%%%
+\let\sqrt\undefined
+
+%\def\root#1\of{%
+%  \setbox\rootbox\hbox{$\m@th\scriptscriptstyle{#1\;\,}$}%
+%  \mathpalette\r@@t}
+%\def\r@@t#1#2{%
+%  \setbox\z@\hbox{$\m@th#1\sqrtsign{\mkern0.5mu #2}$}%
+%  \dimen@\ht\z@ \advance\dimen@-\dp\z@
+%  \mkern5mu\raise.6\dimen@\copy\rootbox
+%  \mkern-10mu\box\z@}
+%\DeclareRobustCommand\sqrt{\@ifnextchar[\@sqrt\sqrtsign}
+%\def\@sqrt[#1]{\root #1\of}
+%\def\dsqrt{\displaystyle\sqrt}
+
+
+\def\aroot#1\of{%
+  \setbox\rootbox\hbox{$\m@th\scriptscriptstyle{#1}$}%
+  \mathpalette\r@@t}
+\def\ar@@t#1#2{%
+  \setbox\z@\hbox{$\m@th#1\sqrtsign{\mkern0.5mu #2}$}%
+  \dimen@\ht\z@ \advance\dimen@-\dp\z@
+  \mkern5mu\raise.6\dimen@\copy\rootbox
+  \mkern-10mu\box\z@}
+\DeclareRobustCommand\asqrt{\@ifnextchar[\@sqrt\asqrtsign}
+\def\@asqrt[#1]{\root #1\of}
+\def\vsqrt{\displaystyle\asqrt}
+
+
+\newbox\rootbox
+\def\myroot#1\of{%
+  \setbox\rootbox\hbox{$\m@th\scriptscriptstyle{#1\mkern7mu}$}%
+  \mathpalette\myr@@t}
+\def\myr@@t#1#2{%
+ \setbox\tw@\hbox{$\m@th#1{\vphantom{b}}#2$}%
+ \setbox\z@\hbox{$\m@th#1\sqrtsign{\mkern2mu\copy\tw@}$}%
+ \dimen4=\tf@size\p@
+ \ifx#1\scriptstyle       \dimen4=\sf@size\p@  \fi
+ \ifx#1\scriptscriptstyle \dimen4=\ssf@size\p@ \fi
+ \dimen4 = 0.2\dimen4\relax%%%                          (*)
+ \dimen@ii\ht\z@ \advance\dimen@ii-\ht\tw@
+ \dimen6=\dimen@ii
+ \advance\dimen@ii-\dimen4\relax
+ \ifdim\dimen@ii<\z@
+    \setbox\z@\hbox{$\m@th#1\sqrtsign{\kern1pt
+       \@tempdima\ht\tw@ \@tempdimb\dp\tw@
+       \advance\@tempdima.51\dimen6
+       \advance\@tempdimb.51\dimen6
+       \vrule \@width\z@ \@height\@tempdima \@depth\@tempdimb
+       \copy\tw@}$}%
+ \fi
+ \dimen@\ht\z@ \advance\dimen@-\dp\z@
+ \mkern5mu\raise.6\dimen@\copy\rootbox
+ \mkern-9mu\box\z@}
+\def\@mysqrt{\@ifnextchar[\@@mysqrt{\@@mysqrt[]}}
+\def\@@mysqrt[#1]{\myroot#1\of}
+\def\@@sqrt<#1,#2>[#3]#4{%
+\@mysqrt[\raise#2 pt\hbox{$\scriptscriptstyle #3$}\kern#1pt]{#4}}
+\DeclareRobustCommand\sqrt{\@ifnextchar<{\@@sqrt}{\@mysqrt}}
+\def\dsqrt{\displaystyle\sqrt}
+
+%%%%%%%%%%%%%%%%
+%Macro2
+%$B4J0W%;%/%7%g%s:84s$;$H1&4s$;(B
+%%%%%%%%%%%%%%%%%
+\newcounter{secNo}
+\renewcommand{\thesecNo}{\kigoua{\arabic{secNo}.}}
+\newcommand{\sectionl}[1]{\addtocounter{secNo}{1}\protect{\raggedleft{\scalebox{1.12}%
+{\thesecNo\bfseries{#1}}}}\\ \indent}
+\newcommand{\sectionr}[1]{\addtocounter{secNo}{1}\protect{\hfill{\scalebox{1.12}{\thesecNo\bfseries{#1}}}}\\ \indent}
+
+%%%%%%%%%%%%%%%%
+%Macro3
+%$B>e2<1&$K$"$1$k2x?M(B
+%%%%%%%%%%%%%%%%%
+\def\aki{%
+\@ifnextchar\bgroup{\@aki@}{\@aki@@}}
+\def\@aki@#1#2{\hbox{\vrule width0pt height#1pt depth#2pt}}
+\def\@aki@@{%
+\@ifnextchar({\@aki}{\@@aki}}
+\def\@aki(#1,#2){\hbox{\vrule width0pt height#1pt depth#2pt}}
+\def\@@aki{%
+\@ifnextchar[{\@@@aki}{\@@@aki[10,5]}}
+\def\@@@aki[#1,#2]{\hbox{\vrule width0pt height#1pt depth#2pt}}
+
+\def\Aki{%
+\@ifnextchar({\@Aki}{\@@Aki}}
+\def\@Aki(#1,#2,#3){\hskip#1\zw \hbox{\vrule width0pt height#2pt depth#3pt}}
+\def\@@Aki#1#2#3{\hskip#1\zw \hbox{\vrule width0pt height#2pt depth#3pt}}
+
+\def\Ak{\hskip3\zw \hbox{\vrule width0pt height10pt depth5pt}}
+\def\akia{\hbox{\vrule width0pt height12pt depth8pt}}
+\def\akib{\hbox{\vrule width0pt height15pt depth10pt}}
+\def\akic{\hbox{\vrule width0pt height17pt depth12pt}}
+\def\akid{\hbox{\vrule width0pt height20pt depth15pt}}
+\def\H{\hskip3\zw}
+%%%%%%%%%%%%%%%%%%%%%%%
+%$B@QJ,4J0W7A(B
+%%%%%%%%%%%%%%%%%%%%%%%
+\def\dint#1#2{\int_{#1}^{#2} }
+\def\tint#1#2#3{\leftbd{#1}\rightbd_{#2}^{#3}}
+\def\rtint#1#2#3{{#1}\rightbd_{#2}^{#3}}
+\def\ltint#1{\leftbd{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B=89g$N(Bcup$B$H(Bcap$B$H3NN($N(Bcup$B$H(Bcap
+%%%%%%%%%%%%%%%%%%%%%%%
+\def\Pcap{\@ifnextchar[\@Pcap\@@Pcap}
+\def\@Pcap[#1,#2,#3]{P(\mbox{#1}\cap\mbox{#2}\cap\mbox{#3})}
+\def\@@Pcap{\@ifnextchar(\@CPcap\@@CPcap}
+\def\@CPcap(#1,#2){P(\mbox{#1}\cap\mbox{#2})}
+\def\@@CPcap#1{P(\mbox{#1})}
+
+\def\Pcup{\@ifnextchar[\@Pcup\@@Pcup}
+\def\@Pcup[#1,#2,#3]{P(\mbox{#1}\cup\mbox{#2}\cup\mbox{#3})}
+\def\@@Pcup{\@ifnextchar(\@CPcup\@@CPcup}
+\def\@CPcup(#1,#2){P(\mbox{#1}\cup\mbox{#2})}
+\def\@@CPcup#1{P(\mbox{#1})}
+
+
+\def\Cap{\@ifnextchar[\@Cap\@@Cap}
+\def\@Cap[#1,#2,#3]{n(\mbox{#1}\cap\mbox{#2}\cap\mbox{#3})}
+\def\@@Cap{\@ifnextchar(\@CCap\@@CCap}
+\def\@CCap(#1,#2){n(\mbox{#1}\cap\mbox{#2})}
+\def\@@CCap#1{n(\mbox{#1})}
+
+\def\Cup{\@ifnextchar[\@Cup\@@Cup}
+\def\@Cup[#1,#2,#3]{n(\mbox{#1}\cup\mbox{#2}\cup\mbox{#3})}
+\def\@@Cup{\@ifnextchar(\@CCup\@@CCup}
+\def\@CCup(#1,#2){n(\mbox{#1}\cup\mbox{#2})}
+\def\@@CCup#1{n(\mbox{#1})}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%abs$B@dBPCM(B
+%abs$B$OBP$K$J$C$F64$`(B
+%$B$3$NJRB&HG$,(Blabs,rabs
+%%%%%%%%%%%%%%%%%%%%%%%
+\newlength{\spaceo}
+\newlength{\spacei}
+\newlength{\spacej}
+\newlength{\spaceg}
+\newlength{\spaceh}
+\spaceh=-1pt % n$B>h2<$2J,(B
+\spaceo=2pt % $B@dBPCM30$N6u$-(B
+\spacei=2.5pt % $B@dBPCMFb$N6u$-(B
+\spacej=1pt % $B@dBPCM>e?-$P$7(B
+\spaceg=1pt % $B@dBPCM2<?-$P$7(B
+\newcommand{\abs}[1]{%
+  \settoheight{\dimen2}{$\mathstrut #1$}%
+  \advance\dimen2 \spaceh% $B@dBPCM1&2#2x?M(B
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \advance\dimen0 \spacej% $B@dBPCM>e$N$O$_$@$7(B
+  \settodepth{\dimen1}{$#1$}%
+  \advance\dimen1 \spaceg% $B@dBPCM2<$N$O$_$@$7(B
+  \hspace{\spaceo}\hbox{\vrule height\dimen0 depth\dimen1 %
+  \hspace{\spacei}\hbox{$#1$}\hspace{\spacei}%
+  \vrule height\dimen0 depth\dimen1}\hspace{\spaceo}%
+\hbox{\vrule width0pt height\dimen2}}
+
+%
+%$B:8$@$1@dBPCM(B
+%
+\def\labs{%
+\@ifnextchar<{\@labs}{\@@labs}}
+\def\@labs<#1,#2>#3{%
+  \hspace{\spaceo}\hbox{\vrule width0.4pt height#1 pt depth#2 pt}
+  \hspace{\spacei}\hbox{$#3$}\hspace{\spaceo}}
+\def\@@labs#1{%
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \advance\dimen0 \spacej% $B@dBPCM>e$N$O$_$@$7(B
+  \settodepth{\dimen1}{$#1$}%
+  \advance\dimen1 \spaceg% $B@dBPCM2<$N$O$_$@$7(B
+  \hspace{\spaceo}\hbox{\vrule height\dimen0 depth\dimen1 %
+  \hspace{\spacei}\hbox{$#1$}}\hspace{\spaceo}}
+%
+%$B1&$@$1@dBPCM(B
+%
+\def\rabs{%
+\@ifnextchar<{\@rabs}{\@@rabs}}
+\def\@rabs<#1,#2>#3{%
+  \setbox0=\hbox{$#3$}%
+  \dimen@=#1 pt \advance\dimen@ \spaceh \ht0=\dimen@
+  \hbox{$#3$}\hspace{\spacei}%
+\hbox{\vrule height#1 pt depth#2 pt}\hspace{\spaceo}%
+\hbox{\vrule width0pt height\ht0 depth#2 pt}}
+
+\def\@@rabs#1{%
+  \settoheight{\dimen2}{$\mathstrut #1$}%
+  \advance\dimen2 \spaceh% $B@dBPCM1&2#2x?M(B
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \advance\dimen0 \spacej% $B@dBPCM>e$N$O$_$@$7(B
+  \settodepth{\dimen1}{$#1$}%
+  \advance\dimen1 \spaceg% $B@dBPCM2<$N$O$_$@$7(B
+  \hbox{$#1$}\hspace{\spacei}%
+\hbox{\vrule height\dimen0 depth\dimen1}\hspace{\spaceo}%
+\hbox{\vrule width0pt height\dimen2}}
+
+\def\vabs#1{%
+  \settoheight{\dimen2}{$\mathstrut #1$}%
+  \advance\dimen2 \spaceh% $B@dBPCM1&2#2x?M(B
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \advance\dimen0 -2pt% $B@dBPCM>e$N$O$_$@$7(B
+  \settodepth{\dimen1}{$#1$}%
+  \advance\dimen1 0pt% $B@dBPCM2<$N$O$_$@$7(B\spaceg
+  \hspace{\spaceo}\hbox{\vrule height\dimen0 depth\dimen1 %
+  \hspace{\spacei}\hbox{$#1$}\hspace{\spacei}%
+  \vrule height\dimen0 depth\dimen1}\hspace{\spaceo}%
+\hbox{\vrule width0pt height\dimen2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%left(,right)$B$G3g8L$r$D$1$k$H!$1&$K(B2$B>h$J$I$,$D$$$?(B
+%$B$H$-$K9b$a$N0LCV$K$J$k$N$G!$$=$l$r4vJ,2<$2$?(B
+%$B3g8L$r$D$/$k!%(B
+%$BBP$K$J$C$F$$$k$N$,(B\G$B!J%+%.3g8L!$%,%&%9$N5-9f!K(B
+%\B$B!JCf3g8L!K(B,\p$B!JIaDL$N3g8L!K(B
+%$B$3$l$NJRB&HG$,(BlG,lB,lp,rG,rB,rp
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newlength{\spacego}
+\newlength{\spacegi}
+\newlength{\spacegh}
+\spacegh=-0.8pt % n$B>h2<$2J,(B
+\spacego=0.8pt % $B3g8L30$N6u$-(B
+\spacegi=1pt % $B3g8LFb$N6u$-(B
+\newcommand{\G}[1]{%
+  \settoheight{\dimen2}{$\mathstrut #1$}%
+  \advance\dimen2 \spacegh% $B3g8L1&2#2x?M(B
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \settodepth{\dimen1}{$#1$}%
+  \hspace{\spacego}\hbox{$\left[%
+  \hspace{\spacegi}\hbox{$#1$}\hspace{\spacegi}\right]$%
+  }\hspace{\spacego}%
+\hbox{\vrule width0pt height\dimen2}}
+
+\newlength{\spacebo}
+\newlength{\spacebi}
+\newlength{\spacebh}
+\spacebh=-0.8pt % n$B>h2<$2J,(B
+\spacebo=0.8pt % $B3g8L30$N6u$-(B
+\spacebi=1pt % $B3g8LFb$N6u$-(B
+\newcommand{\B}[1]{%
+  \settoheight{\dimen2}{$\mathstrut #1$}%
+  \advance\dimen2 \spacebh% $B3g8L1&2#2x?M(B
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \settodepth{\dimen1}{$#1$}%
+  \hspace{\spacebo}\hbox{$\left\{%
+  \hspace{\spacebi}\hbox{$#1$}\hspace{\spacebi}\right\}$%
+  }\hspace{\spacebo}%
+\hbox{\vrule width0pt height\dimen2}}
+
+\newlength{\spacepo}
+\newlength{\spacepi}
+\newlength{\spaceph}
+\spaceph=-0.8pt % n$B>h2<$2J,(B
+\spacepo=0.8pt % $B3g8L30$N6u$-(B
+\spacepi=1pt % $B3g8LFb$N6u$-(B
+\newcommand{\p}[1]{%
+  \settoheight{\dimen2}{$\mathstrut #1$}%
+  \advance\dimen2 \spaceph% $B3g8L1&2#2x?M(B
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \settodepth{\dimen1}{$#1$}%
+  \hspace{\spacepo}\hbox{$\left(%
+  \hspace{\spacepi}\hbox{$#1$}\hspace{\spacepi}\right)$%
+  }\hspace{\spacepo}%
+\hbox{\vrule width0pt height\dimen2}}
+
+
+
+\newlength{\spacerp}
+\spacerp=3pt
+\newdimen\uma \uma=0pt
+\newdimen\sika \sika=0pt
+\newdimen\umaa \umaa=0pt
+\newdimen\sikaa \sikaa=0pt
+\newdimen\umab \umab=0pt
+\newdimen\sikab \sikab=0pt
+
+\def\lp{%
+\@ifnextchar<{\@lp}{\@@lp}}
+\def\@lp<#1,#2>#3{%
+  \setbox0=\hbox{$#3$}%
+  \settoheight{\dimen0}{$\mathstrut #3$}%
+  \settodepth{\dimen1}{$\mathstrut #3$}%
+\global\uma=#1 pt \global\sika=#2 pt
+\ht0=#1 pt \dp0=#2 pt
+\hbox{\vrule width0pt height\dimen0 depth\dimen1}
+  \hspace{\spacepo}\hbox{$\left(%
+  \hspace{\spacepi}\box0\hspace{\spacepi}\right.$%
+  }\hspace{\spacepo}}
+
+\def\@@lp#1{%
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \settodepth{\dimen1}{$\mathstrut #1$}%
+\global\uma=\dimen0 \global\sika=\dimen1
+  \hspace{\spacepo}\hbox{$\left(%
+  \hspace{\spacepi}\hbox{$#1$}\hspace{\spacepi}\right.$}\hspace{\spacepo}}
+
+\def\rp{%
+\@ifnextchar<{\@rp}{\@@rp}}
+\def\@rp<#1,#2>#3{%
+  \setbox0=\hbox{$#3$}%
+  \settoheight{\dimen0}{$\mathstrut #3$}%
+  \settodepth{\dimen1}{$\mathstrut #3$}%
+\hbox{\vrule width0pt height\dimen0 depth\dimen1}
+\hbox{\vrule width0pt height\uma depth\sika}
+  \ht0=#1 pt
+  \dimen2=#1 pt \advance\dimen2\spacerp
+  \dp0=#2 pt
+ \hbox{$\left.%
+\box0\hspace{\spacepi}\right)$%
+  }\hspace{\spacepo}%
+\hbox{\vrule width0pt height\dimen2 depth#2 pt}}
+
+\def\@@rp#1{%
+  \settoheight{\dimen2}{$\mathstrut #1$}%
+  \advance\dimen2 \spaceph% $B3g8L1&2#2x?M(B
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \settodepth{\dimen1}{$#1$}%
+  \hspace{\spacepo}\hbox{$\left.%
+  \hspace{\spacepi}\hbox{\hbox{\vrule width0pt height\uma depth\sika}%
+  $#1$}\hspace{\spacepi}\right)$%
+  }\hspace{\spacepo}%
+\hbox{\vrule width0pt height\dimen2 depth\dimen1}}
+
+
+
+\def\lB{%
+\@ifnextchar<{\@lB}{\@@lB}}
+\def\@lB<#1,#2>#3{%
+  \setbox0=\hbox{$#3$}%
+  \settoheight{\dimen0}{$\mathstrut #3$}%
+  \settodepth{\dimen1}{$\mathstrut #3$}%
+\global\umaa=#1 pt \global\sikaa=#2 pt
+\ht0=#1 pt \dp0=#2 pt
+\hbox{\vrule width0pt height\dimen0 depth\dimen1}
+  \hspace{\spacepo}\hbox{$\left\{%
+  \hspace{\spacepi}\box0\hspace{\spacepi}\right.$%
+  }\hspace{\spacepo}}
+
+
+\def\@@lB#1{%
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \settodepth{\dimen1}{$\mathstrut #1$}%
+\global\umaa=\dimen0 \global\sikaa=\dimen1
+  \hspace{\spacepo}\hbox{$\left\{%
+  \hspace{\spacepi}\hbox{$#1$}\hspace{\spacepi}\right.$}\hspace{\spacepo}}
+
+
+\def\rB{%
+\@ifnextchar<{\@rB}{\@@rB}}
+\def\@rB<#1,#2>#3{%
+  \setbox0=\hbox{$#3$}%
+  \settoheight{\dimen0}{$\mathstrut #3$}%
+  \settodepth{\dimen1}{$\mathstrut #3$}%
+\hbox{\vrule width0pt height\dimen0 depth\dimen1}
+\hbox{\vrule width0pt height\umaa depth\sikaa}
+  \ht0=#1 pt
+  \dimen2=#1 pt \advance\dimen2\spacerp
+  \dp0=#2 pt
+ \hbox{$\left.%
+\box0\hspace{\spacepi}\right\}$%
+  }\hspace{\spacepo}%
+\hbox{\vrule width0pt height\dimen2 depth#2 pt}}
+
+
+\def\@@rB#1{%
+  \settoheight{\dimen2}{$\mathstrut #1$}%
+  \advance\dimen2 \spaceph% $B3g8L1&2#2x?M(B
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \settodepth{\dimen1}{$#1$}%
+  \hspace{\spacepo}\hbox{$\left.%
+  \hspace{\spacepi}\hbox{\hbox{\vrule width0pt height\umaa depth\sikaa}%
+  $#1$}\hspace{\spacepi}\right\}$%
+  }\hspace{\spacepo}%
+\hbox{\vrule width0pt height\dimen2 depth\dimen1}}
+
+\def\lG{%
+\@ifnextchar<{\@lG}{\@@lG}}
+\def\@lG<#1,#2>#3{%
+  \setbox0=\hbox{$#3$}%
+  \settoheight{\dimen0}{$\mathstrut #3$}%
+  \settodepth{\dimen1}{$\mathstrut #3$}%
+\global\umab=#1 pt \global\sikab=#2 pt
+\ht0=#1 pt \dp0=#2 pt
+\hbox{\vrule width0pt height\dimen0 depth\dimen1}
+  \hspace{\spacepo}\hbox{$\left[%
+  \hspace{\spacepi}\box0\hspace{\spacepi}\right.$%
+  }\hspace{\spacepo}}
+
+\def\@@lG#1{%
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \settodepth{\dimen1}{$\mathstrut #1$}%
+\global\umab=\dimen0 \global\sikab=\dimen1
+  \hspace{\spacepo}\hbox{$\left[%
+  \hspace{\spacepi}\hbox{$#1$}\hspace{\spacepi}\right.$}\hspace{\spacepo}}
+
+\def\rG{%
+\@ifnextchar<{\@rG}{\@@rG}}
+\def\@rG<#1,#2>#3{%
+  \setbox0=\hbox{$#3$}%
+  \settoheight{\dimen0}{$\mathstrut #3$}%
+  \settodepth{\dimen1}{$\mathstrut #3$}%
+\hbox{\vrule width0pt height\dimen0 depth\dimen1}
+\hbox{\vrule width0pt height\umab depth\sikab}
+  \ht0=#1 pt
+  \dimen2=#1 pt \advance\dimen2\spacerp
+  \dp0=#2 pt
+ \hbox{$\left.%
+\box0\hspace{\spacepi}\right]$%
+  }\hspace{\spacepo}%
+\hbox{\vrule width0pt height\dimen2 depth#2 pt}}
+
+\def\@@rG#1{%
+  \settoheight{\dimen2}{$\mathstrut #1$}%
+  \advance\dimen2 \spaceph% $B3g8L1&2#2x?M(B
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \settodepth{\dimen1}{$#1$}%
+  \hspace{\spacepo}\hbox{$\left.%
+  \hspace{\spacepi}\hbox{\hbox{\vrule width0pt height\umab depth\sikab}%
+  $#1$}\hspace{\spacepi}\right]$%
+  }\hspace{\spacepo}%
+\hbox{\vrule width0pt height\dimen2 depth\dimen1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$BLa$7MQ(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\Modosi#1{%
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \settodepth{\dimen1}{$\mathstrut #1$}%
+\hbox{\vrule width0pt height\dimen0 depth\dimen1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B<0$N>e2<:81&$KM>Gr$r$D$1$k(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newdimen{\sspaceo}
+\newdimen{\sspacej}
+\newdimen{\sspaceg}
+\sspaceo=2pt % $B<030$N6u$-(B
+\sspacej=2pt % $B<0>e$N6u$-(B
+\sspaceg=2pt % $B<02<$N6u$-(B
+
+\def\F{%
+\@ifnextchar<{\@F}{\@F<2,2>}}
+\def\@F<#1,#2>#3{%
+  \settoheight{\dimen0}{$\mathstrut #3$}%
+  \advance\dimen0 #1pt% $B<0>e$N$O$_$@$7(B
+  \settodepth{\dimen1}{$\mathstrut #3$}%
+  \advance\dimen1 #2pt% $B<02<$N$O$_$@$7(B
+  \hspace{\sspaceo}\hbox{\vrule width0pt height\dimen0 depth\dimen1}%
+  \hbox{$#3$}\hspace{\sspaceo}}
+
+\newcommand{\FM}[1]{%
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \advance\dimen0 \sspacej% $B<0>e$N$O$_$@$7(B
+  \settodepth{\dimen1}{$#1$}%
+  \advance\dimen1 \sspaceg% $B<02<$N$O$_$@$7(B
+  \hspace{\sspaceo}\hbox{\vrule width0.5pt height\dimen0 depth\dimen1}%
+  \hbox{$#1$}\hspace{\sspaceo}}
+\newcommand{\FF}[1]{%
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \settodepth{\dimen1}{$#1$}%
+  \advance\dimen1 \sspaceg% $B<02<$N$O$_$@$7(B
+  \hspace{\sspaceo}\hbox{\vrule width0pt height\dimen0 depth\dimen1}%
+  \hbox{$#1$}\hspace{\sspaceo}}
+\newcommand{\FL}[1]{%
+  \settoheight{\dimen0}{$\mathstrut #1$}%
+  \advance\dimen0 \sspacej% $B<0>e$N$O$_$@$7(B
+  \settodepth{\dimen1}{$#1$}%
+  \hspace{\sspaceo}\hbox{\vrule width0pt height\dimen0 depth\dimen1}%
+  \hbox{$#1$}\hspace{\sspaceo}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Verbatim
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\def\verbatim@font{\normalfont}
+%\def\yy{\mbox{\ooalign{Y\cr=}}}
+\def\yy{\mbox{\kigouc{\char"54}}}
+\def\aa{\mbox{\kigouc{\char"72}}}
+\def\kk{\mbox{\kigouc{\char"71}}}
+\def\dd{\mbox{\kigouc{\char"53}}}
+\def\bl{\{}
+\def\br{\}}
+\def\fa{\mbox{\kigouc{\char"75}}}
+\def\fb{\mbox{\kigouc{\char"77}}}
+\def\Kl{\mbox{\kigouc{\char"57}}}
+\def\Kr{\mbox{\kigouc{\char"58}}}
+\def\hh{\mbox{\kigouc{\char"5E}}}
+\def\uu{\mbox{\kigouc{\char"65}}}
+%%%
+\def\Verbatim{%
+\vspace{-1.5\baselineskip}
+   \trivlist\item\relax
+   \leftskip\@totalleftmargin \rightskip\z@skip
+   \parindent\z@              \parfillskip\@flushglue
+   \let\do\@makeother \dospecials
+   \catcode`\^^I=12
+   \obeylines \verbatim@font
+   \settowidth\dimen@{M}%
+   \edef\@verb@dblcharwd{\the\dimen@}%
+   \def\@verb@space{\ }%
+   \def\@verb@backslash{\yy}%
+   \def\@verb@bgroup{\bl}%
+   \def\@verb@egroup{\br}%
+   \def\@verb@_{\uu}%
+   \def\@verb@less{\textless}%       2006-02-02 $BDI2C(B
+   \def\@verb@greater{\textgreater}% 2006-02-02 $BDI2C(B
+   %%% \textless$B!$(B\textgreater $B$O!H%F%-%9%HMQITEy9f!I$N!J(BLaTeX2e $B$N!K%3%^%s%I(B
+   \def\@verb@vline{$|$}%
+   \@verb@loop}
+\begingroup
+\catcode`\^^M=\active%
+\catcode`\{=12 \catcode`\}=12 \catcode`\[=1%
+\catcode`\]=2  \catcode`\|=0  \catcode`\\=12%
+|gdef|@verb@loop#1^^M[%
+   |@verb@checkend#1\end{Verbatim}|@nil%
+   |ifx|@verb@left|@empty%
+      |@verb@put@line%
+      |def|@tempa[|@verb@loop]%
+   |else%
+      |ifx|@verb@currline|@empty|else |@verb@put@line |fi%
+      |def|@tempa[|end[Verbatim]]%
+   |fi%
+   |@tempa]%
+|gdef|@verb@checkend#1\end{Verbatim}#2|@nil[%
+   |def|@verb@currline[#1]%
+   |def|@verb@left[#2]]%
+|endgroup%
+\newcount\@verb@currpos
+\def\@verb@put@line{%
+   \noindent \@verb@currpos\z@
+   \expandafter\@verb@put@line@loop\@verb@currline\@nnil
+   \par}
+\def\@verb@put@line@loop#1{%
+   \ifx#1\@nnil\else
+      \count@=`#1\relax
+      \ifnum `\\=\count@        {\@verb@backslash}%
+      \else\ifnum `\ =\count@   {\@verb@space}%
+      \else\ifnum `\{=\count@   {\@verb@bgroup}%
+      \else\ifnum `\}=\count@   {\@verb@egroup}%
+      \else\ifnum `\|=\count@   {\@verb@vline}%
+      \else\ifnum `\_=\count@   {\@verb@_}%
+      \else\ifnum `\<=\count@   {\@verb@less}%    2006-02-02 $BDI2C(B
+      \else\ifnum `\>=\count@   {\@verb@greater}% 2006-02-02 $BDI2C(B
+      \else\ifnum \count@<\@cclvi {#1}%
+      \else
+         \hbox to\@verb@dblcharwd{\hskip\z@#1\hss}%
+         \advance\@verb@currpos\@ne
+      \fi\fi\fi\fi\fi\fi\fi\fi\fi % 2006-02-02: \fi $B$r(B 2 $B8DDI2C(B
+      \advance\@verb@currpos\@ne
+      \expandafter\@verb@put@line@loop
+   \fi}
+
+\def\verb{%
+   \relax \ifmmode \hbox \else \leavevmode\null \fi
+   \bgroup
+      \verb@eol@error \let\do\@makeother \dospecials
+      \verbatim@font\@noligs
+      \settowidth\dimen@{M}%
+      \edef\@verb@dblcharwd{\the\dimen@}%
+      \def\@verb@space{\texttt{\char32}}%
+      \def\@verb@backslash{\yy}%
+      \def\@verb@bgroup{\bl}%
+      \def\@verb@egroup{\br}%
+      \def\@verb@_{\uu}%
+      \def\@verb@less{\textless}%
+      \def\@verb@greater{\textgreater}%
+      \def\@verb@vline{$|$}%
+      \@ifstar\@sverb\@verb}
+\def\@verb{%
+   \def\@verb@space{\ }%
+   \frenchspacing
+   \@sverb}
+\def\@sverb#1{%
+   \@tempcnta=`#1\relax
+   \catcode\@tempcnta\active
+   \lccode`\~=\@tempcnta
+   \gdef\verb@balance@group{\verb@egroup
+      \@latex@error{\noexpand\verb illegal in command argument}\@ehc}%
+   \aftergroup\verb@balance@group
+   \lowercase{\let~\verb@egroup}%
+   \let\@verb@put@line@loop\@textverb@loop
+   \@verb@put@line@loop}%
+\let\@verb@put@line@loop@@\@verb@put@line@loop
+\def\@textverb@loop#1{%
+   \edef\@tempa{`\string#1}\@tempcntb=\@tempa\relax
+   \ifnum\@tempcnta=\@tempcntb\else \expandafter\@verb@put@line@loop@@ \fi
+   #1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%accent
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\DeclareTextAccent{\"}{OT1}{"C4}
+\DeclareTextAccent{\'}{OT1}{"B6}
+\DeclareTextAccent{\.}{OT1}{"5F}
+\DeclareTextAccent{\~}{OT1}{"7E}
+\DeclareTextAccent{\=}{OT1}{"B9}
+\DeclareTextAccent{\^}{OT1}{"5E}
+\DeclareTextAccent{\`}{OT1}{"B5}
+\DeclareTextAccent{\c}{OT1}{"BB}
+\DeclareTextAccent{\a}{OT1}{"BA}
+\DeclareTextAccent{\A}{OT1}{"BA}
+\DeclareTextAccent{\u}{OT1}{"B8}
+\DeclareTextAccent{\v}{OT1}{"B7}
+\DeclareTextSymbol{\ss}{OT1}{"BC}
+\DeclareTextSymbol{\o}{OT1}{"BF}
+\DeclareTextSymbol{\O}{OT1}{"C2}
+\DeclareTextSymbol{\ae}{OT1}{"BD}
+\DeclareTextSymbol{\AE}{OT1}{"C0}
+\DeclareTextSymbol{\oe}{OT1}{"BE}
+\DeclareTextSymbol{\OE}{OT1}{"C1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%itemize
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\itemize{%
+  \ifnum \@itemdepth >\thr@@\@toodeep\else
+    \advance\@itemdepth\@ne
+    \edef\@itemitem{labelitem\romannumeral\the\@itemdepth}%
+    \expandafter
+    \list
+      \csname\@itemitem\endcsname
+{\def\makelabel##1{\hss\llap{\raise1pt \hbox to 0mm{$\ceosy{\char"B2}$}\;\,##1}}}%
+  \fi}
+\let\enditemize =\endlist
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%overbrace$B<+A03g8L(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\overbrace{\@ifnextchar<{\@overbrace}{\@@overbrace}}
+\def\@overbrace<#1,#2>#3{%
+\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern0\p@}%
+{\hfil\rotatebox{-90}{$\left\{{\vrule width0pt height#2pt depth#1pt}\right.$}\hfil}\crcr\noalign{\kern-1.5\p@\nointerlineskip}%
+      $\hfil\displaystyle{#3}\hfil$\crcr}}}\limits}
+\def\@@overbrace#1{%
+\settowidth{\dimen0}{$#1$}
+\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern0\p@}%
+{\hfil\rotatebox{-90}{$\left\{{\vrule width0pt height0.45\dimen0 depth0.45\dimen0}\right.$}\hfil}\crcr\noalign{\kern-1.5\p@\nointerlineskip}%
+      $\hfil\displaystyle{#1}\hfil$\crcr}}}\limits}
+
+\def\overbracket{\@ifnextchar<{\@overbracket}{\@@overbracket}}
+\def\@overbracket<#1,#2>#3{%
+\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern0\p@}%
+{\hfil\rotatebox{-90}{$\left[{\vrule width0pt height#2pt depth#1pt}\right.$}\hfil}\crcr\noalign{\kern-1.5\p@\nointerlineskip}%
+      $\hfil\displaystyle{#3}\hfil$\crcr}}}\limits}
+\def\@@overbracket#1{%
+\settowidth{\dimen0}{$#1$}
+\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern0\p@}%
+{\hfil\rotatebox{-90}{$\left[{\vrule width0pt height0.45\dimen0 depth0.45\dimen0}\right.$}\hfil}\crcr\noalign{\kern-1.5\p@\nointerlineskip}%
+      $\hfil\displaystyle{#1}\hfil$\crcr}}}\limits}
+
+\def\overparen{\@ifnextchar<{\@overparen}{\@@overparen}}
+\def\@overparen<#1,#2>#3{%
+\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern0\p@}%
+{\hfil\rotatebox{-90}{$\left({\vrule width0pt height#2pt depth#1pt}\right.$}\hfil}\crcr\noalign{\kern-1.5\p@\nointerlineskip}%
+      $\hfil\displaystyle{#3}\hfil$\crcr}}}\limits}
+\def\@@overparen#1{%
+\settowidth{\dimen0}{$#1$}
+\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern0\p@}%
+{\hfil\rotatebox{-90}{$\left({\vrule width0pt height0.45\dimen0 depth0.45\dimen0}\right.$}\hfil}\crcr\noalign{\kern-1.5\p@\nointerlineskip}%
+      $\hfil\displaystyle{#1}\hfil$\crcr}}}\limits}
+
+\def\underbrace{\@ifnextchar<{\@underbrace}{\@@underbrace}}
+\def\@underbrace<#1,#2>#3{%
+\mathop{\vtop{\m@th\ialign{##\crcr
+   $\hfil\displaystyle{#3}\hfil$\crcr
+   \noalign{\kern-2\p@\nointerlineskip}%
+{\hfil\rotatebox{90}{$\left\{{\vrule width0pt height#2pt depth#1pt}\right.$}\hfil}\crcr\noalign{\kern-1.5\p@}}}}\limits}
+
+\def\@@underbrace#1{%
+\settowidth{\dimen0}{$#1$}
+\mathop{\vtop{\m@th\ialign{##\crcr
+   $\hfil\displaystyle{#1}\hfil$\crcr
+   \noalign{\kern-2\p@\nointerlineskip}%
+\rotatebox{90}{$\left\{{\vrule width0pt height0.45\dimen0 depth0.45\dimen0}\right.$}\crcr\noalign{\kern-1.5\p@}}}}\limits}
+
+\def\underbracket{\@ifnextchar<{\@underbracket}{\@@underbracket}}
+\def\@underbracket<#1,#2>#3{%
+\mathop{\vtop{\m@th\ialign{##\crcr
+   $\hfil\displaystyle{#3}\hfil$\crcr
+   \noalign{\kern-2\p@\nointerlineskip}%
+{\hfil\rotatebox{90}{$\left[{\vrule width0pt height#1pt depth#2pt}\right.$}\hfil}\crcr\noalign{\kern0.5\p@}}}}\limits}
+
+\def\@@underbracket#1{%
+\settowidth{\dimen0}{$#1$}
+\mathop{\vtop{\m@th\ialign{##\crcr
+   $\hfil\displaystyle{#1}\hfil$\crcr
+   \noalign{\kern-2\p@\nointerlineskip}%
+\rotatebox{90}{$\left[{\vrule width0pt height0.45\dimen0 depth0.45\dimen0}\right.$}\crcr\noalign{\kern0.5\p@}}}}\limits}
+
+
+\def\underparen{\@ifnextchar<{\@underparen}{\@@underparen}}
+\def\@underparen<#1,#2>#3{%
+\mathop{\vtop{\m@th\ialign{##\crcr
+   $\hfil\displaystyle{#3}\hfil$\crcr
+   \noalign{\kern-2\p@\nointerlineskip}%
+{\hfil\rotatebox{90}{$\left({\vrule width0pt height#2pt depth#1pt}\right.$}\hfil}\crcr\noalign{\kern0.5\p@}}}}\limits}
+
+\def\@@underparen#1{%
+\settowidth{\dimen0}{$#1$}
+\mathop{\vtop{\m@th\ialign{##\crcr
+   $\hfil\displaystyle{#1}\hfil$\crcr
+   \noalign{\kern-2\p@\nointerlineskip}%
+\rotatebox{90}{$\left({\vrule width0pt height0.45\dimen0 depth0.45\dimen0}\right.$}\crcr\noalign{\kern0.5\p@}}}}\limits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B$=$NB>%3%^%s%I(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2$B;z$"$1$F$f$($K(B
+\def\Y{\hspace{2\zw}\yueni\quad}
+%$BEz$($rB@;z$K$7$FE@!9$r$D$1$F$5$i$K%\!<%k%I$NEz$($r$D$1$k(B
+\def\kotae#1{\bd{#1}\sdots\sdots(\bd{答})}
+\def\kotaee#1{\bd{#1}\sdots\sdots(\bd{答え})}
+%$BE@!9$HEz$($@$1(B
+\def\KOTAE{\sdots\sdots(\bd{答})}
+\def\KOTAEE{\sdots\sdots(\bd{答え})}
+
+%$B6u$-%j!<%@!<$H!{?t;z(B
+\def\hikidashi{\quad\sdots\sdots\sdots\sdots}
+
+%$B;03Q7A(B
+\def\san#1{\sankaku\mathrm{#1}}
+\def\Sankaku#1{\ceoi{\char"C7}\mbox{#1}}
+
+%$B%$%s%G%s%H$,$+$+$C$?$H$3$m$G:8$KLa$7MQ(B
+\def\h{\hspace{-1\zw}}
+\def\hh{\hspace{-2\zw}}
+
+%$BOH0O$_%;%s%?!<;n83MQ(B
+\newdimen\@fboxrule
+\@fboxrule=\fboxrule
+\def\Bc#1{\,\aki(8,3)\fboxrule=0.8pt\fboxsep=0pt\fbox{{%
+\hbox to 3.3\zw{\hss\aki(8,3)\scalebox{0.95}{\textgt{#1}}\hss}}}\,}
+\def\Bb#1{\,\aki(8,3)\fboxrule=0.8pt\fboxsep=0pt\fbox{{%
+\hbox to 2.2\zw{\hss\aki(8,3)\scalebox{0.95}{\textgt{#1}}\hss}}}\,}
+\def\Ba#1{\,\aki(8,3)\fboxrule=0.8pt\fboxsep=0pt\fbox{{%
+\hbox to 1.5\zw{\hss\aki(8,3)\scalebox{0.95}{\textgt{#1}}\hss}}}\,}
+\fboxrule=\@fboxrule
+\def\Bd#1#2{\,\aki(8,3)\fboxrule=0.8pt\fboxsep=0pt\fbox{{%
+\hbox to #1{\hss\aki(8,3)\scalebox{0.95}{\textgt{#2}}\hss}}}\,}
+
+\def\Be#1#2{\,\aki(8,3)\fboxrule=0.8pt\fboxsep=0pt\fbox{{%
+\hbox to #1{\hss\aki(8,3)\scalebox{0.95}{\text{#2}}\hss}}}\,}
+
+
+\newlength\aboxwidth \aboxwidth=2.7\zw
+\def\abox{%
+  {\,\raisebox{1.3pt}{\fboxsep=0pt\fbox{\vphantom{hg}\hskip\aboxwidth}}}\,}
+
+%$B=PBj9;1&4s$;%]%$%s%HMn$H$7(B
+\def\syutten{%
+  \@ifnextchar[%
+  {\@syutten}{\@@syutten}}
+
+%[$BG/EY$r869F$K$OF~$l$k$,0u:~$7$J$$(B,$BBg3XL>(B]
+\def\@syutten[#1,#2]{{%
+  \unskip\nobreak\hfil\penalty0%
+  \hskip0\zw\hbox{}\nobreak\hfil
+ \scalebox{0.9}{(#2)}%
+  \parfillskip=0em\finalhyphendemerits=0\@@par}}
+
+\def\@@syutten{%
+  \@ifnextchar(%
+  {\@asyutten}{\@bsyutten}}
+
+%($BG/EY(B,$BBg3XL>(B)
+\def\@asyutten(#1,#2){{%
+  \unskip\nobreak\hfil\penalty0%
+  \hskip0\zw\hbox{}\nobreak\hfil
+ \scalebox{0.9}{(#1\hskip1\zw{#2})}%
+  \parfillskip=0em\finalhyphendemerits=0\@@par}}
+
+%{$BBg3XL>$@$1(B}
+\def\@bsyutten#1{{%
+  \unskip\nobreak\hfil\penalty0%
+  \hskip0\zw\hbox{}\nobreak\hfil
+ \scalebox{0.9}{(#1)}%
+  \parfillskip=0em\finalhyphendemerits=0\@@par}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B>e$K@~$r$D$1$k!$%*!<%P!<%i%$%s(B
+\def\BAR#1{$\overline{\,{\scalebox{1.2}{\vphantom{h}}}\mbox{#1}\,}$}
+\def\Bar#1{$\overline{\,{\scalebox{1.2}{\vphantom{h}}}{#1}\,}$}
+
+%$B?t<0Fb$N%P!<(B
+\def\BAA#1{\overline{\,{\scalebox{1.2}{\vphantom{h}}}\mbox{#1}\,}}
+\def\Baa#1{\overline{\,{\scalebox{1.2}{\vphantom{h}}}{#1}\,}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%renewenvironment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewenvironment{quote}%
+  {\alist{}{\rightmargin\z@
+        \topsep=0pt
+      \partopsep=0pt
+      \itemsep=0pt
+      \labelwidth=1\zw
+      \labelsep=0\zw}\item\relax}{\endlist}
+  
+%% enumerate $B4D6-$r:FDj5A(B
+\renewenvironment{enumerate}
+  {\ifnum \@enumdepth >\thr@@\@toodeep\else
+   \advance\@enumdepth\@ne
+   \edef\@enumctr{enum\romannumeral\the\@enumdepth}%
+   \list{\csname label\@enumctr\endcsname}{%
+      \iftdir
+         \ifnum \@listdepth=\@ne \topsep0pt\normalbaselineskip
+           \else\topsep\z@\fi
+         % $B$3$3$K$"$C$?Dj5A$r(B...
+         \labelwidth1\zw \labelsep.3\zw
+         \ifnum \@enumdepth=\@ne \leftmargin1\zw\relax
+           \else\leftmargin\leftskip\fi
+         \advance\leftmargin 1\zw
+      \fi
+         \parskip\z@ \itemsep\z@ \parsep\z@% $B$3$A$i$K0\F0(B
+         \usecounter{\@enumctr}%
+         \def\makelabel##1{\hss\llap{##1}}}%
+   \fi}{\endlist}
+
+%$B0J2<(Bamsmath$B$N9TNsItJ,$r<h$j9~$_(B
+\long\def\new@ifnextchar#1#2#3{%
+  \let\reserved@d= #1%
+  \def\reserved@a{#2}\def\reserved@b{#3}%
+  \futurelet\@let@token\new@ifnch
+}
+\def\new@ifnch{%
+  \ifx\@let@token\reserved@d \let\reserved@b\reserved@a \fi
+  \reserved@b
+}
+
+
+\def\matrix{\env@matrix}
+\def\endmatrix{\endarray \hskip -\arraycolsep}
+
+\def\env@matrix{\hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{*\c@MaxMatrixCols c}}
+  
+\newcount\c@MaxMatrixCols \c@MaxMatrixCols=10
+
+\def\pmatrix{\left(\env@matrix}
+\def\endpmatrix{\endmatrix\right)}
+
+\def\bmatrix{\left[\env@matrix}
+\def\endbmatrix{\endmatrix\right]}
+
+\def\Bmatrix{\left\lbrace\env@matrix}
+\def\endBmatrix{\endmatrix\right\rbrace}
+
+\def\vmatrix{\left|\env@matrix}
+\def\endvmatrix{\endmatrix\right|}
+
+\def\Vmatrix{\left\Vert\env@matrix}
+\def\endVmatrix{\endmatrix\right\Vert}
+
+\let\hdots\@ldots
+
+\def\hdotsfor#1{%
+  \ifx[#1\@xp\shdots@for\else\hdots@for\@ne{#1}\fi}
+\newmuskip\dotsspace@
+\def\shdots@for#1]{\hdots@for{#1}}
+\def\hdots@for#1#2{\multicolumn{#2}c%
+  {\m@th\dotsspace@1.5mu\mkern-#1\dotsspace@
+   \xleaders\hbox{$\m@th\mkern#1\dotsspace@.\mkern#1\dotsspace@$}%
+           \hfill
+   \mkern-#1\dotsspace@}%
+   }
+
+\def\cases{\env@cases}
+\def\endcases{\endarray\right.}
+
+\def\env@cases{%
+  \let\@ifnextchar\new@ifnextchar
+  \left\lbrace
+  \def\arraystretch{1.2}%
+  \array{@{}l@{\quad}l@{}}%
+}
+
+\DeclareRobustCommand{\text}{%
+  \ifmmode\expandafter\text@\else\expandafter\mbox\fi}
+\let\nfss@text\text
+\def\text@#1{{\mathchoice
+  {\textdef@\displaystyle\f@size{#1}}%
+  {\textdef@\textstyle\f@size{\firstchoice@false #1}}%
+  {\textdef@\textstyle\sf@size{\firstchoice@false #1}}%
+  {\textdef@\textstyle \ssf@size{\firstchoice@false #1}}%
+  \check@mathfonts
+  }%
+}
+\def\textdef@#1#2#3{\hbox{{%
+                    \everymath{#1}%
+                    \let\f@size#2\selectfont
+                    #3}}}
+\newif\iffirstchoice@
+\firstchoice@true
+\def\stepcounter#1{%
+  \iffirstchoice@
+     \addtocounter{#1}\@ne
+     \begingroup \let\@elt\@stpelt \csname cl@#1\endcsname \endgroup
+  \fi
+}
+\def\addtocounter#1#2{%
+  \iffirstchoice@
+  \@ifundefined {c@#1}{\@nocounterr {#1}}%
+    {\global \advance \csname c@#1\endcsname #2\relax}%
+  \fi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B0BED2s$j9~$_(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\ymawarikomi{\@ifnextchar[{\@ymawarikomi}{\@@ymawarikomi}}
+
+\def\@ymawarikomi[#1]#2#3#4#5#6#7{%
+  \par %
+  \begingroup\clubpenalty=150
+  \def\par{\endgraf\endgroup}%
+  \noindent\hangindent-#2\zw\hangafter=-#3%%$B9T$5$2(B
+		\raisebox{-#6}[0pt][0pt]{%
+      \hbox to 0pt{\hskip#7\zw\includegraphics[width=#4]{#5}\hss\\
+\hskip#2\zw\hss \raisebox{-10pt}[0pt][0pt]{\scalebox{0.8}{\textgt{#1}}}\hss}}}
+
+\def\@@ymawarikomi#1#2#3#4#5#6{%
+  \par %
+  \begingroup\clubpenalty=150
+  \def\par{\endgraf\endgroup}%
+  \noindent\hangindent-#1\zw\hangafter=-#2%%$B9T$5$2(B
+		\raisebox{-#5}[0pt][0pt]{%
+      \hbox to 0pt{\hskip#6\zw\includegraphics[width=#3]{#4}\hss}}}
+%
+%ymawarikomi[$B%-%c%W%7%g%s(B]{$B?^J8;z?t(B}{$B2s9~9T?t(B}{$B?^:81&I}(B}{$B?^(B}{$B?^2<$2(B}{$B?^1&4s$;(B}
+%[$B%-%c%W%7%g%s>JN,2D(B]{13}{7}{3.5cm}{$B?^$NL>A0(B}{3.5cm}{1}
+
+\def\hmawarikomi{\@ifnextchar({\@hmawarikomi}{\@@hmawarikomi}}
+
+\def\@hmawarikomi(#1,#2){%
+\par
+  \begingroup\clubpenalty=150
+  \def\par{\endgraf\endgroup}%
+  \noindent
+  \hangindent-#1\zw\hangafter=-#2} 
+
+\def\@@hmawarikomi{\@ifnextchar[{\@amawarikomi}{\@bmawarikomi}}
+\def\@bmawarikomi#1#2#3#4#5{%
+\par
+  \begingroup\clubpenalty=150
+  \def\par{\endgraf\endgroup}%
+  \noindent
+  \hangindent-#1\zw\hangafter=-#2%
+  \raisebox{-#4}[0pt][0pt]{%
+     \hbox to 0pt{\hskip#5\zw{#3}\hss}}}  
+       
+\def\@amawarikomi[#1]#2#3#4#5#6{%
+\par
+  \begingroup\clubpenalty=150
+  \def\par{\endgraf\endgroup}%
+  \noindent
+  \hangindent-#2\zw\hangafter=-#3%
+\raisebox{0pt}[0pt][0pt]{\hbox to 0pt{\hskip#6\zw{\scalebox{0.8}{\textgt{#1}}}%
+\hss}}%
+  \raisebox{-#5}[0pt][0pt]{\hbox to 0pt{\hskip#6\zw{#4}\hss}}}
+
+%$B?^0J30$N2s$j9~$_(B
+%hmawarikomi{$BI=MQJ8;z?t(B}{$B2s9~9T?t(B}{$BI=Dj5A(B}{$BI=2<$2(B}{$B1&0\F0(B}
+%{13}{7}{$BJ*$NDj5A(B}{3.5cm}{12}
+%
+%$B85%W%m%0%i%`(B
+%\def\hmawarikomi#1#2#3#4#5{%
+%\par
+%  \begingroup\clubpenalty=150
+%  \def\par{\endgraf\endgroup}%
+%  \noindent
+%  \hangindent-#1\zw\hangafter=-#2%
+%  \raisebox{-#4}[0pt][0pt]{%
+%     \hbox to 0pt{\hskip#5\zw{#3}\hss}}}
+
+%$B$_$J$b;a2s$j9~$_MQ(B $B0\F0$r$9$k(B
+
+\def\IDO#1#2#3{\smash{
+\raisebox{#1zh}{\makebox[0mm][l]{\hskip#2\zw#3}}}}
+
+%$B>e$G$O$^$:$$$i$7$$!%(B2008-11-28$B$K2<5-$KJQ99(B
+\def\IDO#1#2#3{
+\smash{
+\raisebox{#1zh}{\makebox[0mm][l]
+{\hskip#2\zw
+\parbox{\columnwidth}{#3}}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% $B1&$O$_=P$7(B
+%  \hamidasi{$BK\J8$r=q$/(B}{$BJ8;z?t(B\zw}
+      
+\def\hamidasiaki{2\zw}
+
+\def\hamidasi#1#2{%
+\def\@BUN{\begin{minipage}{#2}
+#1
+\end{minipage}}
+\settoheight{\dimen1}{$\@BUN$}
+\advance\dimen1 -0.5\baselineskip
+\hfill\smash{\raisebox{-\dimen1}[0pt][0pt]{%
+\makebox[0mm][l]{\hskip\hamidasiaki\@BUN}}}}
+
+
+\def\hhamidasi#1#2#3#4{%
+\def\@BUN{\begin{minipage}{#2}
+#1
+\end{minipage}}
+\hfill\smash{\raisebox{-#3\baselineskip}[0pt][0pt]{%
+\makebox[0mm][l]{\hskip\hamidasiaki\hskip#4\@BUN}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B9T4V(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\行間調整{\setlength\abovedisplayskip{3pt plus 1pt minus 2pt} % $BD9$$?t<0$N>e$KF~$l$k6uGr(B
+\setlength\abovedisplayshortskip{\abovedisplayskip} % $BC;$$?t<0$N>e$KF~$l$k6uGr(B
+\setlength\belowdisplayskip{3pt plus 1pt minus 2pt} % $BD9$$?t<0$N2<$KF~$l$k6uGr(B
+\setlength\belowdisplayshortskip{\belowdisplayskip} % $BC;$$?t<0$N2<$KF~$l$k6uGr(B
+\setlength\lineskip{4pt}
+\setlength\normallineskip{2pt}
+\setlength\lineskiplimit{4pt}
+\setlength\normallineskiplimit{1pt}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$BE@(BP_n$B$HN)BN$NJ8;z$KE:$(;z$r$D$1$k(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\Ten#1#2{\text{#1}{_{#2}}}
+\def\Svec#1#2{\overrightarrow{\vphantom{h}\text{#1}{_{#2}}}}
+\def\SSvec#1#2#3#4{\overrightarrow{\vphantom{h}\ceor{#1}_{#2}\ceor{#3}_{#4}}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$BOH$G0O$`%A%'%C%/%\%C%/%9(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\checkbox{\@ifnextchar[\@@checkbox\@checkbox}
+
+\def\@checkbox#1{\vspace{1mm}
+\CHECK \fbox{\parbox[c]{60mm}{
+\begin{flushleft}
+\leftskip3\zw
+\vspace{-2mm}
+\gt #1
+\vspace{-2mm}
+\end{flushleft}
+}
+\vspace{1mm}
+}
+\vspace{1mm}}
+
+\def\@@checkbox[#1]#2{\vspace{1mm}
+\CHECK \fbox{\parbox[c]{60mm}{
+\begin{flushleft}
+\leftskip#1\zw
+\vspace{-2mm}
+\gt #2
+\vspace{-2mm}
+\end{flushleft}
+}
+\vspace{1mm}
+}
+\vspace{1mm}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% $B%+%&%s%?!<$N0MB84X78$NDI2C(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\@addtoreset{shimonbango}{reidaibango}
+\@addtoreset{shimonbango}{shomonbango}
+\@addtoreset{shimonbango}{shomonbangor}
+\@addtoreset{shomonbango}{reidaibango}
+\@addtoreset{shimonbbango}{reidaibango}
+\@addtoreset{shimonbbango}{shomonbango}
+\@addtoreset{shimonbbango}{shomonbangor}
+\@addtoreset{shomonbbango}{reidaibango}
+
+\endinput

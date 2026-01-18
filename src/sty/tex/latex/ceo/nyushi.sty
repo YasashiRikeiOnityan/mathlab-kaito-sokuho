@@ -1,0 +1,112 @@
+\ProvidesPackage{nyushi}
+
+
+%使う記号はフォントkigopに入れてある．
+\def\kigoup#1{\mbox{\useroman{U}{kigop}{m}{n}#1}}
+
+
+%問題番号を四角黒塗りに変更
+%\renewcommand{\thereidaibango}{\kigoup{\symbol{\arabic
+%{reidaibango}}}\quad}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%kigopの文字をタイプで出すためのマクロ
+%kigoup
+%%%%%%%%%%%%%%%%%%%%%%%
+\def\pichi{\kigoup{\char"41}}
+\def\pni{\kigoup{\char"42}}
+\def\psan{\kigoup{\char"43}}
+\def\pshi{\kigoup{\char"44}}
+\def\pgo{\kigoup{\char"45}}
+\def\proku{\kigoup{\char"46}}
+\def\pshichi{\kigoup{\char"47}}
+\def\phachi{\kigoup{\char"48}}
+\def\pku{\kigoup{\char"49}}
+\def\pjyu{\kigoup{\char"4A}}
+\def\pjyuichi{\kigoup{\char"4B}}
+\def\pjyuni{\kigoup{\char"4C}}
+\def\pjyusan{\kigoup{\char"4D}}
+\def\pjyushi{\kigoup{\char"4E}}
+\def\pjyugo{\kigoup{\char"4F}}
+\def\pjyuroku{\kigoup{\char"50}}
+\def\pjyushichi{\kigoup{\char"51}}
+\def\pjyuhachi{\kigoup{\char"52}}
+\def\pjyuku{\kigoup{\char"53}}
+\def\pnijyu{\kigoup{\char"54}}
+\def\pnijyuichi{\kigoup{\char"55}}
+\def\pnijyuni{\kigoup{\char"56}}
+\def\pnijyusa{\kigoup{\char"57}}
+\def\pnijyushi{\kigoup{\char"58}}
+\def\pnijyugo{\kigoup{\char"59}}
+\def\pnijyuroku{\kigoup{\char"5A}}
+\def\pnijyushichi{\kigoup{\char"77}}
+\def\pnijyuhachi{\kigoup{\char"78}}
+\def\pnijyuku{\kigoup{\char"79}}
+\def\psanjyu{\kigoup{\char"7A}}
+
+
+
+\def\kai{\kigoup{\char"61}}
+\def\bekkai{\kigoup{\char"62}}
+\def\kangaekata{\kigoup{\char"63}}
+\def\chu{\kigoup{\char"64}}
+\def\kaisetu{\kigoup{\char"65}}
+\def\sankoumondai{\kigoup{\char"66}}
+\def\suua{\kigoup{\char"67}}
+\def\suub{\kigoup{\char"68}}
+\def\suuc{\kigoup{\char"69}}
+\def\suuichi{\kigoup{\char"6A}}
+\def\suuni{\kigoup{\char"6B}}
+\def\suusan{\kigoup{\char"6C}}
+\def\kihon{\kigoup{\char"6D}}
+\def\hyoujyun{\kigoup{\char"6E}}
+\def\yayanan{\kigoup{\char"6F}}
+\def\nan{\kigoup{\char"70}}
+\def\kaname{\kigoup{\char"71}}
+
+
+
+%[年度,大学名]の出典
+\def\@syutten[#1,#2]{{%
+  \unskip\nobreak\hfil\penalty0%
+  \hskip0\zw\hbox{}\nobreak\hfil
+  \addmark{#2}%
+  \scalebox{0.9}{(#1\hskip1\zw{#2})}%
+  \parfillskip=0em\finalhyphendemerits=0\@@par}}
+
+\def\addmark#1{}%%% 必要に応じ，個々のクラスファイル側で適切なタイミングで再定義
+
+%$$で数式を作ったときの点々と式番号をつけるTENTENとTEN
+ \def\TENTEN{%
+ \refstepcounter{equation}
+ \leavevmode
+\leaders\hbox to.3333\zw{\hss\raise.5ex\hbox{.}\hss}\hfill
+ \kern\z@\mrunumb{\theequation}}
+
+\def\TEN{%
+ \refstepcounter{equation}
+\cdots \cdots \cdots
+ \kern\z@\mrunumb{\theequation}}
+
+\def\TENAB{%
+ \leavevmode
+\leaders\hbox to.3333\zw{\hss\raise.5ex\hbox{.}\hss}\hfill
+ \kern\z@}
+
+%注環境の調整
+\def\Chu{%
+\par
+\leftskip=1\zw \hspace{-0.8\zw}\chu\quad \;
+\noindent\kern-1\zw}
+\def\endChu{\par}
+
+%太字
+\def\gt{\gtfamily\bfseries}
+
+\let\ne=\neeqb
+\let\neq\neeqb
+
+
+\endinput
+
+

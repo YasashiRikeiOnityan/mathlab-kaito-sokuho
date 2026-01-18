@@ -1,0 +1,76 @@
+\NeedsTeXFormat{LaTeX2e}
+%
+% Create by Toru Yasuda, May 2005:
+%Thanks for all my friends and adviser.
+\ProvidesPackage{amikake}
+\RequirePackage{color}
+
+
+\newbox\@highlight@strut
+\def\highlight{\@testopt\@highlight{}}
+\def\@highlight[#1]#2#3{% #1: color model, #2: color name or parameters, #3: text
+   \leavevmode
+   \begingroup
+   \setbox\@highlight@strut\hbox{\vrule\@height1.1zh \@depth.25zh \@width\z@}%
+   \def\@tempa{#1}%
+   \ifx\@tempa\@empty \def\@highlight@bkcolor{\color{#2}}%
+   \else              \def\@highlight@bkcolor{\color[#1]{#2}}%
+   \fi
+   \let\@highlight@prevletter\@empty
+   \@highlight@loop#3\@nil
+   \endgroup}
+\def\@highlight@loop#1{%
+   \def\@highlight@currletter{#1}%
+   \ifx\@highlight@currletter\@nnil
+      \setbox2\hbox{\@highlight@prevletter\null}%
+      \@highlight@putletter%%% undefined
+   \else
+      \setbox2\hbox{\@highlight@prevletter}%
+      \ifx\@highlight@currletter\@cr@cmd
+         \@highlight@putletter
+         \\\relax
+         \let\@highlight@prevletter\@empty
+      \else
+         \setbox0\hbox{\@highlight@prevletter\@highlight@currletter}%
+         \setbox4\hbox{\@highlight@currletter}%
+         \skip@\wd0 \advance\skip@-\wd2 \advance\skip@-\wd4\relax
+         \ifdim      \skip@=\z@         \skip@\kanjiskip
+         \else\ifdim \skip@=\xkanjiskip \skip@\xkanjiskip
+         \else                          \advance\skip@ \z@ \@plus\p@ \@minus\p@
+         \fi\fi
+         \@highlight@putletter
+         \@highlight@putglue
+      \fi
+      \expandafter\@highlight@loop
+   \fi}
+\def\@highlight@overlap{.4pt}
+\def\@highlight@putletter{%
+   \hbox{%
+      \begingroup
+      \@highlight@bkcolor
+      \dimen@\wd\tw@ \advance\dimen@\@highlight@overlap\relax
+      \vrule\@width\dimen@ \kern-\dimen@
+      \endgroup
+      \box\tw@
+      \copy\@highlight@strut}%
+   \let\@highlight@prevletter\@highlight@currletter}
+\def\@highlight@putglue{%
+   \begingroup
+   \@highlight@bkcolor
+   \leaders\vrule\hskip\skip@
+   \endgroup}
+\def\@cr@cmd{\\}
+
+\endinput
+
+%\begin{document}
+%これは，行分割可能な背景色つきテキストを作成する実験です．
+%これは，行分割可能な背景色つきテキストを作成する実験です．
+%これは，\highlight{cyan}{行分割可能な（背景色）つきテキストを
+%作成する実験です．}%
+%これは，行分割可能な背景色つきテキストを作成する実験です．
+%これは，{\color{white}\highlight{blue}{行分割可能な\\%%% 強制改行
+%背景色つきテキストを作成する実験です．}}%
+%これは，\highlight[gray]{.8}{行分割が可能な{highlighted-}{text}を
+%作成する実験です．}
+%%%% 英単語のようなものは，{，} で囲んでください．

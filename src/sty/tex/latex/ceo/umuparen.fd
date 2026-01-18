@@ -1,0 +1,10 @@
+\ProvidesFile{umuparen.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{muparen}{}
+\DeclareFontShape{U}{muparen}{m}{n}{	%medium
+     <->muparen%
+}{}
+
+\endinput
+

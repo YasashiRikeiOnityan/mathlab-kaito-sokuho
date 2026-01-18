@@ -1,0 +1,22 @@
+%%% pre-emath.sty by tDB(emath@nifty.com)
+%
+\ProvidesPackage{pre-emath}[2022/06/14 0.00]
+%
+\@ifundefined{directlua}{%
+	\def\EM@system#1{\immediate\write18{#1}}%
+%	\edef\zw{zw}%
+%	\edef\zh{zh}%
+	\newdimen\zw\setlength{\zw}{1zw}%
+	\newdimen\zh\setlength{\zh}{1zh}%
+}{%
+	\newif\iftdir\tdirfalse
+	\newif\ifydir\ydirtrue
+%	\newif\ifmdir\mdirtrue
+	\let\luatate\tate
+	\def\tate{\luatate\tdirtrue}%
+%	\newdimen\ybaselineshift\ybaselineshift\z@
+%	\newdimen\tbaselineshift\tbaselineshift\z@
+	\def\EM@system#1{\directlua{ os.execute('#1') }}%	
+}%
+%
+\endinput

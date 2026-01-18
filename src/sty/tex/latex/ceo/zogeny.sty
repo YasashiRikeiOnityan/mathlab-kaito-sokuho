@@ -1,0 +1,1322 @@
+\NeedsTeXFormat{LaTeX2e}
+%
+% Create by Toru Yasuda, Feb 2006:
+
+\ProvidesPackage{zogeny}
+
+\RequirePackage{keyval}
+
+\def\AA{\hspace{0.5pt}} %$B%3%i%`$N:81&$N6u$-(B
+\def\BB{8mm} %$B%3%i%`$N:G>.:81&I}(B
+\def\TAki#1#2{\hbox{\vrule width0pt height#1 depth#2}}
+\newdimen\hyouaki
+\hyouaki=3pt
+\newdimen\hyouakib
+\hyouakib=3pt
+\define@key{zogen}{hensu}{\def\@hensu{#1}}
+\define@key{zogen}{hensua}{\def\@hensua{#1}}
+\define@key{zogen}{hensub}{\def\@hensub{#1}}
+\define@key{zogen}{kansub}{\def\@kansub{#1}}
+\define@key{zogen}{kansuc}{\def\@kansuc{#1}}
+\define@key{zogen}{kansud}{\def\@kansud{#1}}
+\define@key{zogen}{kansue}{\def\@kansue{#1}}
+\define@key{zogen}{ten}{\def\@ten{#1}}
+\define@key{zogen}{ranaa}{\def\@ranaa{#1}}
+\define@key{zogen}{ranab}{\def\@ranab{#1}}
+\define@key{zogen}{ranac}{\def\@ranac{#1}}
+\define@key{zogen}{ranad}{\def\@ranad{#1}}
+\define@key{zogen}{ranae}{\def\@ranae{#1}}
+\define@key{zogen}{ranaf}{\def\@ranaf{#1}}
+\define@key{zogen}{ranag}{\def\@ranag{#1}}
+\define@key{zogen}{ranah}{\def\@ranah{#1}}
+\define@key{zogen}{ranai}{\def\@ranai{#1}}
+\define@key{zogen}{ranaj}{\def\@ranaj{#1}}
+\define@key{zogen}{ranak}{\def\@ranak{#1}}
+\define@key{zogen}{ranba}{\def\@ranba{#1}}
+\define@key{zogen}{ranbb}{\def\@ranbb{#1}}
+\define@key{zogen}{ranbc}{\def\@ranbc{#1}}
+\define@key{zogen}{ranbd}{\def\@ranbd{#1}}
+\define@key{zogen}{ranbe}{\def\@ranbe{#1}}
+\define@key{zogen}{ranbf}{\def\@ranbf{#1}}
+\define@key{zogen}{ranbg}{\def\@ranbg{#1}}
+\define@key{zogen}{ranbh}{\def\@ranbh{#1}}
+\define@key{zogen}{ranbi}{\def\@ranbi{#1}}
+\define@key{zogen}{ranbj}{\def\@ranbj{#1}}
+\define@key{zogen}{ranbk}{\def\@ranbk{#1}}
+\define@key{zogen}{ranca}{\def\@ranca{#1}}
+\define@key{zogen}{rancb}{\def\@rancb{#1}}
+\define@key{zogen}{rancc}{\def\@rancc{#1}}
+\define@key{zogen}{rancd}{\def\@rancd{#1}}
+\define@key{zogen}{rance}{\def\@rance{#1}}
+\define@key{zogen}{rancf}{\def\@rancf{#1}}
+\define@key{zogen}{rancg}{\def\@rancg{#1}}
+\define@key{zogen}{ranch}{\def\@ranch{#1}}
+\define@key{zogen}{ranci}{\def\@ranci{#1}}
+\define@key{zogen}{rancj}{\def\@rancj{#1}}
+\define@key{zogen}{randa}{\def\@randa{#1}}
+\define@key{zogen}{randb}{\def\@randb{#1}}
+\define@key{zogen}{randc}{\def\@randc{#1}}
+\define@key{zogen}{randd}{\def\@randd{#1}}
+\define@key{zogen}{rande}{\def\@rande{#1}}
+\define@key{zogen}{randf}{\def\@randf{#1}}
+\define@key{zogen}{randg}{\def\@randg{#1}}
+\define@key{zogen}{randh}{\def\@randh{#1}}
+\define@key{zogen}{randi}{\def\@randi{#1}}
+\define@key{zogen}{randj}{\def\@randj{#1}}
+\define@key{zogen}{ranea}{\def\@ranea{#1}}
+\define@key{zogen}{raneb}{\def\@raneb{#1}}
+\define@key{zogen}{ranec}{\def\@ranec{#1}}
+\define@key{zogen}{raned}{\def\@raned{#1}}
+\define@key{zogen}{ranee}{\def\@ranee{#1}}
+\define@key{zogen}{ranef}{\def\@ranef{#1}}
+\define@key{zogen}{raneg}{\def\@raneg{#1}}
+\define@key{zogen}{raneh}{\def\@raneh{#1}}
+\define@key{zogen}{ranei}{\def\@ranei{#1}}
+\define@key{zogen}{ranej}{\def\@ranej{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%keyRESET
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\doten{\protect{\rvec<3,1>(x,y)}}
+
+\def\RESETKEYA{\setkeys{zogen}{%
+hensu=x,kansub=f'(x),kansuc=f(x),kansud=f(x),kansue=f(x),
+ranaa=\cdots,ranab=\cdots,ranac=\cdots,ranad=\cdots,ranae=\cdots,ranaf=\cdots,ranag=\cdots,ranah=\cdots,ranai=\cdots,ranaj=\cdots,ranak=\cdots,
+ranba=\ ,ranbb=\ ,ranbc=\ ,ranbd=\ ,ranbe=\ ,ranbf=\ ,ranbg=\ ,ranbh=\ ,
+ranbi=\ ,ranbj=\ ,ranbk=\ ,
+ranca=\ ,rancb=\ ,rancc=\ ,rancd=\ ,rance=\ ,rancf=\ ,rancg=\ ,ranch=\ ,
+ranci=\ ,rancj=\ ,
+randa=\ ,randb=\ ,randc=\ ,randd=\ ,rande=\ ,randf=\ ,randg=\ ,randh=\ ,
+randi=\ ,randj=\ ,
+ranea=\ ,raneb=\ ,ranec=\ ,raned=\ ,ranee=\ ,ranef=\ ,raneg=\ ,raneh=\ ,
+ranei=\ ,ranej=\ }}
+
+
+\def\RESETKEYB{\setkeys{zogen}{%
+hensu=t,kansub=\dfrac{dx}{dt},kansuc=\dfrac{dy}{dt},kansud=\protect{\rvec<3,1>(x,y)},
+ranaa=\cdots,ranab=\cdots,ranac=\cdots,ranad=\cdots,ranae=\cdots,ranaf=\cdots,ranag=\cdots,ranah=\cdots,ranai=\cdots,ranaj=\cdots,ranak=\cdots,
+ranba=\ ,ranbb=\ ,ranbc=\ ,ranbd=\ ,ranbe=\ ,ranbf=\ ,ranbg=\ ,ranbh=\ ,
+ranbi=\ ,ranbj=\ ,ranbk=\ ,
+ranca=\ ,rancb=\ ,rancc=\ ,rancd=\ ,rance=\ ,rancf=\ ,rancg=\ ,ranch=\ ,
+ranci=\ ,rancj=\ ,
+randa=\ ,randb=\ ,randc=\ ,randd=\ ,rande=\ ,randf=\ ,randg=\ ,randh=\ ,
+randi=\ ,randj=\ }}
+
+
+\def\RESETKEYC{\setkeys{zogen}{%
+hensu=X,kansub=変数,
+ranaa=2,ranab=3,ranac=4,ranad=5,ranae=6,ranaf=7,ranag=8,ranah=9,ranai=10,
+ranaj=11,ranak=12,
+ranba=\dfrac{1}{36},ranbb=\dfrac{2}{36},ranbc=\dfrac{3}{36},
+ranbd=\dfrac{4}{36},ranbe=\dfrac{5}{36},ranbf=\dfrac{6}{36},ranbg=\dfrac{5}{36},ranbh=\dfrac{4}{36},
+ranbi=\dfrac{3}{36},ranbj=\dfrac{2}{36},ranbk=\dfrac{1}{36}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%5$B9T(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\zogenhyogogyojyuretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \AA&\AA \@ranah \AA&\AA \@ranai \AA&\AA \@ranaj \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \AA&\AA \@ranbh \AA&\AA \@ranbi \AA&\AA \@ranbj \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \AA&\AA \@rancg \AA&\AA \@ranch \AA&\AA \@ranci \AA&\AA \@rancj \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd \AA&\AA \@rande \AA&\AA \@randf \AA&\AA \@randg \AA&\AA \@randh \AA&\AA \@randi \AA&\AA \@randj \TAki{\dimen7}{\dimen8}\\
+\hline
+\@kansue &\AA \@ranea \AA&\AA \@raneb \AA&\AA \@ranec \AA&\AA \@raned \AA&\AA \@ranee \AA&\AA \@ranef \AA&\AA \@raneg \AA&\AA \@raneh \AA&\AA \@ranei \AA&\AA \@ranej \TAki{\dimen9}{\dimen10}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyogogyokyuretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settoheight{\dimen9}{$\@kansue+\@ranea+\@raneb+\@ranec+\@raned+\@ranee+\@ranef+\@raneg+\@raneh+\@ranei+\@ranej$}
+\settodepth{\dimen10}{$\@kansue+\@ranea+\@raneb+\@ranec+\@raned+\@ranee+\@ranef+\@raneg+\@raneh+\@ranei+\@ranej$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\advance\dimen9\hyouaki
+\advance\dimen10\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \AA&\AA \@ranah \AA&\AA \@ranai \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \AA&\AA \@ranbh \AA&\AA \@ranbi \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \AA&\AA \@rancg \AA&\AA \@ranch \AA&\AA \@ranci \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd \AA&\AA \@rande \AA&\AA \@randf \AA&\AA \@randg \AA&\AA \@randh \AA&\AA \@randi \TAki{\dimen7}{\dimen8}\\
+\hline
+\@kansue &\AA \@ranea \AA&\AA \@raneb \AA&\AA \@ranec \AA&\AA \@raned \AA&\AA \@ranee \AA&\AA \@ranef \AA&\AA \@raneg \AA&\AA \@raneh \AA&\AA \@ranei \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyogogyohachiretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \AA&\AA \@ranah \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \AA&\AA \@ranbh \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \AA&\AA \@rancg \AA&\AA \@ranch \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd \AA&\AA \@rande \AA&\AA \@randf \AA&\AA \@randg \AA&\AA \@randh \TAki{\dimen7}{\dimen8}\\
+\hline
+\@kansue &\AA \@ranea \AA&\AA \@raneb \AA&\AA \@ranec \AA&\AA \@raned \AA&\AA \@ranee \AA&\AA \@ranef \AA&\AA \@raneg \AA&\AA \@raneh \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyogogyosichiretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \AA&\AA \@rancg \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd \AA&\AA \@rande \AA&\AA \@randf \AA&\AA \@randg \TAki{\dimen7}{\dimen8}\\
+\hline
+\@kansue &\AA \@ranea \AA&\AA \@raneb \AA&\AA \@ranec \AA&\AA \@raned \AA&\AA \@ranee \AA&\AA \@ranef \AA&\AA \@raneg \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyogogyorokuretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd \AA&\AA \@rande \AA&\AA \@randf \TAki{\dimen7}{\dimen8}\\
+\hline
+\@kansue &\AA \@ranea \AA&\AA \@raneb \AA&\AA \@ranec \AA&\AA \@raned \AA&\AA \@ranee \AA&\AA \@ranef \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+
+
+\def\zogenhyogogyogoretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd \AA&\AA \@rande \TAki{\dimen7}{\dimen8}\\
+\hline
+\@kansue &\AA \@ranea \AA&\AA \@raneb \AA&\AA \@ranec \AA&\AA \@raned \AA&\AA \@ranee \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+
+\def\zogenhyogogyoyonretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd \TAki{\dimen7}{\dimen8}\\
+\hline
+\@kansue &\AA \@ranea \AA&\AA \@raneb \AA&\AA \@ranec \AA&\AA \@raned \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyogogyosanretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \TAki{\dimen7}{\dimen8}\\
+\hline
+\@kansue &\AA \@ranea \AA&\AA \@raneb \AA&\AA \@ranec \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyogogyoniretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \TAki{\dimen7}{\dimen8}\\
+\hline
+\@kansue &\AA \@ranea \AA&\AA \@raneb \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+
+\def\zogenhyogogyoichiretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \TAki{\dimen7}{\dimen8}\\
+\hline
+\@kansue &\AA \@ranea \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%4$B9T0J2<(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\zogenhyoyongyojyuretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \AA&\AA \@ranah \AA&\AA \@ranai \AA&\AA \@ranaj \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \AA&\AA \@ranbh \AA&\AA \@ranbi \AA&\AA \@ranbj \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \AA&\AA \@rancg \AA&\AA \@ranch \AA&\AA \@ranci \AA&\AA \@rancj \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd \AA&\AA \@rande \AA&\AA \@randf \AA&\AA \@randg \AA&\AA \@randh \AA&\AA \@randi \AA&\AA \@randj \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyoyongyokyuretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \AA&\AA \@ranah \AA&\AA \@ranai \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \AA&\AA \@ranbh \AA&\AA \@ranbi \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \AA&\AA \@rancg \AA&\AA \@ranch \AA&\AA \@ranci \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd \AA&\AA \@rande \AA&\AA \@randf \AA&\AA \@randg \AA&\AA \@randh \AA&\AA \@randi \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyoyongyohachiretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}& \omit\hspace{\BB}&\omit\hspace{\BB}& \omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \AA&\AA \@ranah \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \AA&\AA \@ranbh  \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \AA&\AA \@rancg \AA&\AA \@ranch  \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd \AA&\AA \@rande \AA&\AA \@randf \AA&\AA \@randg \AA&\AA \@randh  \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyoyongyosichiretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \AA&\AA \@rancg \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd \AA&\AA \@rande \AA&\AA \@randf \AA&\AA \@randg \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyoyongyorokuretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd \AA&\AA \@rande \AA&\AA \@randf \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyoyongyogoretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae  \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe  \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance  \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd \AA&\AA \@rande  \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyoyongyoyonretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad  \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd  \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd   \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc \AA&\AA \@randd   \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyoyongyosanretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac   \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc   \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc   \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb \AA&\AA \@randc   \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyoyongyoniretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab   \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb   \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb   \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa \AA&\AA \@randb   \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyoyongyoichiretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settoheight{\dimen7}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\settodepth{\dimen8}{$\@kansud+\@randa+\@randb+\@randc+\@randd+\@rande+\@randf+\@randg+\@randh+\@randi+\@randj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\advance\dimen7\hyouakib
+\advance\dimen8\hyouakib
+\[
+\begin{array}{|c||c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa    \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba   \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca  \TAki{\dimen5}{\dimen6}\\
+\hline
+\@kansud &\AA \@randa  \TAki{\dimen7}{\dimen8}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyosangyojyuretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}& \omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \AA&\AA \@ranah \AA&\AA \@ranai \AA&\AA \@ranaj \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \AA&\AA \@ranbh \AA&\AA \@ranbi\AA&\AA \@ranbj \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \AA&\AA \@rancg \AA&\AA \@ranch \AA&\AA \@ranci\AA&\AA \@rancj \TAki{\dimen5}{\dimen6}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyosangyokyuretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \AA&\AA \@ranah \AA&\AA \@ranai \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \AA&\AA \@ranbh \AA&\AA \@ranbi \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \AA&\AA \@rancg \AA&\AA \@ranch \AA&\AA \@ranci \TAki{\dimen5}{\dimen6}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyosangyohachiretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \AA&\AA \@ranah \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \AA&\AA \@ranbh \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \AA&\AA \@rancg \AA&\AA \@ranch \TAki{\dimen5}{\dimen6}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyosangyosichiretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \AA&\AA \@rancg \TAki{\dimen5}{\dimen6}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyosangyorokuretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \AA&\AA \@rancf \TAki{\dimen5}{\dimen6}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyosangyogoretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd \AA&\AA \@rance \TAki{\dimen5}{\dimen6}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyosangyoyonretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad  \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd  \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \AA&\AA \@rancd  \TAki{\dimen5}{\dimen6}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyosangyosanretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\[
+\begin{array}{|c||c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \AA&\AA \@rancc \TAki{\dimen5}{\dimen6}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyosangyoniretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\[
+\begin{array}{|c||c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \AA&\AA \@rancb \TAki{\dimen5}{\dimen6}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyosangyoichiretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settoheight{\dimen5}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\settodepth{\dimen6}{$\@kansuc+\@ranca+\@rancb+\@rancc+\@rancd+\@rance+\@rancf+\@rancg+\@ranch+\@ranci+\@rancj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\advance\dimen5\hyouaki
+\advance\dimen6\hyouaki
+\[
+\begin{array}{|c||c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \TAki{\dimen3}{\dimen4}\\
+\hline
+\@kansuc &\AA \@ranca \TAki{\dimen5}{\dimen6}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyonigyojyuichiretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj+\@ranak$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj+\@ranak$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj+\@ranbk$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj+\@ranbk$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \AA&\AA \@ranah \AA&\AA \@ranai \AA&\AA \@ranaj \AA&\AA \@ranak \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \AA&\AA \@ranbh \AA&\AA \@ranbi\AA&\AA \@ranbj \AA&\AA \@ranbk \TAki{\dimen3}{\dimen4}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyonigyojyuretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \AA&\AA \@ranah \AA&\AA \@ranai \AA&\AA \@ranaj \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \AA&\AA \@ranbh \AA&\AA \@ranbi\AA&\AA \@ranbj \TAki{\dimen3}{\dimen4}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyonigyokyuretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB} \\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \AA&\AA \@ranah \AA&\AA \@ranai \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \AA&\AA \@ranbh \AA&\AA \@ranbi \TAki{\dimen3}{\dimen4}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyonigyohachiretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \AA&\AA \@ranah \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \AA&\AA \@ranbh \TAki{\dimen3}{\dimen4}\\
+\hline
+\end{array}\]}
+
+
+\def\zogenhyonigyosichiretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \AA&\AA \@ranag \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \AA&\AA \@ranbg \TAki{\dimen3}{\dimen4}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyonigyorokuretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \AA&\AA \@ranaf \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \AA&\AA \@ranbf \TAki{\dimen3}{\dimen4}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyonigyogoretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad \AA&\AA \@ranae \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd \AA&\AA \@ranbe \TAki{\dimen3}{\dimen4}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyonigyoyonretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\[
+\begin{array}{|c||c|c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \AA&\AA \@ranad  \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \AA&\AA \@ranbd  \TAki{\dimen3}{\dimen4}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyonigyosanretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\[
+\begin{array}{|c||c|c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}& \omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \AA&\AA \@ranac \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \AA&\AA \@ranbc \TAki{\dimen3}{\dimen4}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyonigyoniretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\[
+\begin{array}{|c||c|c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \AA&\AA \@ranab \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \AA&\AA \@ranbb \TAki{\dimen3}{\dimen4}\\
+\hline
+\end{array}\]}
+
+\def\zogenhyonigyoichiretu{%
+\settoheight{\dimen1}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settodepth{\dimen2}{$\@hensu+\@ranaa+\@ranab+\@ranac+\@ranad+\@ranae+\@ranaf+\@ranag+\@ranah+\@ranai+\@ranaj$}
+\settoheight{\dimen3}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\settodepth{\dimen4}{$\@kansub+\@ranba+\@ranbb+\@ranbc+\@ranbd+\@ranbe+\@ranbf+\@ranbg+\@ranbh+\@ranbi+\@ranbj$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\[
+\begin{array}{|c||c|} \hline
+\omit\hspace{\BB}&\omit\hspace{\BB}\\
+\@hensu &\AA \@ranaa \TAki{\dimen1}{\dimen2}\\
+\hline
+\@kansub &\AA \@ranba \TAki{\dimen3}{\dimen4}\\
+\hline
+\end{array}\]}
+
+
+
+\def\zogen{%
+  \@ifnextchar({\@zogen}{\@zogen}}
+
+\def\@zogen(#1,#2){\@nameuse{zog@#1@#2}}
+
+
+%$B5H1J$5$s$N%"%I%P%$%9(B08-11-28
+\def\@zogen(#1,#2){%
+  \def\@zogen@next{\@nameuse{zog@#1@#2}}%
+  \ifhmode\ifinner
+     \def\@zogen@next{%
+        \@ifundefined{mathindent}{}{\hskip\mathindent}%
+        \parbox{\linewidth}{\@nameuse{zog@#1@#2}}}%
+  \fi\fi
+  \@zogen@next}
+\@namedef{zog@5@10}{\zogenhyogogyojyuretu}
+\@namedef{zog@5@9}{\zogenhyogogyokyuretu}
+\@namedef{zog@5@8}{\zogenhyogogyohachiretu}
+\@namedef{zog@5@7}{\zogenhyogogyosichiretu}
+\@namedef{zog@5@6}{\zogenhyogogyorokuretu}
+\@namedef{zog@5@5}{\zogenhyogogyogoretu}
+\@namedef{zog@5@4}{\zogenhyogogyoyonretu}
+\@namedef{zog@5@3}{\zogenhyogogyosanretu}
+\@namedef{zog@5@2}{\zogenhyogogyoniretu}
+\@namedef{zog@5@1}{\zogenhyogogyoichiretu}
+\@namedef{zog@4@10}{\zogenhyoyongyojyuretu}
+\@namedef{zog@4@9}{\zogenhyoyongyokyuretu}
+\@namedef{zog@4@8}{\zogenhyoyongyohachiretu}
+\@namedef{zog@4@7}{\zogenhyoyongyosichiretu}
+\@namedef{zog@4@6}{\zogenhyoyongyorokuretu}
+\@namedef{zog@4@5}{\zogenhyoyongyogoretu}
+\@namedef{zog@4@4}{\zogenhyoyongyoyonretu}
+\@namedef{zog@4@3}{\zogenhyoyongyosanretu}
+\@namedef{zog@4@2}{\zogenhyoyongyoniretu}
+\@namedef{zog@4@1}{\zogenhyoyongyoichiretu}
+\@namedef{zog@3@10}{\zogenhyosangyojyuretu}
+\@namedef{zog@3@9}{\zogenhyosangyokyuretu}
+\@namedef{zog@3@8}{\zogenhyosangyohachiretu}
+\@namedef{zog@3@7}{\zogenhyosangyosichiretu}
+\@namedef{zog@3@6}{\zogenhyosangyorokuretu}
+\@namedef{zog@3@5}{\zogenhyosangyogoretu}
+\@namedef{zog@3@4}{\zogenhyosangyoyonretu}
+\@namedef{zog@3@3}{\zogenhyosangyosanretu}
+\@namedef{zog@3@2}{\zogenhyosangyoniretu}
+\@namedef{zog@3@1}{\zogenhyosangyoichiretu}
+\@namedef{zog@2@11}{\zogenhyonigyojyuichiretu}
+\@namedef{zog@2@10}{\zogenhyonigyojyuretu}
+\@namedef{zog@2@9}{\zogenhyonigyokyuretu}
+\@namedef{zog@2@8}{\zogenhyonigyohachiretu}
+\@namedef{zog@2@7}{\zogenhyonigyosichiretu}
+\@namedef{zog@2@6}{\zogenhyonigyorokuretu}
+\@namedef{zog@2@5}{\zogenhyonigyogoretu}
+\@namedef{zog@2@4}{\zogenhyonigyoyonretu}
+\@namedef{zog@2@3}{\zogenhyonigyosanretu}
+\@namedef{zog@2@2}{\zogenhyonigyoniretu}
+\@namedef{zog@2@1}{\zogenhyonigyoichiretu}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$BCV49@QJ,(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\RESETKEYD{\setkeys{zogen}{%
+hensua=x,hensub=\theta,
+ranaa=0,ranab=\rightarrow,ranac=1,
+ranba=0 ,ranbb=\rightarrow ,ranbc=\dfrac{\pi}{2}}}
+\RESETKEYD
+\def\CC{5mm}
+
+\def\chikan{%
+\settoheight{\dimen1}{$\@hensua+\@ranaa+\@ranab+\@ranac$}
+\settodepth{\dimen2}{$\@hensua+\@ranaa+\@ranab+\@ranac$}
+\settoheight{\dimen3}{$\@hensub+\@ranba+\@ranbb+\@ranbc$}
+\settodepth{\dimen4}{$\@hensub+\@ranba+\@ranbb+\@ranbc$}
+\advance\dimen1\hyouaki
+\advance\dimen2\hyouaki
+\advance\dimen3\hyouaki
+\advance\dimen4\hyouaki
+\[
+\begin{array}{|c||ccc|} \hline
+\omit\hspace{\CC}&\omit\hspace{\CC}&\omit&\omit\hspace{\CC}\\
+\@hensua &\AA \@ranaa \hspace{-1mm}&\hspace{-1mm} \rightarrow \hspace{-1mm}&\hspace{-1mm}\@ranac \TAki{\dimen1}{\dimen2}\\
+\hline
+\@hensub &\AA \@ranba \hspace{-1mm}&\hspace{-1mm} \rightarrow \hspace{-1mm}&\hspace{-1mm}\@ranbc \TAki{\dimen3}{\dimen4}\\
+\hline
+\end{array}\]}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$B%Q%?!<%s$rA}$d$9(B
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\RESETKEYE{\setkeys{zogen}{%
+hensu=x,kansub=f'(x),kansuc=f''(x),kansud=f(x),
+ranaa=\cdots,ranab=\cdots,ranac=\cdots,ranad=\cdots,ranae=\cdots,ranaf=\cdots,ranag=\cdots,ranah=\cdots,ranai=\cdots,ranaj=\cdots,ranak=\cdots,
+ranba=\ ,ranbb=\ ,ranbc=\ ,ranbd=\ ,ranbe=\ ,ranbf=\ ,ranbg=\ ,ranbh=\ ,
+ranbi=\ ,ranbj=\ ,ranbk=\ ,
+ranca=\ ,rancb=\ ,rancc=\ ,rancd=\ ,rance=\ ,rancf=\ ,rancg=\ ,ranch=\ ,
+ranci=\ ,rancj=\ ,
+randa=\ ,randb=\ ,randc=\ ,randd=\ ,rande=\ ,randf=\ ,randg=\ ,randh=\ ,
+randi=\ ,randj=\ }}
+
+\let\tikan=\chikan
+\let\RESETZOGEN=\RESETKEYEA
+\let\RESETOHTOTU=\RESETKEYE
+\let\RESETOUTOTU=\RESETKEYE
+\let\RESETPARA=\RESETKEYEB
+\let\RESETBUNPU=\RESETKEYEC
+\let\RESETKAKURITUBUNPU=\RESETKEYEC
+\let\RESETTIKAN=\RESETKEYED
+\let\RESETCHIKAN=\RESETKEYED
+
+
+
+\endinput

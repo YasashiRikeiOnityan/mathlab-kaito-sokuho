@@ -1,0 +1,12 @@
+\ProvidesFile{omsceo.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{OMS}{ceo}{}
+\DeclareFontShape{OMS}{ceo}{m}{n}{	%medium
+     <->ceosy%
+}{}
+\DeclareFontShape{OMS}{ceo}{bx}{n}{	%bold
+     <->cesyb%
+}{}
+\endinput
+

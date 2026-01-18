@@ -1,0 +1,10 @@
+\ProvidesFile{ukigok.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{kigok}{}
+\DeclareFontShape{U}{kigok}{m}{n}{	%medium
+     <->kigok%
+}{}
+
+\endinput
+

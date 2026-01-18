@@ -1,0 +1,10 @@
+\ProvidesFile{ukigoa.fd}
+	[2005/5/18 v1.0]
+
+\DeclareFontFamily{U}{kigoa}{}
+\DeclareFontShape{U}{kigoa}{m}{n}{	%medium
+     <->kigoa%
+}{}
+
+\endinput
+

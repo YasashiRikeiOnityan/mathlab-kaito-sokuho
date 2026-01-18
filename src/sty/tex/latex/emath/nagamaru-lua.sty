@@ -1,0 +1,16 @@
+% nagamaru-lua.sty
+%
+\ProvidesPackage{nagamaru-lua}[2025/08/03 v0.00-lua]%
+%
+\RequirePackage{EMpict2e}
+\let\nagamaru\pIIeNagamaru
+\def\knagamaru#1{\pIIeNagamaru*[1]{{\color{white}\bfseries #1}}}%
+\def\ynagamaru#1{{\swap\Nmaru@yokokei\Nmaru@tatekei
+  \setlength\@tempdima{\Nmaru@tatekei+1pt}%
+  \edef\Nmaru@tatekei{\the\@tempdima}%
+  \nagamaru{#1}}}%
+\def\kynagamaru#1{{\swap\Nmaru@yokokei\Nmaru@tatekei
+  \setlength\@tempdima{\Nmaru@tatekei+1pt}%
+  \edef\Nmaru@tatekei{\the\@tempdima}%
+  \knagamaru{#1}}}%
+\endinput
