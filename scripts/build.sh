@@ -107,12 +107,65 @@ fi
 # Dockerイメージ名
 IMAGE_NAME="tex-builder"
 
-# Dockerイメージをビルド（既に存在する場合はスキップ）
-echo "Building Docker image..."
-docker build -t "$IMAGE_NAME" -f "$DOCKERFILE_PATH" . || {
-    echo "Error: Failed to build Docker image."
-    exit 1
+# Dockerイメージをビルド（Dockerfile /src/sty に変更がない場合はスキップ）
+# NOTE: `docker build` はキャッシュヒットでも Docker Desktop の「ビルド履歴」に記録が残るため、
+#       変更がないときはそもそも `docker build` を叩かないようにする。
+get_hash_cmd() {
+    if command -v shasum >/dev/null 2>&1; then
+        echo "shasum -a 256"
+    elif command -v sha256sum >/dev/null 2>&1; then
+        echo "sha256sum"
+    else
+        echo ""
+    fi
 }
+
+HASH_CMD=$(get_hash_cmd)
+if [ -z "$HASH_CMD" ]; then
+    echo "Warning: 'shasum' or 'sha256sum' not found. Building Docker image every time."
+    NEED_BUILD=1
+else
+    CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/mathlab-kaito-sokuho"
+    CACHE_FILE="${CACHE_DIR}/tex-builder.build-input.sha256"
+    mkdir -p "$CACHE_DIR"
+
+    compute_build_input_hash() {
+        {
+            $HASH_CMD "$DOCKERFILE_PATH"
+            if [ -d "src/sty" ]; then
+                find "src/sty" -type f -print | LC_ALL=C sort | while IFS= read -r f; do
+                    $HASH_CMD "$f"
+                done
+            fi
+        } | $HASH_CMD | awk '{print $1}'
+    }
+
+    CURRENT_HASH=$(compute_build_input_hash)
+    SAVED_HASH=""
+    if [ -f "$CACHE_FILE" ]; then
+        SAVED_HASH=$(cat "$CACHE_FILE")
+    fi
+
+    NEED_BUILD=0
+    if ! docker image inspect "$IMAGE_NAME" >/dev/null 2>&1; then
+        NEED_BUILD=1
+    elif [ "$CURRENT_HASH" != "$SAVED_HASH" ]; then
+        NEED_BUILD=1
+    fi
+fi
+
+if [ "$NEED_BUILD" -eq 1 ]; then
+    echo "Building Docker image..."
+    docker build -t "$IMAGE_NAME" -f "$DOCKERFILE_PATH" . || {
+        echo "Error: Failed to build Docker image."
+        exit 1
+    }
+    if [ -n "$HASH_CMD" ]; then
+        echo "$CURRENT_HASH" > "$CACHE_FILE"
+    fi
+else
+    echo "Docker image is up to date. Skipping build."
+fi
 
 # texファイルを検索してコンパイル
 echo "Searching for tex files..."
