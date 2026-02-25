@@ -18,6 +18,8 @@
 % ヘッダー
 \lhead{\textbf{2026年 東京科学大学}}
 
+\newlength{\defaultmathindent}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -26,31 +28,127 @@
 \begin{problembox}
     \begin{enumerate} 
         \item [\huge \shikakuni]\quad\raisebox{1ex}{（60点）} \\
-        一文字分字数を下げて問題文をここに書く。ここに問題文を書く。ここに問題文を書く。ここに問題文を書く。
-        ここに問題文を書く。ここに問題文を書く。ここに問題文を書く。ここに問題文を書く。ここに問題文を書く。
+        \hspace{1em}$n$ は4以上の整数であり，$x, y, z$ はすべて正の整数であるとする．
         \begin{enumerate}
-            \item [\kakkoichi] ここに小問を書く。ここに小問を書く。ここに小問を書く。
-            \item [\kakkoni] ここに小問を書く。ここに小問を書く。ここに小問を書く。
-            \item [\kakkosan] ここに小問を書く。ここに小問を書く。ここに小問を書く。
+            \item [\kakkoichi] $1\leqq r<n$ をみたす整数 $r$ に対して，
+                \begin{align*}
+                    \kumiawase{n}{r}=\kumiawase{n-1}{r}+\kumiawase{n-1}{r-1}
+                \end{align*}
+                および
+                \begin{align*}
+                    \kumiawase{n+1}{r+1}=\sum_{k=r}^{n}\kumiawase{k}{r}
+                \end{align*}
+                が成り立つことを示せ．
+            \item [\kakkoni] 空間の点 $(x, y, z)$ で，
+                \begin{align*}
+                    x+y+z<n
+                \end{align*}
+                をみたすものの個数を $n$ を用いて表せ．
+            \item [\kakkosan] 空間の点 $(x, y, z)$ で，
+                \begin{align*}
+                    x+y+z<3n\quad\text{かつ}\quad x<y<z
+                \end{align*}
+                をみたすものの個数を $n$ を用いて表せ．
         \end{enumerate}
     \end{enumerate}
 \end{problembox}
 
-\begin{multicols}{2}
+\begin{multicols*}{2}
 
 \noindent
-\kaib
+\kakkoichi\quad それぞれ示す．
+\begin{align*}
+    &\kumiawase{n-1}{r}+\kumiawase{n-1}{r-1} \\
+    &=\bunsuu{(n-1)!}{r!(n-r-1)!}+\bunsuu{(n-1)!}{(n-1)!(n-r)!} \\
+    &=\bunsuu{(n-1)!(n-r)+(n-1)!r}{r!(n-r)!} \\
+    &=\bunsuu{(n-1)!n}{r!(n-r)!} \\
+    &=\bunsuu{n!}{r!(n-r)!} \\
+    &=\kumiawase{n}{r}\owari
+\end{align*}
+\begin{align*}
+    &\sum_{k=r}^{n}\kumiawase{k}{r} \\
+    &=\kumiawase{r}{r}+\kumiawase{r+1}{r}+\kumiawase{r+2}{r}+ \sdots +\kumiawase{n}{r} \\
+    &=(\kumiawase{r+1}{r+1}+\kumiawase{r+1}{r})+\kumiawase{r+2}{r}+ \sdots +\kumiawase{n}{r} \\
+    &=(\kumiawase{r+2}{r+1}+\kumiawase{r+2}{r})+ \sdots +\kumiawase{n}{r} \\
+    &=\kumiawase{r+3}{r+1}+ \sdots +\kumiawase{n}{r} \\
+    &=\sdots \\
+    &=\kumiawase{n}{r+1}+\kumiawase{n}{r} \\
+    &=\kumiawase{n+1}{r+1}\owari
+\end{align*}
 
 \noindent
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
+\kakkoni\quad $k=3, 4, \ldots , n-1$ に対し $x+y+z=k$ をみたす $(x, y, z)$ の個数は
+\begin{align*}
+    (x-1)+(y-1)+(z-1)=k-3
+\end{align*}
+から $\kumiawase{k-1}{2}$ 個である．よって，求める個数は
+\begin{align*}
+    \sum_{k=3}^{n-1}\kumiawase{k-1}{2}=\sum_{k=2}^{n-2}\kumiawase{k}{2}=\boldsymbol{\kumiawase{n-1}{3}}~\text{\bf 個}
+\end{align*}
 
-\end{multicols}
+\noindent
+\kakkosan\quad 全体集合 $U$ を次のように定義する．
+\setlength{\defaultmathindent}{\mathindent}
+\setlength{\mathindent}{2mm}
+\begin{align*}
+    U=\{(x, y, z) ~|~ x+y+z=3n,~ x,y,z \text{は正の整数}\}
+\end{align*}
+\setlength{\mathindent}{\defaultmathindent}
+\noindent
+このとき
+\begin{align*}
+    n(U)=\kumiawase{3n-1}{2}=(3n-1)(3n-2)/2
+\end{align*}
+である．余事象を考える．
+
+\begin{enumerate}
+    \item [\tokeiichi] $x=y=z$ の場合 \\
+        $(x, y, z) = (n, n, n)$ の1つがある．
+    \item [\tokeini] $x, y, z$ のうち，2つのみが同じ値の場合 \\
+        $x=y\neq z$ のときを考える．
+        \begin{enumerate}
+            \item [\maruichi] $n$ が奇数のとき \\
+                $x$ のとり得る値は $1$ から $(3n-1)/2$ までであり，\tokeiichi の場合を
+                除くととり得る点の個数は $(3n-1)/2-1=(3n-3)/2$ 個である．
+            \item [\maruni] $n$ が偶数のとき \\
+                $x$ のとり得る値は $1$ から $(3n-2)/2$ までであり，\tokeiichi の場合を
+                除くととり得る点の個数は $(3n-2)/2-1=(3n-4)/2$ 個である．
+        \end{enumerate}
+        同様に，$y=z\neq x, z=x\neq y$ の場合も計算できるので，$n$ が奇数のとき $3(3n-3)/2$ 個，$n$ が偶数のとき $3(3n-4)/2$ 個である．
+\end{enumerate}
+
+\end{multicols*}
+
+\pagebreak
+
+\begin{multicols*}{2}
+
+\noindent
+よって，$x, y, z$ の3つの座標がすべて異なる場合の数は， 
+$n$ が奇数のとき，
+\begin{align*}
+    &(3n-1)(3n-2)/2-3(3n-3)/2-1 \\
+    &=(9n^{2}-18n+9)/2 ~\text{個}
+\end{align*}
+$n$ が偶数のとき，
+\begin{align*}
+    &(3n-1)(3n-2)/2-3(3n-4)/2-1 \\
+    &=(9n^{2}-18n+12)/2 ~\text{個}
+\end{align*}
+\vfill
+\null
+\columnbreak
+\noindent
+$x<y<z$ をみたす場合の数は左の場合からさらに $1/6$ になるので，
+$n$ が奇数のとき，
+\begin{align*}
+    (9n^{2}-18n+9)/12=\boldsymbol{3(n-1)^2/4} ~\text{\bf 個}
+\end{align*}
+$n$ が偶数のとき，
+\begin{align*}
+    (9n^{2}-18n+12)/12=\boldsymbol{(3n^{2}-6n+4)/4} ~\text{\bf 個}
+\end{align*}
+
+\end{multicols*}
 
 \end{document}
