@@ -92,7 +92,7 @@ acs-*.bib
 *.mp
 *.t[1-9]
 *.t[1-9][0-9]
-*.tfm
+# *.tfm
 
 #(r)(e)ledmac/(r)(e)ledpar
 *.end
