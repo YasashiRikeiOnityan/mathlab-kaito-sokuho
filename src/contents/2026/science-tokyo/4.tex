@@ -52,9 +52,7 @@
 % \begin{multicols*}{2}
 
 \noindent
-\kakkoichi\quad 適当に点を打って状況を整理すると以下の通りである．
-
-\noindent
+\kakkoichi\quad 適当に点を打って状況を整理すると以下の図の通りである．
 平行移動と回転を行って $l_{n}$ が実軸に重なるように変換する．
 このとき，$z$ が移った点に対する共役の複素数が $R_{n}(z)$ が移る点である．
 この点に対して，行った変換の逆操作を行うことで $R_{n}(z)$ が求まる．
@@ -117,25 +115,25 @@
     \fill (RZp) circle [radius=1.5pt];
     \draw ($(A)!-1.4!(B)$) -- ($(B)!-1.4!(A)$) node [left] {$l_{n}$};
     \draw [dashed] ($(O)!-1.7!(Bp)$) -- ($(Bp)!-1.1!(O)$);
-    \draw [purple, semithick, ->] (\lineangle:0.7) arc (\lineangle:0:0.7);
-    \draw [->, orange] (A) -- ($(A)!0.48!(O)$);
-    \draw [->, orange] (A) -- ($(A)!0.52!(O)$);
-    \draw [orange] (A) -- (O);
-    \draw [->, orange] (Z) -- ($(Z)!0.48!(Zp)$);
-    \draw [->, orange] (Z) -- ($(Z)!0.52!(Zp)$);
-    \draw [orange] (Z) -- (Zp);
-    \draw [->, orange] (RZ) -- ($(RZ)!0.48!(RZp)$);
-    \draw [->, orange] (RZ) -- ($(RZ)!0.52!(RZp)$);
-    \draw [orange] (RZ) -- (RZp);
+    \draw [gray, semithick, ->] (\lineangle:0.7) arc (\lineangle:0:0.7);
+    \draw [->, gray] (A) -- ($(A)!0.48!(O)$);
+    \draw [->, gray] (A) -- ($(A)!0.52!(O)$);
+    \draw [gray] (A) -- (O);
+    \draw [->, gray] (Z) -- ($(Z)!0.48!(Zp)$);
+    \draw [->, gray] (Z) -- ($(Z)!0.52!(Zp)$);
+    \draw [gray] (Z) -- (Zp);
+    \draw [->, gray] (RZ) -- ($(RZ)!0.48!(RZp)$);
+    \draw [->, gray] (RZ) -- ($(RZ)!0.52!(RZp)$);
+    \draw [gray] (RZ) -- (RZp);
     \fill (Zpp) circle [radius=1.5pt];
     \path let \p1=($(Zp)-(0,0)$) in \pgfextra{\pgfmathparse{veclen(\x1,\y1)/28.45274}\xdef\rZprime{\pgfmathresult}\pgfmathparse{atan2(\y1,\x1)}\xdef\startangle{\pgfmathresult}} (0,0);
     \pgfmathsetmacro{\endangle}{\startangle - \lineangle}
-    \draw [purple, semithick, ->] (Zp) arc (\startangle:\endangle:\rZprime);
+    \draw [gray, semithick, ->] (Zp) arc (\startangle:\endangle:\rZprime);
     \fill (RZpp) circle [radius=1.5pt];
     \draw [dotted] (Zpp) -- (RZpp);
     \path let \p1=($(RZp)-(0,0)$) in \pgfextra{\pgfmathparse{veclen(\x1,\y1)/28.45274}\xdef\rRZprime{\pgfmathresult}\pgfmathparse{atan2(\y1,\x1)}\xdef\RZstartangle{\pgfmathresult}} (0,0);
     \pgfmathsetmacro{\RZendangle}{\RZstartangle - \lineangle}
-    \draw [purple, semithick, ->] (RZp) arc (\RZstartangle:\RZendangle:\rRZprime);
+    \draw [gray, semithick, ->] (RZp) arc (\RZstartangle:\RZendangle:\rRZprime);
 \end{tikzpicture}
 \end{minipage}
 \end{center}
