@@ -26,31 +26,55 @@
 \begin{problembox}
     \begin{enumerate} 
         \item [\huge \shikakugo]\quad\raisebox{1ex}{（60点）} \\
-        一文字分字数を下げて問題文をここに書く。ここに問題文を書く。ここに問題文を書く。ここに問題文を書く。
-        ここに問題文を書く。ここに問題文を書く。ここに問題文を書く。ここに問題文を書く。ここに問題文を書く。
-        \begin{enumerate}
-            \item [\kakkoichi] ここに小問を書く。ここに小問を書く。ここに小問を書く。
-            \item [\kakkoni] ここに小問を書く。ここに小問を書く。ここに小問を書く。
-            \item [\kakkosan] ここに小問を書く。ここに小問を書く。ここに小問を書く。
-        \end{enumerate}
+        \hspace{1em}$n, k$ を正の整数とする．次の不等式をみたす最小の $k$ を求めよ．
+        \begin{align*}
+            \dlim{n\to\infty}{\dint{0}{100}{x^{k}e^{-x}\sin^{2}(nx)\,dx}}>10
+        \end{align*}
+        ただし．$e$ は自然対数の底であり，$e>2$ をみたす．
     \end{enumerate}
 \end{problembox}
 
-\begin{multicols}{2}
+% \begin{multicols*}{2}
 
 \noindent
-\kaib
-
-\noindent
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。ここに解答を書く。
-
-\end{multicols}
+半角の公式から
+\begin{align*}
+    \dint{0}{100}{x^{k}e^{-x}\sin^{2}(nx)\,dx}=\bunsuu{1}{2}\dint{0}{100}{x^{k}e^{-x}\,dx}-\bunsuu{1}{2}\dint{0}{100}{x^{k}e^{-x}\cos(2nx)\,dx}
+\end{align*}
+第2項を部分積分をすると
+\begin{align*}
+    &\dint{0}{100}{x^{k}e^{-x}\cos(2nx)\,dx} \\
+    &=\teisekibun{x^{k}e^{-x}\sdot\bunsuu{1}{2n}\sin{(2nx)}}{0}{100}-\dint{0}{100}{(kx^{k-1}-x^{k})e^{-x}\sdot\bunsuu{1}{2n}\sin{(2nx)}\,dx} \\
+    &=100^{k}e^{-100}\sdot\bunsuu{1}{2n}\sin{(200n)}-\bunsuu{1}{2n}\dint{0}{100}{(kx^{k-1}-x^{k})e^{-x}\sin{(2nx)}\,dx} \\
+    &=100^{k}e^{-100}\sdot\bunsuu{1}{2n}\sin{(200n)}-\bunsuu{k}{2n}\dint{0}{100}{x^{k-1}e^{-x}\sin{(2nx)}\,dx}+\bunsuu{1}{2n}\dint{0}{100}{x^{k}e^{-x}\sin{(2nx)}\,dx}
+\end{align*}
+それぞれの項について，$0\leqq x\leqq 100$ で以下の不等式が成り立つ．
+\begin{align*}
+    \gauss{1}\quad&-100^{k}e^{-100}\sdot\bunsuu{1}{2n}\leqq 100^{k}e^{-100}\sdot\bunsuu{1}{2n}\sin{(200n)}\leqq 100^{k}e^{-100}\sdot\bunsuu{1}{2n} \\[3mm]
+    \gauss{2}\quad&-\bunsuu{k}{2n}\dint{0}{100}{x^{k-1}\,dx}\leqq -\bunsuu{k}{2n}\dint{0}{100}{x^{k-1}e^{-x}\sin{(2nx)}\,dx}\leqq\bunsuu{k}{2n}\dint{0}{100}{x^{k-1}\,dx} \\
+    &\yueni~ -\bunsuu{k}{2n}\sdot\bunsuu{100^{k}}{k}\leqq -\bunsuu{k}{2n}\dint{0}{100}{x^{k-1}e^{-x}\sin{(2nx)}\,dx}\leqq\bunsuu{k}{2n}\sdot\bunsuu{100^{k}}{k} \\[3mm]
+    \gauss{3}\quad&-\bunsuu{1}{2n}\dint{0}{100}{x^{k}\,dx}\leqq\bunsuu{1}{2n}\dint{0}{100}{x^{k}e^{-x}\sin{(2nx)}\,dx}\leqq\bunsuu{1}{2n}\dint{0}{100}{x^{k}\,dx} \\
+    &\yueni~ -\bunsuu{1}{2n}\sdot\bunsuu{100^{k+1}}{k+1}\leqq\bunsuu{1}{2n}\dint{0}{100}{x^{k}e^{-x}\sin{(2nx)}\,dx}\leqq\bunsuu{1}{2n}\sdot\bunsuu{100^{k+1}}{k+1}
+\end{align*}
+3つの不等式の最左辺，最右辺は全て $n\to\infty$ で0に収束するので，はさみうちの原理から
+\begin{align*}
+    \dlim{n\to\infty}{\left(\bunsuu{1}{2}\dint{0}{100}{x^{k}e^{-x}\cos(2nx)\,dx}\right)}=0
+\end{align*}
+よって
+\begin{align*}
+    \dlim{n\to\infty}{\dint{0}{100}{x^{k}e^{-x}\sin^{2}(nx)\,dx}}=\bunsuu{1}{2}\dint{0}{100}{x^{k}e^{-x}\,dx}
+\end{align*}
+であるから，$\dint{0}{100}{x^{k}e^{-x}\,dx}>20$ をみたす最小の $k$ を求める．$I_{k}=\dint{0}{100}{x^{k}e^{-x}\,dx}$ とおいて部分積分をすると
+\begin{align*}
+    I_{k}=\teisekibun{-x^{k}e^{-x}}{0}{100}+\dint{0}{100}{kx^{k-1}e^{-x}\,dx}=kI_{k-1}-100^{k}e^{-100}
+\end{align*}
+この漸化式と，$I_{0}=\dint{0}{100}{e^{-x}\,dx}=\teisekibun{-e^{-x}}{0}{100}=1-e^{-100}$ から
+\begin{alignat*}{2}
+    &I_{1}=I_{0}-100e^{-100}=1-101e^{-100}<20,&&\quad I_{2}=2I_{1}-100^{2}e^{-100}=2-10202e^{-100}<20 \\
+    &I_{3}=3I_{2}-100^{3}e^{-100}=6-1030606e^{-100}<20,&&\quad I_{4}=4I_{3}-100^{4}e^{-100}=24-104122424e^{-100}>20 \\
+    &{}&&\quad (\nazenara ~ 104122424e^{-100}<2^{27}\sdot 2^{-100}=2^{-73}<1)
+\end{alignat*}
+であるので，条件をみたす最小の $k$ は $\boldsymbol{4}$ である．
+% \end{multicols*}
 
 \end{document}
