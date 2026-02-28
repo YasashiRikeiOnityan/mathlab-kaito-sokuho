@@ -36,8 +36,6 @@
     \end{enumerate}
 \end{problembox}
 
-% \begin{multicols}{2}
-
 \noindent
 \kakkoichi\quad
 $f(\theta)$を微分すると
@@ -53,40 +51,14 @@ $f(\theta)$を微分すると
 \noindent
 \kakkoni\quad
 まず，加法定理から
-% {\setlength\mathindent{0pt}
-%     \begin{align*}
-%     &\phantom{{}={}}\int_0^{2\pi}\sin(\cos{x}-x)dx\\
-%     &=\int_0^{2\pi}\sin{(\cos{x})}\sdot\cos{x}\,dx-\int_0^{2\pi}\cos(\cos{x})\sin xdx
-%     \end{align*}
-% }%
 \begin{align*}
     \dint{0}{2\pi}{\sin(\cos{x}-x)\,dx}=\dint{0}{2\pi}{\sin{(\cos{x})}\sdot\cos{x}\,dx}-\dint{0}{2\pi}{\cos{(\cos{x})}\sdot\sin{x}\,dx}
 \end{align*}
 となる．ここで，右辺第$2$項について$t=x-\pi$と置換すると
-% {\setlength\mathindent{0pt}
-%     \begin{align*}
-%     &\phantom{{}={}}\int_0^{2\pi}\cos(\cos{x})\sin xdx\\
-%     &=\int_{-\pi}^\pi\cos(-\cos t)\cdot(-\sin t)dt\\
-%     &=-\int_{-\pi}^\pi\cos(\cos t)\sin tdt
-%     \end{align*}
-% }%
 \begin{align*}
     \dint{0}{2\pi}{\cos{(\cos{x})}\sdot\sin{x}\,dx}&=\dint{-\pi}{\pi}{\cos{(-\cos{t})}\sdot(-\sin{t})\,dt}=-\dint{-\pi}{\pi}{\cos{(\cos{t})}\sdot\sin{t}\,dt}
 \end{align*}
 $\cos{(\cos{t})}\sdot\sin{t}$は奇函数なので，積分区間の対称性から積分値は$0$であることが分かる．よって
-% {\setlength\mathindent{0pt}
-%     \begin{align*}
-%     &\phantom{{}={}}\int_0^{2\pi}\sin(\cos{x}-x)dx\\
-%     &=\int_0^{2\pi}\sin{(\cos{x})}\sdot\cos{x}\,dx\\
-%     &=\dint{0}{\pi}\sin{(\cos{x})}\sdot\cos{x}\,dx+\int_\pi^{2\pi}\sin{(\cos{x})}\sdot\cos{x}\,dx\\
-%     &=\dint{0}{\pi}\sin{(\cos{x})}\sdot\cos{x}\,dx\\
-%     &\qquad{}+\dint{0}{\pi}\sin(-\cos t)\cdot(-\cos t)dt\quad(x=t-\pi)\\
-%     &=2\dint{0}{\pi}\sin{(\cos{x})}\sdot\cos{x}\,dx\\
-%     &=2\dint{0}{\pi/2}\sin{(\cos{x})}\sdot\cos{x}\,dx\\
-%     &\qquad{}+2\dint{0}{\pi/2}\sin(-\cos t)\cdot(-\cos t)dt\quad(x=\pi-t)\\
-%     &=4\dint{0}{\pi/2}\sin{(\cos{x})}\sdot\cos{x}\,dx
-%     \end{align*}
-% }%
 \begin{align*}
     \dint{0}{2\pi}{\sin{(\cos{x}-x)}\,dx}&=\dint{0}{2\pi}{\sin{(\cos{x})}\sdot\cos{x}\,dx} \\
     &=\dint{0}{\pi}{\sin{(\cos{x})}\sdot\cos{x}\,dx}+\dint{\pi}{2\pi}{\sin{(\cos{x})}\sdot\cos{x}\,dx} \\
@@ -96,30 +68,10 @@ $\cos{(\cos{t})}\sdot\sin{t}$は奇函数なので，積分区間の対称性か
     &=4\dint{0}{\pi/2}{\sin{(\cos{x})}\sdot\cos{x}\,dx}
 \end{align*}
 の値を評価すればよい．$0\leqq x\leqq\bunsuu{\pi}{2}$で$0\leqq\cos{x}\leqq1$なので，\tokeiichi の議論から$0\leqq f(\cos{x})\leqq M$であることが分かる．よって
-% {\setlength\mathindent{0pt}
-%     \begin{align*}
-%     0\leqq\dint{0}{\pi/2}f(\cos{x})\cos{x}\,dx\leqq\dint{0}{\pi/2}M\cos{x}\,dx=M
-%     \end{align*}
-% }%
 \begin{align*}
     0\leqq\dint{0}{\pi/2}f(\cos{x})\cos{x}\,dx\leqq\dint{0}{\pi/2}M\cos{x}\,dx=M
 \end{align*}
 である．
-% {\setlength\mathindent{0pt}
-%     \begin{align*}
-%     &\phantom{{}={}}\dint{0}{\pi/2}f(\cos{x})\cos{x}\,dx\\
-%     &=\dint{0}{\pi/2}\left(\sin{(\cos{x})}-\cos{x}+\bunsuu{\cos^3x}6\right)\cos{x}\,dx\\
-%     &=J-\dint{0}{\pi/2}\cos^2xdx+\bunsuu{1}{6}\dint{0}{\pi/2}\cos^4xdx\\
-%     &=J-\bunsuu{1}{2}\dint{0}{\pi/2}(1+\cos2x)dx\\
-%     &\qquad{}+\bunsuu{1}{24}\dint{0}{\pi/2}(1+\cos2x)^2dx\\
-%     &=J-\bunsuu{1}{2}\left[x-\bunsuu{1}{2}\sin2x\right]_0^{\pi/2}\\
-%     &\qquad{}+\bunsuu{1}{24}\dint{0}{\pi/2}(1+2\cos2x+\cos^22x)dx\\
-%     &=J-\bunsuu{\pi}{4}+\bunsuu{1}{24}\Bigl[x+\sin2x\Bigr]_0^{\pi/2}\\
-%     &\qquad{}+\bunsuu{1}{48}\dint{0}{\pi/2}(1+\cos4x)dx\\
-%     &=J-\bunsuu{\pi}{4}+\bunsuu{\pi}{48}+\bunsuu{1}{48}\left[x+\bunsuu{1}4\sin4x\right]_0^{\pi/2}\\
-%     &=J-\bunsuu{\pi}{4}+\bunsuu{\pi}{48}+\bunsuu\pi{96}=J-\bunsuu7{32}\pi
-%     \end{align*}
-% }%
 \begin{align*}
     \dint{0}{\pi/2}f(\cos{x})\cos{x}\,dx&=\dint{0}{\pi/2}{\left(\sin{(\cos{x})}-\cos{x}+\bunsuu{\cos^3x}{6}\right)\cos{x}\,dx} \\
     &=J-\dint{0}{\pi/2}{\cos^{2}{x}\,dx}+\bunsuu{1}{6}\dint{0}{\pi/2}{\cos^{4}{x}\,dx}\quad \left(J=\dint{0}{\pi/2}\sin{(\cos{x})}\sdot\cos{x}\,dx\right) \\
@@ -131,16 +83,9 @@ $\cos{(\cos{t})}\sdot\sin{t}$は奇函数なので，積分区間の対称性か
     &=J-\bunsuu7{32}\pi
 \end{align*}
 となる．以上より，$0\leqq J-\bunsuu{7}{32}\pi\leqq M$なので
-% {\setlength\mathindent{0pt}
-%     \begin{align*}
-%     \bunsuu{7}{8}\pi\leqq\int_0^{2\pi}\sin(\cos{x}-x)dx=4J\leqq\bunsuu{7}{8}\pi+4M
-%     \end{align*}
-% }%
 \begin{align*}
     \bunsuu{7}{8}\pi\leqq\dint{0}{2\pi}{\sin{(\cos{x}-x)}\,dx}=4J\leqq\bunsuu{7}{8}\pi+4M
 \end{align*}
 を得る．\owari
-
-% \end{multicols}
 
 \end{document}
