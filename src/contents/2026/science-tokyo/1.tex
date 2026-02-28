@@ -1,0 +1,90 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metadata
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% id: 2026-science-tokyo-1
+% title: 2026年 東京科学大学 第1問
+% tags: []
+% difficulty: C
+% source: https://admissions.isct.ac.jp/ja/013/undergraduate/examination-questions
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[fleqn]{ltjsarticle}
+
+\usepackage{common}
+\loadcommonpreamble
+
+% ヘッダー
+\lhead{\textbf{2026年 東京科学大学}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\begin{problembox}
+    \begin{enumerate} 
+        \item [\huge \shikakuichi]\quad\raisebox{1ex}{（60点）}
+        \begin{enumerate}
+            \item [\kakkoichi] $x$ は無理数であり，有理数 $a, b$ および正の整数 $n$ により
+                $x=a+b\sqrt{n}$ と表されるとする．このとき，$x^{2}+px+q=0$ が成り立つような有理数 $p, q$
+                を求めよ．また，そのような有理数 $p, q$ の組はただ一つに限ることを示せ．
+            \item [\kakkoni] $x$ は無理数であり，有理数 $a, b$ および正の整数 $n$ により
+                $x=a+b\sqrt[3]{n}$ と表されるとする．このとき，$x^{3}+px^{2}+qx+r=0$ が成り立つような有理数 $p, q, r$
+                を求めよ，また，そのような有理数 $p, q, r$ の組はただ一つに限ることを示せ．
+        \end{enumerate}
+    \end{enumerate}
+\end{problembox}
+
+\begin{multicols*}{2}
+
+\noindent
+\kakkoichi\quad $x-a=b\sqrt{n}$ の両辺を2乗して
+\begin{align*}
+    &(x-a)^{2}=b^{2}n \\
+    &x^{2}-2ax+a^{2}=b^{2}n \\
+    &x^{2}-2ax+(a^{2}-b^{2}n)=0
+\end{align*}
+これを $x^{2}+px+q=0$ と係数比較すると
+\begin{align*}
+    \boldsymbol{p=-2a,\quad q=a^{2}-b^{2}n}
+\end{align*}
+これらの $p, q$ は有理数である．他に有理数 $p^{\prime}, q^{\prime}$ が存在して
+$x^{2}+p^{\prime}x+q^{\prime}=0$ が成り立つと仮定すると，
+\begin{align*}
+    (p-p^{\prime})x+(q-q^{\prime})=0~\sdots~\astab
+\end{align*}
+を得る．$p-p^{\prime}\neq 0$と仮定すると，$x=-\bunsuu{q-q^{\prime}}{p-p^{\prime}}$ 
+となり，これは有理数であるから $x$ が無理数であることに矛盾する．
+したがって，$p=p^{\prime}$ であり，これを $\astab$ に代入すると $q=q^{\prime}$ を得る．
+よって，$p, q$ の一意性が示された．\owari
+\vfill
+\null
+\columnbreak
+\noindent
+\kakkoni\quad $x-a=b\sqrt[3]{n}$ の両辺を3乗して
+\begin{align*}
+    &(x-a)^{3}=b^{3}n \\
+    &x^{3}-3ax^{2}+3a^{2}x-a^{3}=b^{3}n \\
+    &x^{3}-3ax^{2}+3a^{2}x-(a^{3}+b^{3}n)=0
+\end{align*}
+これを $x^{3}+px^{2}+qx+r=0$ と係数比較すると
+\begin{align*}
+    \boldsymbol{p=-3a,\quad q=3a^{2},\quad r=-(a^{3}+b^{3}n)}
+\end{align*}
+これらの $p, q, r$ は有理数である．他に有理数 $p^{\prime}, q^{\prime}, r^{\prime}$ が存在して
+$x^{3}+p^{\prime}x^{2}+q^{\prime}x+r^{\prime}=0$ が成り立つと仮定すると，
+\begin{align*}
+    (p-p^{\prime})x^{2}+(q-q^{\prime})x+(r-r^{\prime})=0~\sdots~\astab
+\end{align*}
+を得る．$\astab$ において，係数のいずれかが $0$ でないとすると，$x$ は2次以下の有理数係数の方程式を満たすことになるが，
+これは成り立たない（証明後述）．したがって，
+\begin{align*}
+    p=p^{\prime}, q=q^{\prime}, r=r^{\prime}
+\end{align*}
+となり，$p, q, r$ の一意性が示された．\owari
+
+\end{multicols*}
+
+\end{document}
