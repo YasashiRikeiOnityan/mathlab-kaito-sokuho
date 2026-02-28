@@ -46,7 +46,7 @@
                 をみたすものの個数を $n$ を用いて表せ．
             \item [\kakkosan] 空間の点 $(x, y, z)$ で，
                 \begin{align*}
-                    x+y+z<3n\quad\text{かつ}\quad x<y<z
+                    x+y+z=3n\quad\text{かつ}\quad x<y<z
                 \end{align*}
                 をみたすものの個数を $n$ を用いて表せ．
         \end{enumerate}
@@ -88,12 +88,10 @@
 
 \noindent
 \kakkosan\quad 全体集合 $U$ を次のように定義する．
-\setlength{\defaultmathindent}{\mathindent}
-\setlength{\mathindent}{2mm}
+{\setlength{\mathindent}{0pt}
 \begin{align*}
-    U=\{(x, y, z) ~|~ x+y+z=3n,~ x,y,z \text{は正の整数}\}
-\end{align*}
-\setlength{\mathindent}{\defaultmathindent}
+    U=\{(x, y, z) ~|~ x+y+z=3n,~ x,y,z\in\mathbb{N}\}
+\end{align*}}
 \noindent
 このとき
 \begin{align*}
@@ -106,14 +104,14 @@
         $(x, y, z) = (n, n, n)$ の1つがある．
     \item [\tokeini] $x, y, z$ のうち，2つのみが同じ値の場合 \\
         $x=y\neq z$ のときを考える．
-        \begin{enumerate}
-            \item [\maruichi] $n$ が奇数のとき \\
+        \begin{itemize}
+            \item $n$ が奇数のとき \\
                 $x$ のとり得る値は $1$ から $(3n-1)/2$ までであり，\tokeiichi の場合を
-                除くととり得る点の個数は $(3n-1)/2-1=(3n-3)/2$ 個である．
-            \item [\maruni] $n$ が偶数のとき \\
+                除くと，とり得る点の個数は $(3n-1)/2-1=(3n-3)/2$ 個である．
+            \item $n$ が偶数のとき \\
                 $x$ のとり得る値は $1$ から $(3n-2)/2$ までであり，\tokeiichi の場合を
-                除くととり得る点の個数は $(3n-2)/2-1=(3n-4)/2$ 個である．
-        \end{enumerate}
+                除くと，とり得る点の個数は $(3n-2)/2-1=(3n-4)/2$ 個である．
+        \end{itemize}
         同様に，$y=z\neq x, z=x\neq y$ の場合も計算できるので，$n$ が奇数のとき $3(3n-3)/2$ 個，$n$ が偶数のとき $3(3n-4)/2$ 個である．
 \end{enumerate}
 
