@@ -1,0 +1,198 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Metadata
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% id: 2026-science-tokyo-3
+% title: 2026年 東京科学大学 第3問
+% tags: []
+% difficulty: C
+% source: https://admissions.isct.ac.jp/ja/013/undergraduate/examination-questions
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[fleqn]{ltjsarticle}
+
+\usepackage{common}
+\loadcommonpreamble
+
+% ヘッダー
+\lhead{\textbf{2026年 東京科学大学}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\begin{problembox}
+    \begin{enumerate} 
+        \item [\huge \shikakusan]\quad\raisebox{1ex}{（60点）} \\
+        \hspace{1em}$a$ と $b$ を正の実数とし，座標平面の3点 $\mathrm{O}(0, 0), \mathrm{A}(a, 0), \mathrm{B}(0, b)$ を考える．
+        ABの中点をC, ACの中点をPとし, $\sankaku{BCO}$ の外心をQとする．
+        \begin{enumerate}
+            \item [\kakkoichi] 2点P, Qのそれぞれの座標を $a$ と $b$ を用いて表せ．
+            \item [\kakkoni] 2点O, Aを通る直線上の点Rで，$\kaku{PRQ}=\bunsuu{\pi}{2}$ をみたすものすべてについて，それぞれの座標を $a$ と $b$ を用いて表せ．
+            \item [\kakkosan] \kakkoni の条件をみたす点Rで，
+                \begin{align*}
+                    \sankaku{PQR}\soji\sankaku{ABO},\quad\sankaku{QPR}\soji\sankaku{ABO}
+                \end{align*}
+                のうち少なくとも一方が成り立つようなものをすべて求めよ．
+        \end{enumerate}
+    \end{enumerate}
+\end{problembox}
+
+\begin{multicols*}{2}
+
+\noindent
+\kakkoichi\quad 点Cの座標は $\left(\bunsuu{a}{2}, \bunsuu{b}{2}\right)$ であるから， \\
+点Pの座標は
+\begin{align*}
+    \mathrm{P}=\left(\bunsuu{a+a/2}{2}, \bunsuu{0+b/2}{2}\right)=\boldsymbol{\left(\bunsuu{3a}{4}, \bunsuu{b}{4}\right)}
+\end{align*}
+また，線分OBの垂直二等分線と線分OCの垂直二等分線の交点が点Qの座標である． それぞれの直線の方程式は
+\begin{align*}
+    y=\bunsuu{b}{2},~ y=-\bunsuu{a}{b}\left(x-\bunsuu{a}{4}\right)+\bunsuu{b}{4}
+\end{align*}
+より，点Qの座標は
+\begin{align*}
+    \mathrm{Q}=\boldsymbol{\left(\bunsuu{a^{2}-b^{2}}{4a}, \bunsuu{b}{2}\right)}
+\end{align*}
+
+\begin{center}
+\begin{tikzpicture}
+    \coordinate (O) at (0,0);
+    \coordinate (A) at (3,0);
+    \coordinate (B) at (0,2);
+    \coordinate (C) at (1.5,1);
+    \coordinate (P) at (2.25,0.5);
+    \coordinate (Q) at (5/12,1);
+    \draw [semithick,->,>=stealth] (-0.75,0) -- (3.5,0) node [below] {$x$};
+    \draw [semithick,->,>=stealth] (0,-0.75) -- (0,2.5) node [left] {$y$};
+    \fill (O) circle [radius=1.5pt] node [below left] {O};
+    \fill (A) circle [radius=2pt] node [below] {A};
+    \fill (B) circle [radius=2pt] node [left] {B};
+    \fill (C) circle [radius=2pt] node [above right] {C};
+    \fill (P) circle [radius=2pt] node [above right] {P};
+    \fill (Q) circle [radius=2pt] node [above] {Q};
+    \draw (A) -- (B);
+    \draw (O) -- (C);
+    \draw [dashed] ($(O)!0.5!(B)$) -- (Q) -- ($(O)!0.5!(C)$);
+    \coordinate (S) at ($(O)!0.5!(B)$);
+    \coordinate (T) at ($(O)!0.5!(C)$);
+    \draw ($(S)!6pt!(O)$)--($(S)!6pt!(O)!6pt!90:(O)$)--($(S)!6pt!(Q)$);
+    \draw ($(T)!6pt!(C)$)--($(T)!6pt!(C)!6pt!90:(C)$)--($(T)!6pt!(Q)$);
+\end{tikzpicture}
+\end{center}
+
+\noindent
+\kakkoni\quad 図のように $\theta_{\mathrm{P}}, \theta_{\mathrm{Q}}$ と置き，$\theta_{\mathrm{Q}}-\theta_{\mathrm{P}}=\bunsuu{\pi}{2}$ となるとき，すなわち，RPとRQが直交するときを考える．
+
+\begin{center}
+\begin{tikzpicture}
+    \coordinate (O) at (0,0);
+    \coordinate (A) at (3,0);
+    \coordinate (B) at (0,2);
+    \coordinate (C) at (1.5,1);
+    \coordinate (P) at (2.25,0.5);
+    \coordinate (Q) at (5/12,1);
+    \coordinate (R) at (3/4,0);
+    \draw [semithick] (-0.75,0) -- (3.5,0);
+    \fill (P) circle [radius=2pt] node [above right] {P};
+    \fill (Q) circle [radius=2pt] node [above] {Q};
+    \fill (R) circle [radius=2pt] node [below] {R};
+    \draw (P) -- (R) -- (Q);
+    \draw pic["$\theta_{\mathrm{P}}$", draw=black, angle eccentricity=1.5, angle radius=0.8cm] {angle=A--R--P};
+    \draw pic["$\theta_{\mathrm{Q}}$", draw=black, angle eccentricity=1.5, angle radius=0.4cm] {angle=A--R--Q};
+\end{tikzpicture}
+\end{center}
+
+\noindent
+$\mathrm{R}=(k, 0)$ と置くと，
+\begin{align*}
+    &(\text{RPの傾き})=\bunsuu{b}{3a-4k} \\
+    &(\text{RQの傾き})=\bunsuu{2ab}{a^{2}-b^{2}-4ak}
+\end{align*}
+より，RPとRGが直交する条件は傾きの積が $-1$ となることであるから，
+\begin{align*}
+    &\bunsuu{b}{3a-4k} \sdot \bunsuu{2ab}{a^{2}-b^{2}-4ak} = -1 \\
+    &\yueni~(a-4k)(3a^{2}-4ak-b^{2})=0 \\
+    &\yueni~k=\bunsuu{a}{4}, \bunsuu{3a^{2}-b^{2}}{4a}
+\end{align*}
+したがって，求めるRの座標は
+\begin{align*}
+    \boldsymbol{\left(\bunsuu{a}{4}, 0\right),~ \left(\bunsuu{3a^{2}-b^{2}}{4a}, 0\right)}
+\end{align*}
+
+\noindent
+\kakkosan\quad \kakkoni で求めた座標をそれぞれ
+\begin{align*}
+    \text{R}_{1}=\left(\bunsuu{a}{4}, 0\right),~ \text{R}_{2}=\left(\bunsuu{3a^{2}-b^{2}}{4a}, 0\right)
+\end{align*}
+とする．
+
+\begin{center}
+\begin{tikzpicture}
+    \coordinate (O) at (0,0);
+    \coordinate (A) at (3,0);
+    \coordinate (B) at (0,2);
+    \coordinate (P) at (2.25,0.5);
+    \coordinate (Q) at (5/12,1);
+    \coordinate (R1) at (3/4,0);
+    \coordinate (R2) at (23/12,0);
+    \draw [semithick,->,>=stealth] (-0.75,0) -- (3.5,0) node [below] {$x$};
+    \draw [semithick,->,>=stealth] (0,-0.75) -- (0,2.5) node [left] {$y$};
+    \fill (O) circle [radius=1.5pt] node [below left] {O};
+    \fill (A) circle [radius=2pt] node [below] {A};
+    \fill (B) circle [radius=2pt] node [left] {B};
+    \fill (P) circle [radius=2pt] node [above right] {P};
+    \fill (Q) circle [radius=2pt] node [above] {Q};
+    \fill (R1) circle [radius=2pt] node [below] {$\text{R}_{1}$};
+    \fill (R2) circle [radius=2pt] node [below] {$\text{R}_{2}$};
+    \draw (A) -- (B);
+    \draw (Q) -- (R1) -- (P) -- cycle;
+    \draw (Q) -- (R2) -- (P) -- cycle;
+    \draw ($(R1)!6pt!(P)$)--($(R1)!6pt!(P)!6pt!90:(P)$)--($(R1)!6pt!(Q)$);
+    \draw ($(R2)!6pt!(P)$)--($(R2)!6pt!(P)!6pt!90:(P)$)--($(R2)!6pt!(Q)$);
+    \draw ($(O)!6pt!(A)$)--($(O)!6pt!(A)!6pt!90:(A)$)--($(O)!6pt!(B)$);
+\end{tikzpicture}
+\end{center}
+\noindent
+ここで
+\begin{align*}
+    &\sankaku{PQR}\soji\sankaku{ABO} \\
+    &\iff \tan{\kaku{PQR}}=\tan{\kaku{ABO}}~\left(=\bunsuu{a}{b}\right) \\[1.5mm]
+    &\sankaku{QPR}\soji\sankaku{ABO} \\
+    &\iff \tan{\kaku{PQR}}=\tan{\kaku{BAO}}~\left(=\bunsuu{b}{a}\right)
+\end{align*}
+である．
+
+\end{multicols*}
+
+\pagebreak
+
+\begin{multicols*}{2}
+
+\noindent
+$\tan{\kaku{PQR}}$ を求めるのに必要な傾きを計算する．
+\begin{align*}
+    &(\text{QPの傾き})=m_{\text{QP}}=-\bunsuu{ab}{2a^{2}+b^{2}} \\
+    &(\text{QR$_1$の傾き})=m_{\text{QR$_1$}}=-\bunsuu{a}{b} \\
+    &(\text{QR$_2$の傾き})=m_{\text{QR$_2$}}=-\bunsuu{b}{2a}
+\end{align*}
+ゆえに，
+\begin{align*}
+    &\tan{\kaku{PQR$_1$}}=\bunsuu{m_{\text{QP}}-m_{\text{QR$_1$}}}{1+m_{\text{QP}}\sdot m_{\text{QR$_1$}}}=\bunsuu{a}{b} \\[2mm]
+    &\tan{\kaku{PQR$_2$}}=\bunsuu{m_{\text{QP}}-m_{\text{QR$_2$}}}{1+m_{\text{QP}}\sdot m_{\text{QR$_2$}}}=\bunsuu{b}{2a}
+\end{align*}
+\vfill
+\null
+\columnbreak
+\noindent
+$\tan{\kaku{PQR$_1$}}$ は常に $\tan{\kaku{ABO}}$ と等しいのでR$_1$ は条件をみたす．R$_2$ は
+\begin{align*}
+    &\bunsuu{b}{2a}=\bunsuu{a}{b}~\text{または}~\bunsuu{b}{2a}=\bunsuu{b}{a} \iff 2a^{2}=b^{2}
+\end{align*}
+のとき条件をみたす．$2a^{2}=b^{2}$ のとき，R$_2$ はR$_1$ と一致するので，求める点は $\boldsymbol{\left(\bunsuu{a}{4}, 0\right)}$
+
+\end{multicols*}
+
+\end{document}
